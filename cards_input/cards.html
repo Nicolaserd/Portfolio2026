@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio - Architects of Digital Clarity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#ffafd3",
+                        "surface-container-high": "#222a3d",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed": "#ffd8e7",
+                        "on-surface": "#dae2fd",
+                        "on-primary-fixed": "#3d0026",
+                        "secondary": "#7bd0ff",
+                        "primary": "#ffafd3",
+                        "surface-bright": "#31394d",
+                        "on-secondary-fixed": "#001e2c",
+                        "error-container": "#93000a",
+                        "surface-variant": "#2d3449",
+                        "outline-variant": "#544249",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#ffafd3",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#00374d",
+                        "tertiary-fixed": "#d4e4fa",
+                        "secondary-fixed": "#c4e7ff",
+                        "on-primary-fixed-variant": "#85145a",
+                        "inverse-primary": "#a43073",
+                        "primary-container": "#f472b6",
+                        "on-primary": "#620040",
+                        "surface": "#0b1326",
+                        "inverse-surface": "#dae2fd",
+                        "on-tertiary-container": "#283748",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "surface-container-low": "#131b2e",
+                        "tertiary": "#b9c8de",
+                        "secondary-container": "#00a6e0",
+                        "on-tertiary": "#233143",
+                        "outline": "#a28a93",
+                        "on-background": "#dae2fd",
+                        "on-secondary": "#00354a",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-on-surface": "#283044",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-error-container": "#ffdad6",
+                        "background": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "tertiary-container": "#91a0b5",
+                        "surface-container": "#171f33",
+                        "on-primary-container": "#6d0047",
+                        "on-surface-variant": "#dac0c9",
+                        "secondary-fixed-dim": "#7bd0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "stack-lg": "48px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Noto Serif"],
+                        "body-md": ["Noto Serif"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Noto Serif"],
+                        "body-lg": ["Noto Serif"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dae2fd;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(11, 19, 38, 0.4), rgba(11, 19, 38, 1));
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-slate-900/80 dark:bg-[#1E293B]/80 backdrop-blur-xl border-b border-slate-400/10">
+<div class="max-w-[1280px] mx-auto px-6 py-4 flex justify-between items-center">
+<a class="text-2xl font-serif italic text-white dark:text-slate-50" href="#">Portfolio</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-pink-400 border-b-2 border-pink-400 pb-1 font-headline-md text-[16px]" href="#">Projects</a>
+<a class="text-slate-400 font-medium hover:text-slate-100 transition-colors font-headline-md text-[16px]" href="#">About</a>
+<a class="text-slate-400 font-medium hover:text-slate-100 transition-colors font-headline-md text-[16px]" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded shadow-sm hover:opacity-90 active:scale-95 transition-all font-label-caps uppercase">
+                Inquire
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic wide shot of a minimalist architectural structure with clean lines and monolithic concrete surfaces. The scene is bathed in the cool, blue-toned light of twilight, reflecting the Midnight Clarity design system's sophisticated indigo palette. Subtle pink light catchers highlight the edges of the structure, creating a high-contrast and serene atmospheric mood. The environment is quiet and expansive, emphasizing architectural purity and digital precision." style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI');"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 text-center px-6 max-w-[900px]">
+<span class="font-label-caps text-primary tracking-widest uppercase block mb-stack-sm">Modern Minimalism</span>
+<h1 class="font-headline-xl text-white mb-stack-md">Architects of Digital Clarity</h1>
+<p class="font-body-lg text-on-surface-variant max-w-xl mx-auto mb-stack-lg">
+                    Crafting premium digital experiences through the lens of sophisticated simplicity and tonal precision.
+                </p>
+<div class="flex flex-col sm:flex-row gap-gutter justify-center items-center">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-caps transition-all hover:scale-105 active:scale-95">
+                        View Portfolio
+                    </button>
+<button class="border border-outline text-white px-8 py-4 rounded-full font-label-caps transition-all hover:bg-white/5 active:scale-95">
+                        Our Process
+                    </button>
+</div>
+</div>
+</section>
+<!-- Selected Works Section -->
+<section class="max-w-[1280px] mx-auto px-6 py-stack-lg mt-stack-lg">
+<div class="flex justify-between items-end mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-white">Selected Works</h2>
+<p class="font-body-md text-on-surface-variant mt-2">A curated selection of our most impactful collaborations.</p>
+</div>
+<a class="hidden md:flex items-center gap-2 text-primary font-label-caps hover:underline" href="#">
+                    View All Projects
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Bento-style Project Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Feature Project -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="relative aspect-[16/9] overflow-hidden bg-surface-container rounded-xl border border-slate-400/10">
+<div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 p-stack-md z-10">
+<span class="font-label-caps text-primary-fixed-dim bg-slate-900/60 backdrop-blur px-3 py-1 rounded-full text-[10px]">Architecture</span>
+<h3 class="font-headline-md text-white mt-3">Monolith House</h3>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A detailed architectural study of a monolithic concrete house under a deep indigo sky. The lighting is low-key, focusing on the interplay of shadows and the soft reflection of cool ambient light on textured stone surfaces. Minimalist windows reveal warm interior glows, providing a striking contrast to the dark, serene exterior environment. The composition is asymmetrical and balanced, reflecting luxury editorial aesthetics." style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI');"></div>
+</div>
+</div>
+<!-- Small Grid Project 1 -->
+<div class="md:col-span-4 group cursor-pointer">
+<div class="relative aspect-square overflow-hidden bg-surface-container rounded-xl border border-slate-400/10">
+<div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 p-stack-md z-10">
+<span class="font-label-caps text-primary-fixed-dim bg-slate-900/60 backdrop-blur px-3 py-1 rounded-full text-[10px]">Brand Identity</span>
+<h3 class="font-headline-md text-white mt-3">Vesper Branding</h3>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist brand identity showcase featuring premium stationery and a glass vessel on a dark indigo surface. The lighting is focused and soft, creating elegant highlights on the glass edges and paper textures. The overall palette is composed of deep navies, slate greys, and a singular pop of coral pink, adhering to the Midnight Clarity visual tokens. The mood is intellectual and highly refined." style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI');"></div>
+</div>
+</div>
+<!-- Small Grid Project 2 -->
+<div class="md:col-span-4 group cursor-pointer">
+<div class="relative aspect-square overflow-hidden bg-surface-container rounded-xl border border-slate-400/10">
+<div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 p-stack-md z-10">
+<span class="font-label-caps text-primary-fixed-dim bg-slate-900/60 backdrop-blur px-3 py-1 rounded-full text-[10px]">Digital Product</span>
+<h3 class="font-headline-md text-white mt-3">Lumina App</h3>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A sleek mobile interface displayed on a futuristic device within a dark, moody setting. The screen shows a data-heavy dashboard designed with tonal layering and subtle glows, using indigo and coral accents. The surrounding environment is out of focus, emphasizing the clarity of the digital design. The composition conveys a sense of high-end technology and quiet sophistication." style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI');"></div>
+</div>
+</div>
+<!-- Medium Feature Project -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="relative aspect-[16/9] md:aspect-auto md:h-full overflow-hidden bg-surface-container rounded-xl border border-slate-400/10">
+<div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-all duration-500"></div>
+<div class="absolute bottom-0 left-0 p-stack-md z-10">
+<span class="font-label-caps text-primary-fixed-dim bg-slate-900/60 backdrop-blur px-3 py-1 rounded-full text-[10px]">Art Direction</span>
+<h3 class="font-headline-md text-white mt-3">Nordic Silence</h3>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="An ethereal landscape photograph featuring a minimalist structure isolated in a misty, dark forest at dusk. The palette is dominated by deep indigo and charcoal tones, with a soft pinkish light emerging from a distance. The image evokes a feeling of quiet solitude and intellectual focus, aligning with the editorial 'Midnight Clarity' brand theme. The layout uses generous darkspace around the central subject." style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI');"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pull Quote Section -->
+<section class="max-w-[1280px] mx-auto px-6 py-32 text-center">
+<div class="max-w-3xl mx-auto">
+<span class="material-symbols-outlined text-pink-400 text-4xl mb-6">format_quote</span>
+<blockquote class="font-headline-lg text-on-surface italic leading-relaxed">
+                    "True clarity isn't the absence of detail, but the presence of meaning through the removal of noise."
+                </blockquote>
+<cite class="font-label-caps text-on-tertiary-container block mt-8 uppercase tracking-widest">— Julian Vesper, Creative Director</cite>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="max-w-[1280px] mx-auto px-6 py-stack-lg">
+<div class="bg-surface-container-high rounded-3xl p-12 md:p-24 text-center border border-slate-400/10 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at top right, #F472B6 0%, transparent 50%);"></div>
+<h2 class="font-headline-xl text-white mb-6">Ready to tell your story?</h2>
+<p class="font-body-lg text-on-surface-variant max-w-lg mx-auto mb-10">
+                    We partner with visionary brands to create digital legacies. Let's build something enduring together.
+                </p>
+<button class="bg-primary-container text-on-primary-container px-10 py-5 rounded-full font-headline-md text-[18px] hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+                    Start a Conversation
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 dark:bg-[#0F172A] w-full py-12 mt-24 border-t border-slate-400/10">
+<div class="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-serif italic text-white text-xl">Portfolio</span>
+<p class="font-serif text-slate-400 text-sm">© 2024 Creative Professional. All rights reserved.</p>
+</div>
+<div class="flex gap-12">
+<a class="text-slate-500 hover:text-pink-300 transition-colors font-serif text-sm opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-pink-300 transition-colors font-serif text-sm opacity-80 hover:opacity-100" href="#">Dribbble</a>
+<a class="text-slate-500 hover:text-pink-300 transition-colors font-serif text-sm opacity-80 hover:opacity-100" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+</body></html>

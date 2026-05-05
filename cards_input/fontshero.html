@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#3f0303",
+                    "surface-container-highest": "#e3e2e6",
+                    "inverse-primary": "#b2c5ff",
+                    "surface-bright": "#fbf8fd",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "on-secondary-fixed-variant": "#7a2e26",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#dbb8ff",
+                    "tertiary": "#58397a",
+                    "secondary": "#98453b",
+                    "on-surface-variant": "#44464f",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#4b5e91",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#efdbff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#e9d1ff",
+                    "background": "#fbf8fd",
+                    "surface": "#fbf8fd",
+                    "on-secondary-container": "#782d25",
+                    "on-primary-fixed": "#001848",
+                    "on-primary-fixed-variant": "#324576",
+                    "inverse-on-surface": "#f2f0f5",
+                    "surface-container": "#efedf2",
+                    "secondary-container": "#ff9789",
+                    "secondary-fixed-dim": "#ffb4aa",
+                    "on-tertiary-fixed-variant": "#573878",
+                    "on-tertiary-fixed": "#29074a",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#dae2ff",
+                    "surface-container-high": "#e9e7ec",
+                    "primary": "#334678",
+                    "inverse-surface": "#303034",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#4a5d90",
+                    "outline-variant": "#c5c6d0",
+                    "on-primary-container": "#cfd9ff",
+                    "surface-variant": "#e3e2e6",
+                    "surface-dim": "#dbd9de",
+                    "tertiary-container": "#705193",
+                    "on-error": "#ffffff",
+                    "outline": "#757780",
+                    "surface-container-low": "#f5f3f8",
+                    "on-background": "#1b1b1f",
+                    "on-surface": "#1b1b1f",
+                    "secondary-fixed": "#ffdad5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-padding": "120px",
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "gutter": "32px"
+            },
+            "fontFamily": {
+                    "h3": ["Noto Serif"],
+                    "h2": ["Noto Serif"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "h1": ["Noto Serif"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "h3": ["2rem", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "h2": ["3rem", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                    "body-md": ["1rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["1.25rem", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "h1": ["4.5rem", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "label-caps": ["0.75rem", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .backdrop-blur-2xl {
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 h-24 bg-white/70 backdrop-blur-2xl border-b border-indigo-900/10">
+<div class="max-w-[1280px] mx-auto flex justify-between items-center px-12 w-full h-full">
+<div class="text-2xl font-light tracking-tighter text-indigo-900">STUDIO</div>
+<div class="hidden md:flex items-center gap-12">
+<a class="font-serif text-sm tracking-widest uppercase text-rose-400 border-b border-rose-400 pb-1 hover:text-rose-400 transition-colors duration-500 ease-in-out scale-100 active:scale-95" href="#">Projects</a>
+<a class="font-serif text-sm tracking-widest uppercase text-indigo-900/60 hover:text-rose-400 transition-colors duration-500 ease-in-out scale-100 active:scale-95" href="#">About</a>
+<a class="font-serif text-sm tracking-widest uppercase text-indigo-900/60 hover:text-rose-400 transition-colors duration-500 ease-in-out scale-100 active:scale-95" href="#">Contact</a>
+<button class="bg-primary px-8 py-3 text-on-primary font-serif text-sm tracking-widest uppercase transition-all duration-300 hover:opacity-90 active:scale-95">Inquire</button>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60" data-alt="A serene and expansive landscape photograph used as a background for a creative studio website. The image features soft, transitionary dusk lighting with deep indigo shadows and subtle coral highlights in the sky, reflecting a sense of clarity and quiet sophistication. The composition is minimal and editorial, emphasizing vast open space and atmospheric mist to evoke an expensive, high-end gallery aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+</div>
+<div class="relative z-10 max-w-[1280px] mx-auto px-12 w-full">
+<div class="max-w-3xl">
+<span class="font-label-caps text-label-caps text-primary mb-6 block">DESIGN &amp; STRATEGY</span>
+<h1 class="font-h1 text-h1 text-primary mb-8 leading-[1.1]">
+                        Architects of <br/>
+<span class="italic font-light">Digital Clarity</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-xl">
+                        A minimalist design practice dedicated to creating intentional experiences for high-end creative professionals and global studios.
+                    </p>
+<div class="flex items-center gap-8">
+<button class="bg-primary px-10 py-4 text-on-primary font-serif text-sm tracking-widest uppercase transition-all duration-300 hover:shadow-lg">View Portfolio</button>
+<a class="text-secondary font-serif text-sm tracking-widest uppercase border-b border-secondary/30 pb-1 hover:border-secondary transition-all" href="#">Our Process</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Selected Works Section -->
+<section class="max-w-[1280px] mx-auto px-12 py-[120px]">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-xl">
+<span class="font-label-caps text-label-caps text-primary mb-4 block">PORTFOLIO</span>
+<h2 class="font-h2 text-h2 text-primary">Selected Works</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-2">
+                    A curated collection of projects where form meets function, and quiet aesthetics meet loud results.
+                </p>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Project 01 - Large Offset -->
+<div class="col-span-12 md:col-span-8 group cursor-pointer mb-16">
+<div class="aspect-[16/9] overflow-hidden bg-surface-container mb-6 relative">
+<div class="absolute inset-0 bg-indigo-900/5 group-hover:bg-indigo-900/0 transition-colors duration-500 z-10"></div>
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="A cinematic project showcase image featuring a modern architectural structure with clean lines and large glass facades. The lighting is captured during the blue hour, creating a sophisticated atmospheric glow. The overall visual style is minimalist and high-end, utilizing a palette of cool indigos and soft greys to represent professional design excellence." src="https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] tracking-[0.2em] text-primary mb-2 block uppercase">Architectural Design</span>
+<h3 class="font-h3 text-h3 text-primary group-hover:text-secondary transition-colors duration-300">Monolith House</h3>
+</div>
+<span class="font-body-md text-on-surface-variant mt-4">2024</span>
+</div>
+</div>
+<!-- Project 02 - Small Offset Right -->
+<div class="col-span-12 md:col-start-9 md:col-span-4 group cursor-pointer md:mt-32">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container mb-6 relative">
+<div class="absolute inset-0 bg-indigo-900/5 group-hover:bg-indigo-900/0 transition-colors duration-500 z-10"></div>
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Detailed editorial shot of a luxury brand book lying on a marble surface. The lighting is soft and directional, highlighting the texture of the premium paper and the minimalist serif typography. The mood is calm and intellectual, aligned with a high-end studio aesthetic of reflection and quiet sophistication." src="https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI"/>
+</div>
+<div>
+<span class="font-label-caps text-[10px] tracking-[0.2em] text-primary mb-2 block uppercase">Visual Identity</span>
+<h3 class="font-h3 text-h3 text-primary group-hover:text-secondary transition-colors duration-300">Vesper Branding</h3>
+</div>
+</div>
+<!-- Project 03 - Small Offset Left -->
+<div class="col-span-12 md:col-span-5 group cursor-pointer mb-16">
+<div class="aspect-square overflow-hidden bg-surface-container mb-6 relative">
+<div class="absolute inset-0 bg-indigo-900/5 group-hover:bg-indigo-900/0 transition-colors duration-500 z-10"></div>
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="A minimalist digital interface design displayed on a tablet, showing elegant whitespace and a sophisticated grid layout. The colors are muted indigos and soft lavenders, reflecting the tranquil period of dusk. The setting is a clean, bright studio environment that emphasizes clarity and modern editorial design standards." src="https://lh3.googleusercontent.com/aida/ADBb0ugGQB4k03FeSb5Om69HaKdg7aQ1u5tSqJXBE0hEB3Am6thBY58AhSpZIKudCH1JG7O2DucSpj3_Z-RTXz5bDb1GwIa2LE2ickfzqPP-aSMSyFBJ2owkYt10W3KW9pBjwuxDs6v111gVZbNCFzi0UTWwcb4HYYvKFf249TQrM8VlxQ8wISoHBI6Woto1hLdNmiIEDqZ7d6IM6e3ROSambxjUf_TgCSDvBmfwaAaW63qmSp8zHpASkLN1exohH1GzuCb-GvusXzzJVqI"/>
+</div>
+<div>
+<span class="font-label-caps text-[10px] tracking-[0.2em] text-primary mb-2 block uppercase">UI/UX Strategy</span>
+<h3 class="font-h3 text-h3 text-primary group-hover:text-secondary transition-colors duration-300">Aether App</h3>
+</div>
+</div>
+<!-- CTA Column -->
+<div class="col-span-12 md:col-start-7 md:col-span-6 flex items-center justify-center py-20">
+<div class="text-center">
+<h2 class="font-h2 text-h2 text-primary mb-8 italic">Ready to tell your story?</h2>
+<button class="border border-primary px-12 py-4 text-primary font-serif text-sm tracking-widest uppercase transition-all duration-500 hover:bg-primary hover:text-on-primary">Contact the Studio</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Quote Section -->
+<section class="bg-surface-container-low py-[120px]">
+<div class="max-w-[1280px] mx-auto px-12 text-center">
+<div class="max-w-4xl mx-auto">
+<span class="material-symbols-outlined text-secondary text-5xl mb-8">blur_on</span>
+<p class="font-h2 text-h2 text-primary italic leading-relaxed">
+                        "In the quiet of dusk, we find the clarity to define what truly matters."
+                    </p>
+<div class="w-12 h-[1px] bg-secondary mx-auto mt-12"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-32 bg-slate-50 border-t border-indigo-900/5">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center px-12 gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="text-lg font-medium text-indigo-900">STUDIO</div>
+<p class="font-serif text-xs tracking-wide text-indigo-900/40">© 2024 Dusk Studio. Built for clarity.</p>
+</div>
+<div class="flex gap-12">
+<a class="font-serif text-xs tracking-wide text-indigo-900/40 hover:text-rose-400 underline underline-offset-4 decoration-rose-400/30 transition-all duration-300" href="#">LinkedIn</a>
+<a class="font-serif text-xs tracking-wide text-indigo-900/40 hover:text-rose-400 underline underline-offset-4 decoration-rose-400/30 transition-all duration-300" href="#">Instagram</a>
+<a class="font-serif text-xs tracking-wide text-indigo-900/40 hover:text-rose-400 underline underline-offset-4 decoration-rose-400/30 transition-all duration-300" href="#">Behance</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">location_on</span>
+<span class="font-serif text-xs tracking-wide text-indigo-900">London / Global</span>
+</div>
+</div>
+</footer>
+</body></html>
