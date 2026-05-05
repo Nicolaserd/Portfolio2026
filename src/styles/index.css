@@ -1,32 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
 
+/* =============================================
+   DARK MODE — "Midnight Clarity" (predeterminado)
+   ============================================= */
 :root {
-  --primary: hsl(250, 85%, 60%);
-  --primary-hover: hsl(250, 85%, 50%);
-  --background: hsl(220, 15%, 10%);
-  --surface: hsl(220, 15%, 15%);
-  --surface-hover: hsl(220, 15%, 20%);
-  --text: hsl(220, 10%, 95%);
-  --text-muted: hsl(220, 10%, 70%);
-  --border: hsl(220, 15%, 25%);
-  --radius-md: 12px;
-  --radius-lg: 24px;
+  --background:              #0b1326;
+  --surface:                 #171f33;
+  --surface-low:             #131b2e;
+  --surface-high:            #222a3d;
+  --surface-highest:         #2d3449;
+
+  --on-surface:              #dae2fd;
+  --on-surface-variant:      #dac0c9;
+
+  --primary:                 #ffafd3;
+  --primary-container:       #f472b6;
+  --on-primary:              #620040;
+
+  --secondary:               #7bd0ff;
+  --on-secondary:            #00354a;
+
+  --outline:                 #a28a93;
+  --outline-variant:         #544249;
+
+  --border:                  rgba(162, 138, 147, 0.15);
+
+  /* Typography tokens */
+  --font-serif: 'Noto Serif', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+
+  /* Radius */
+  --radius-sm:  0.125rem;
+  --radius:     0.25rem;
+  --radius-md:  0.375rem;
+  --radius-lg:  0.5rem;
+  --radius-xl:  0.75rem;
+  --radius-full:9999px;
+
+  /* Spacing */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   48px;
+
+  /* Transition */
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
+/* =============================================
+   LIGHT MODE — "Ethereal Dusk"
+   ============================================= */
+[data-theme="light"] {
+  --background:              #fbf8fd;
+  --surface:                 #efedf2;
+  --surface-low:             #f5f3f8;
+  --surface-high:            #e9e7ec;
+  --surface-highest:         #e3e2e6;
+
+  --on-surface:              #1b1b1f;
+  --on-surface-variant:      #44464f;
+
+  --primary:                 #334678;
+  --primary-container:       #4b5e91;
+  --on-primary:              #ffffff;
+
+  --secondary:               #98453b;
+  --on-secondary:            #ffffff;
+
+  --outline:                 #757780;
+  --outline-variant:         #c5c6d0;
+
+  --border:                  rgba(117, 119, 128, 0.2);
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  /* Transición suave al cambiar de tema */
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
 body {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--background);
-  color: var(--text);
+  color: var(--on-surface);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
 }
 
 a {
@@ -36,13 +114,23 @@ a {
 }
 
 a:hover {
-  color: var(--primary-hover);
+  opacity: 0.8;
 }
 
-/* Glassmorphism utility */
+/* =============================================
+   UTILIDADES
+   ============================================= */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(11, 19, 38, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  transition: background var(--transition), border var(--transition);
+}
+
+[data-theme="light"] .glass {
+  background: rgba(251, 248, 253, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
 }

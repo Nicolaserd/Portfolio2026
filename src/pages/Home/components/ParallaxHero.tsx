@@ -17,14 +17,6 @@ const ParallaxHero: React.FC = () => {
         <img src="/parallax/sol.png" alt="Sol" className="sol-pequeno" />
       </div>
       
-      {/* Montañas - en contenedor absoluto que ocupa toda la sección */}
-      <div className="parallax-layer layer-montanas">
-        <div className="montanas-wrapper">
-          <img src="/parallax/montañas.png" alt="Montaña Izquierda" className="montana-pequena montana-izq" />
-          <img src="/parallax/montañas.png" alt="Montaña Derecha" className="montana-pequena montana-der" />
-        </div>
-      </div>
-      
       {/* Mar - Esta capa dicta la altura del contenedor */}
       <div className="parallax-layer layer-mar">
         <SimpleParallax scale={1.3} delay={0} orientation="up">
