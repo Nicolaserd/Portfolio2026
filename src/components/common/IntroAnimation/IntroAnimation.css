@@ -1,0 +1,46 @@
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2); /* Fondo semi transparente oscuro o claro para dar contraste */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.intro-container.fade-out {
+  animation: fadeOutBlur 1.5s ease forwards;
+}
+
+.samurai-frame {
+  width: 100%;
+  max-width: 90vw;
+  max-height: 60vh;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .samurai-frame {
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+}
+
+@keyframes fadeOutBlur {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    filter: blur(15px);
+    visibility: hidden;
+  }
+}
