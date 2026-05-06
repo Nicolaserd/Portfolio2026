@@ -54,12 +54,12 @@ function svgIco(type: string) {
 }
 
 const KatanaStrike: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const haloRef = useRef<HTMLDivElement>(null);
   const katanaRef = useRef<HTMLDivElement>(null);
   const ribbonRef = useRef<HTMLDivElement>(null);
   const ribbonCoreRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
   const grpFrontRef = useRef<HTMLDivElement>(null);
   const grpBackRef = useRef<HTMLDivElement>(null);
   const grpDataRef = useRef<HTMLDivElement>(null);
@@ -67,24 +67,16 @@ const KatanaStrike: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const nodesDivRef = useRef<HTMLDivElement>(null);
 
-  // References for animation state to clear on unmount
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const animFrameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     let isCancelled = false;
     let nodeData: any[] = [];
     
-    const wait = (ms: number) => new Promise(resolve => {
-      const t = setTimeout(resolve, ms);
-      timeoutsRef.current.push(t);
-    });
-
     const halo = haloRef.current;
     const katana = katanaRef.current;
     const ribbon = ribbonRef.current;
     const ribbonC = ribbonCoreRef.current;
-    const titleEl = titleRef.current;
     const grpFront = grpFrontRef.current;
     const grpBack = grpBackRef.current;
     const grpData = grpDataRef.current;
@@ -92,8 +84,9 @@ const KatanaStrike: React.FC = () => {
     const canvas = canvasRef.current;
     const nodesDiv = nodesDivRef.current;
     const stage = stageRef.current;
+    const section = sectionRef.current;
 
-    if (!halo || !katana || !ribbon || !ribbonC || !titleEl || !grpFront || !grpBack || !grpData || !grpTools || !canvas || !nodesDiv || !stage) return;
+    if (!halo || !katana || !ribbon || !ribbonC || !grpFront || !grpBack || !grpData || !grpTools || !canvas || !nodesDiv || !stage || !section) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -103,105 +96,8 @@ const KatanaStrike: React.FC = () => {
       return getComputedStyle(stage).getPropertyValue(`--cat-${cat}`).trim() || '#fff';
     };
 
-    /* ═══════════════════════════════════════════════════
-       KATANA — animación manual con rAF
-    ═══════════════════════════════════════════════════ */
-    function animateKatana() {
-      return new Promise<void>(async resolve => {
-        if (isCancelled) return resolve();
-        // Fase 1: aparecer suave
-        halo!.style.opacity = '1';
-        katana!.style.transition = 'opacity 1.4s ease, filter 1.4s ease, transform 1.4s ease';
-        katana!.style.opacity = '1';
-        katana!.style.filter = 'blur(0)';
-        katana!.style.transform = 'translate(0, 0) scale(1)';
-
-        await wait(1400);
-        if (isCancelled) return resolve();
-
-        // Flotar
-        katana!.style.transition = 'transform 1.2s ease-in-out';
-        katana!.style.transform = 'translate(0, -6px) scale(1)';
-        await wait(700);
-        if (isCancelled) return resolve();
-        katana!.style.transform = 'translate(0, 0) scale(1)';
-        await wait(700);
-        if (isCancelled) return resolve();
-
-        // Wind-up
-        katana!.style.transition = 'transform 0.35s ease-in';
-        katana!.style.transform = 'translate(-90px, 0) scale(1)';
-        await wait(350);
-        if (isCancelled) return resolve();
-
-        // ESTOCADA — animación rAF suave
-        const startX = -90;
-        const endX = window.innerWidth + 200;
-        const dur = 420; // ms
-        const t0 = performance.now();
-
-        // Cinta aparece al mismo tiempo
-        ribbon!.style.transition = 'none';
-        ribbonC!.style.transition = 'none';
-        ribbon!.style.opacity = '0';
-        ribbonC!.style.opacity = '0';
-        ribbon!.style.transform = 'scaleX(0)';
-        ribbonC!.style.transform = 'scaleX(0)';
-
-        function tick(now: number) {
-          if (isCancelled) return resolve();
-          const p = Math.min((now - t0) / dur, 1);
-          const ease = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p; // ease-in-out
-          const x = startX + (endX - startX) * ease;
-          katana!.style.transition = 'none';
-          katana!.style.transform = `translate(${x}px, 0) rotate(${ease * 32}deg) scale(1.02)`;
-          katana!.style.filter = p > 0.6 ? `blur(${(p - 0.6) * 6}px)` : 'blur(0)';
-          katana!.style.opacity = p > 0.7 ? String(1 - (p - 0.7) / 0.3) : '1';
-
-          // Cinta crece desde izquierda
-          const rp = Math.min(p / 0.6, 1);
-          ribbon!.style.transform = `scaleX(${rp})`;
-          ribbonC!.style.transform = `scaleX(${rp})`;
-          ribbon!.style.opacity = String(Math.min(rp * 1.4, 1));
-          ribbonC!.style.opacity = String(Math.min(rp * 1.4, 1));
-
-          if (p < 1) {
-            animFrameIdRef.current = requestAnimationFrame(tick);
-          } else {
-            // Cinta se queda tenue
-            ribbon!.style.transition = 'opacity 1s ease';
-            ribbonC!.style.transition = 'opacity 1s ease';
-            ribbon!.style.opacity = '0.45';
-            ribbonC!.style.opacity = '0.45';
-            halo!.style.opacity = '0';
-            resolve();
-          }
-        }
-        animFrameIdRef.current = requestAnimationFrame(tick);
-      });
-    }
-
-    /* ═══════════════════════════════════════════════════
-       MOSTRAR GRUPO (fade in → hold → fade out rápido)
-    ═══════════════════════════════════════════════════ */
-    async function showGroup(el: HTMLDivElement, holdMs = 2600) {
-      if (isCancelled) return;
-      el.style.transition = 'opacity 0.55s ease, filter 0.55s ease';
-      el.style.opacity = '1';
-      el.style.filter = 'blur(0)';
-      await wait(holdMs);
-      if (isCancelled) return;
-      el.style.transition = 'opacity 0.18s ease';
-      el.style.opacity = '0';
-      await wait(200);
-    }
-
-    /* ═══════════════════════════════════════════════════
-       RED NEURONAL
-    ═══════════════════════════════════════════════════ */
     function buildNeuralNet() {
       if (!stage || !canvas || !nodesDiv) return;
-      // Usamos el tamaño del contenedor en lugar de window.innerWidth para ser un componente amigable
       const W = stage.clientWidth;
       const H = stage.clientHeight;
       canvas.width = W;
@@ -210,7 +106,6 @@ const KatanaStrike: React.FC = () => {
       nodesDiv.innerHTML = '';
       nodeData = [];
 
-      // Layout: 2x2 cajas con margenes y espacio superior para el título principal
       const topReserve = Math.max(80, H * 0.16);
       const margin = Math.min(W, H) * 0.03;
       const gap = margin;
@@ -232,7 +127,6 @@ const KatanaStrike: React.FC = () => {
         box.style.top = p.y + 'px';
         box.style.width = boxW + 'px';
         box.style.height = boxH + 'px';
-        // Adjust opacity for the box border
         let rawColor = getCatColor(cat);
         let bcolor = rawColor.replace(/[\d.]+\)$/, '0.18)');
         box.style.borderColor = bcolor;
@@ -246,21 +140,17 @@ const KatanaStrike: React.FC = () => {
         box.appendChild(inner);
         nodesDiv.appendChild(box);
         boxes[cat] = { box, inner, x: p.x, y: p.y, w: boxW, h: boxH };
-        requestAnimationFrame(() => { box.style.opacity = '1'; });
       });
 
-      // Distribuir nodos dentro de cada inner box
       const groups: Record<string, typeof TECH> = {};
       TECH.forEach(t => { (groups[t.cat] = groups[t.cat] || []).push(t); });
 
       Object.entries(groups).forEach(([cat, list]) => {
         const b = boxes[cat];
-        // área útil del inner box
         const innerX = b.x + 8;
         const innerY = b.y + 38;
         const innerW = b.w - 16;
         const innerH = b.h - 46;
-        // círculo de nodos centrado en la caja
         const cx = innerX + innerW / 2;
         const cy = innerY + innerH / 2;
         const r = Math.min(innerW, innerH) * 0.32;
@@ -275,8 +165,6 @@ const KatanaStrike: React.FC = () => {
           node.style.left = x + 'px';
           node.style.top = y + 'px';
           node.style.opacity = '0';
-          // Fix for light theme node shadow dynamically
-          node.style.transition = 'opacity 0.6s ease';
 
           let icoHtml;
           if (tech.svg) icoHtml = `<span class="ico" style="background:${tech.bg};color:${tech.fg}">${svgIco(tech.svg)}</span>`;
@@ -285,7 +173,6 @@ const KatanaStrike: React.FC = () => {
           node.innerHTML = `${icoHtml}<span class="name">${tech.name}</span>`;
           nodesDiv.appendChild(node);
 
-          // Suspendido: oscilación acotada al box
           const phase = Math.random() * Math.PI * 2;
           const ampY = Math.min(14, innerH * 0.06);
           const ampX = Math.min(8, innerW * 0.03);
@@ -293,7 +180,6 @@ const KatanaStrike: React.FC = () => {
           nodeData.push({
             el: node, bx: x, by: y, x, y,
             ampX, ampY, phase, speed,
-            // límites de la caja para clamp
             minX: innerX + 50, maxX: innerX + innerW - 50,
             minY: innerY + 24, maxY: innerY + innerH - 24,
             tech,
@@ -320,7 +206,6 @@ const KatanaStrike: React.FC = () => {
         }
       }
 
-      // Pulso viajante por líneas relacionadas
       const t = performance.now() * 0.001;
       nodeData.forEach((nd, i) => {
         const related = nodeData.filter((n, j) => j !== i && n.tech.cat === nd.tech.cat && areRelated(nd.tech.name, n.tech.name));
@@ -341,7 +226,6 @@ const KatanaStrike: React.FC = () => {
       nodeData.forEach(nd => {
         let nx = nd.bx + Math.sin(t * nd.speed + nd.phase) * nd.ampX;
         let ny = nd.by + Math.cos(t * nd.speed * 1.3 + nd.phase) * nd.ampY;
-        // clamp dentro de la caja
         nx = Math.max(nd.minX, Math.min(nd.maxX, nx));
         ny = Math.max(nd.minY, Math.min(nd.maxY, ny));
         nd.x = nx; nd.y = ny;
@@ -350,226 +234,214 @@ const KatanaStrike: React.FC = () => {
       });
     }
 
-    function neuralLoop() {
-      if (isCancelled) return;
-      updateNodes();
-      drawLines();
-      animFrameIdRef.current = requestAnimationFrame(neuralLoop);
-    }
+    // SCROLL SCRUBBING LOGIC
+    let targetP = 0;
+    let currentP = 0;
 
-    async function showNeuralNet() {
-      if (isCancelled) return;
-      buildNeuralNet();
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const scrollableDist = rect.height - window.innerHeight;
+      if (scrollableDist <= 0) return;
+      const rawP = -rect.top / scrollableDist;
+      targetP = Math.max(0, Math.min(1, rawP));
+    };
 
-      titleEl!.style.top = '4%';
-      titleEl!.style.transform = 'translate(-50%, 0)';
-      titleEl!.style.transition = 'opacity 1.2s ease, filter 1.2s ease';
-      titleEl!.style.opacity = '1';
-      titleEl!.style.filter = 'blur(0)';
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
 
-      canvas!.style.opacity = '1';
-      nodesDiv!.style.opacity = '1';
+    // Build the canvas once
+    buildNeuralNet();
 
-      nodeData.forEach((nd, i) => {
-        const t = setTimeout(() => { if (!isCancelled) nd.el.style.opacity = '1'; }, i * 80);
-        timeoutsRef.current.push(t);
-      });
+    function renderLoop() {
+      if (isCancelled) return;
+      
+      // Lerp progress for butter-smooth animation
+      currentP += (targetP - currentP) * 0.08;
+      // Precision snapping to avoid endless micro-updates
+      if (Math.abs(targetP - currentP) < 0.0001) currentP = targetP;
 
-      ribbon!.style.transition = 'opacity 1.2s ease';
-      ribbonC!.style.transition = 'opacity 1.2s ease';
-      ribbon!.style.opacity = '0';
-      ribbonC!.style.opacity = '0';
+      const p = currentP;
 
-      neuralLoop();
-    }
-
-    /* ═══════════════════════════════════════════════════
-       MAIN SEQUENCE
-    ═══════════════════════════════════════════════════ */
-    async function main() {
-      // 1. Katana aparece y atraviesa
-      await animateKatana();
-      if (isCancelled) return;
-      await wait(300);
-      if (isCancelled) return;
-
-      // 2. Título "Stack principal"
-      titleEl!.style.opacity = '1';
-      titleEl!.style.filter = 'blur(0)';
-      await wait(2200);
-      if (isCancelled) return;
-      titleEl!.style.transition = 'opacity 0.2s ease';
-      titleEl!.style.opacity = '0';
-      await wait(250);
-      if (isCancelled) return;
-
-      // 3. Grupos secuenciales
-      await showGroup(grpFront!, 2600);
-      if (isCancelled) return;
-      await showGroup(grpBack!, 2600);
-      if (isCancelled) return;
-      await showGroup(grpData!, 2600);
-      if (isCancelled) return;
-      await showGroup(grpTools!, 2800);
-      if (isCancelled) return;
-      await wait(200);
-      if (isCancelled) return;
-
-      // 4. Red neuronal
-      await showNeuralNet();
-    }
-
-    /* ═══════════════════════════════════════════════════
-       INTERSECTION OBSERVER (Animar al hacer scroll)
-    ═══════════════════════════════════════════════════ */
-    const resetAnimation = () => {
-      isCancelled = true;
-      timeoutsRef.current.forEach(clearTimeout);
-      timeoutsRef.current = [];
-      if (animFrameIdRef.current) {
-        cancelAnimationFrame(animFrameIdRef.current);
-        animFrameIdRef.current = null;
+      // 1. KATANA PHASE (0 to 0.3)
+      let kX = -90, kR = 0, kS = 1, kOpacity = 0, kBlur = 6, rOpacity = 0, rScale = 0;
+      if (p < 0.1) {
+        // Appear & Float
+        const pSub = p / 0.1;
+        kOpacity = pSub;
+        kBlur = 6 * (1 - pSub);
+        kX = -40 * (1 - pSub) - 90 * pSub;
+      } else if (p < 0.3) {
+        // Strike
+        const pSub = (p - 0.1) / 0.2;
+        const ease = pSub < 0.5 ? 2 * pSub * pSub : -1 + (4 - 2 * pSub) * pSub;
+        kX = -90 + (window.innerWidth + 200 + 90) * ease;
+        kR = ease * 32;
+        kS = 1.02;
+        kOpacity = 1;
+        kBlur = pSub > 0.6 ? (pSub - 0.6) * 6 : 0;
+        
+        rScale = Math.min(pSub / 0.6, 1);
+        rOpacity = Math.min(rScale * 1.4, 1);
+      } else {
+        kOpacity = 0;
+        rScale = 1;
+        rOpacity = Math.max(0, 0.45 - (p - 0.3) * 2);
       }
       
-      // Reset DOM state
-      halo!.style.opacity = '0';
-      katana!.style.opacity = '0';
-      katana!.style.transform = 'translate(-40px, 8px) scale(0.98)';
-      katana!.style.filter = 'blur(6px)';
-      ribbon!.style.opacity = '0';
-      ribbonC!.style.opacity = '0';
-      ribbon!.style.transform = 'scaleX(0)';
-      ribbonC!.style.transform = 'scaleX(0)';
-      titleEl!.style.opacity = '0';
-      titleEl!.style.filter = 'blur(4px)';
-      grpFront!.style.opacity = '0';
-      grpBack!.style.opacity = '0';
-      grpData!.style.opacity = '0';
-      grpTools!.style.opacity = '0';
-      canvas!.style.opacity = '0';
-      nodesDiv!.style.opacity = '0';
-      nodesDiv!.innerHTML = '';
-      nodeData = [];
-      if (ctx) ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-    };
+      katana.style.opacity = String(kOpacity);
+      katana.style.filter = `blur(${kBlur}px)`;
+      katana.style.transform = `translate(${kX}px, 0) rotate(${kR}deg) scale(${kS})`;
+      halo.style.opacity = p > 0 && p < 0.3 ? String(kOpacity) : '0';
+      ribbon.style.transform = `scaleX(${rScale})`;
+      ribbon.style.opacity = String(rOpacity);
+      ribbonC.style.transform = `scaleX(${rScale})`;
+      ribbonC.style.opacity = String(rOpacity);
 
-    const startAnimation = () => {
-      resetAnimation();
-      isCancelled = false; // allow new animation to run
-      main();
-    };
+      // 2. TITLE PHASE (0.25 to 0.40) & Sticky Title for Phase 4 (0.7+)
+      // REMOVED animated title based on user request.
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          startAnimation();
-        } else {
-          resetAnimation();
+      // 3. SEQUENTIAL GROUPS (0.35 to 0.7)
+      const renderGroup = (el: HTMLElement | null, start: number) => {
+        if (!el) return;
+        let op = 0, bl = 4;
+        if (p >= start && p < start + 0.1) {
+          const pSub = (p - start) / 0.1;
+          if (pSub < 0.3) { op = pSub / 0.3; bl = 4 * (1 - op); }
+          else if (pSub > 0.8) { op = 1 - (pSub - 0.8) / 0.2; bl = 4 * (1 - op); }
+          else { op = 1; bl = 0; }
         }
-      });
-    }, { threshold: 0.2 }); // Trigger when 20% visible
+        el.style.opacity = String(op);
+        el.style.filter = `blur(${bl}px)`;
+      };
+      renderGroup(grpFront, 0.35);
+      renderGroup(grpBack, 0.43);
+      renderGroup(grpData, 0.51);
+      renderGroup(grpTools, 0.59);
 
-    if (stage) {
-      observer.observe(stage);
+      // 4. NEURAL NET PHASE (0.7 to 1.0)
+      let nOpacity = 0;
+      if (p >= 0.7) {
+         nOpacity = Math.min(1, (p - 0.7) / 0.1);
+      }
+      canvas.style.opacity = String(nOpacity);
+      nodesDiv.style.opacity = String(nOpacity);
+      
+      const boxes = nodesDiv.querySelectorAll('.cluster-box') as NodeListOf<HTMLElement>;
+      boxes.forEach(box => box.style.opacity = String(nOpacity));
+
+      nodeData.forEach((nd, i) => {
+         const startP = 0.7 + (i * 0.005);
+         let op = 0;
+         if (p > startP) op = Math.min(1, (p - startP) / 0.05);
+         nd.el.style.opacity = String(op * nOpacity);
+      });
+
+      if (nOpacity > 0.01) {
+        updateNodes();
+        drawLines();
+      }
+
+      animFrameIdRef.current = requestAnimationFrame(renderLoop);
     }
+    
+    animFrameIdRef.current = requestAnimationFrame(renderLoop);
 
     const handleResize = () => {
-      if (nodeData.length > 0 && stageRef.current && canvasRef.current) {
-        canvasRef.current.width = stageRef.current.clientWidth;
-        canvasRef.current.height = stageRef.current.clientHeight;
-      }
+      buildNeuralNet();
     };
     window.addEventListener('resize', handleResize);
 
     return () => {
-      resetAnimation();
-      if (stage) observer.unobserve(stage);
+      isCancelled = true;
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
     };
   }, []);
 
   return (
-    <section className="katana-section">
-      <div className="stage" id="stage" ref={stageRef}>
-        <div className="halo" id="halo" ref={haloRef}></div>
-
-        {/* KATANA */}
-        <div className="katana-wrap" id="katana" ref={katanaRef}>
-          <div className="katana">
-            <div className="kashira"></div>
-            <div className="grip"></div>
-            <div className="tsuba"></div>
-            <div className="habaki"></div>
-            <div className="blade"></div>
-          </div>
+    <section className="katana-section" ref={sectionRef}>
+      <div className="katana-header-wrapper">
+        <div className="section-header">
+          <h2 className="section-title">Stack Principal</h2>
         </div>
-
-        {/* CINTA */}
-        <div className="ribbon" id="ribbon" ref={ribbonRef}></div>
-        <div className="ribbon core" id="ribbonCore" ref={ribbonCoreRef}></div>
-
-        {/* TÍTULO */}
-        <div className="stack-title" id="stackTitle" ref={titleRef}>
-          <span className="pre">—&nbsp;</span>Stack principal<span className="pre">&nbsp;—</span>
-        </div>
-
-        {/* PANELES SECUENCIALES */}
-        <div className="group-panel" id="grpFrontend" ref={grpFrontRef}>
-          <div className="glabel">Frontend</div>
-          <div className="row">
-            <div className="chip"><span className="ico" style={{ background: '#f7df1e' }}>JS</span><span className="name">JavaScript</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#3178c6', color: '#fff' }}>TS</span><span className="name">TypeScript</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#61dafb' }}>⚛</span><span className="name">React</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#000', color: '#fff' }}>N</span><span className="name">Next.js</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#38bdf8', color: '#fff' }}>~</span><span className="name">Tailwind</span></div>
-          </div>
-        </div>
-
-        <div className="group-panel" id="grpBackend" ref={grpBackRef}>
-          <div className="glabel">Backend &amp; Base de datos</div>
-          <div className="row">
-            <div className="chip"><span className="ico" style={{ background: '#5fa04e', color: '#fff' }}>⬢</span><span className="name">Node.js</span></div>
-            <div className="chip"><span className="ico ol">Ex</span><span className="name">Express</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#10aa50', color: '#fff' }}>M</span><span className="name">MongoDB</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#336791', color: '#fff' }}>Pg</span><span className="name">PostgreSQL</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#3ecf8e', color: '#0a3d2a' }}>S</span><span className="name">Supabase</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#2d3748', color: '#fff' }}>Pr</span><span className="name">Prisma</span></div>
-          </div>
-        </div>
-
-        <div className="group-panel" id="grpData" ref={grpDataRef}>
-          <div className="glabel">Data &amp; BI</div>
-          <div className="row">
-            <div className="chip"><span className="ico" style={{ background: '#f2c811' }}>PB</span><span className="name">Power BI</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#376a37', color: '#fff' }}>PQ</span><span className="name">Power Query</span></div>
-            <div className="chip"><span className="ico" style={{ background: '#e8a33d' }}>DA</span><span className="name">DAX</span></div>
-            <div className="chip"><span className="ico ol">ET</span><span className="name">ETL</span></div>
-          </div>
-        </div>
-
-        <div className="group-panel" id="grpTools" ref={grpToolsRef}>
-          <div className="glabel">Herramientas</div>
-          <div className="row">
-            <div className="chip">
-              <span className="ico" style={{ background: '#f05033', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('git') }}></span>
-              <span className="name">Git</span>
-            </div>
-            <div className="chip">
-              <span className="ico" style={{ background: '#1f1f1f', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('github') }}></span>
-              <span className="name">GitHub</span>
-            </div>
-            <div className="chip">
-              <span className="ico" style={{ background: '#007acc', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('vscode') }}></span>
-              <span className="name">VSCode</span>
-            </div>
-          </div>
-        </div>
-
-        {/* RED NEURONAL */}
-        <canvas id="neural-canvas" ref={canvasRef}></canvas>
-        <div className="neural-nodes" id="neuralNodes" ref={nodesDivRef}></div>
       </div>
-      
+      <div className="sticky-container">
+        <div className="stage" id="stage" ref={stageRef}>
+          <div className="halo" id="halo" ref={haloRef}></div>
+
+          {/* KATANA */}
+          <div className="katana-wrap" id="katana" ref={katanaRef}>
+            <div className="katana">
+              <div className="kashira"></div>
+              <div className="grip"></div>
+              <div className="tsuba"></div>
+              <div className="habaki"></div>
+              <div className="blade"></div>
+            </div>
+          </div>
+
+          {/* CINTA */}
+          <div className="ribbon" id="ribbon" ref={ribbonRef}></div>
+          <div className="ribbon core" id="ribbonCore" ref={ribbonCoreRef}></div>
+
+          {/* PANELES SECUENCIALES */}
+          <div className="group-panel" id="grpFrontend" ref={grpFrontRef}>
+            <div className="glabel">Frontend</div>
+            <div className="row">
+              <div className="chip"><span className="ico" style={{ background: '#f7df1e' }}>JS</span><span className="name">JavaScript</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#3178c6', color: '#fff' }}>TS</span><span className="name">TypeScript</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#61dafb' }}>⚛</span><span className="name">React</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#000', color: '#fff' }}>N</span><span className="name">Next.js</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#38bdf8', color: '#fff' }}>~</span><span className="name">Tailwind</span></div>
+            </div>
+          </div>
+
+          <div className="group-panel" id="grpBackend" ref={grpBackRef}>
+            <div className="glabel">Backend &amp; Base de datos</div>
+            <div className="row">
+              <div className="chip"><span className="ico" style={{ background: '#5fa04e', color: '#fff' }}>⬢</span><span className="name">Node.js</span></div>
+              <div className="chip"><span className="ico ol">Ex</span><span className="name">Express</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#10aa50', color: '#fff' }}>M</span><span className="name">MongoDB</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#336791', color: '#fff' }}>Pg</span><span className="name">PostgreSQL</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#3ecf8e', color: '#0a3d2a' }}>S</span><span className="name">Supabase</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#2d3748', color: '#fff' }}>Pr</span><span className="name">Prisma</span></div>
+            </div>
+          </div>
+
+          <div className="group-panel" id="grpData" ref={grpDataRef}>
+            <div className="glabel">Data &amp; BI</div>
+            <div className="row">
+              <div className="chip"><span className="ico" style={{ background: '#f2c811' }}>PB</span><span className="name">Power BI</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#376a37', color: '#fff' }}>PQ</span><span className="name">Power Query</span></div>
+              <div className="chip"><span className="ico" style={{ background: '#e8a33d' }}>DA</span><span className="name">DAX</span></div>
+              <div className="chip"><span className="ico ol">ET</span><span className="name">ETL</span></div>
+            </div>
+          </div>
+
+          <div className="group-panel" id="grpTools" ref={grpToolsRef}>
+            <div className="glabel">Herramientas</div>
+            <div className="row">
+              <div className="chip">
+                <span className="ico" style={{ background: '#f05033', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('git') }}></span>
+                <span className="name">Git</span>
+              </div>
+              <div className="chip">
+                <span className="ico" style={{ background: '#1f1f1f', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('github') }}></span>
+                <span className="name">GitHub</span>
+              </div>
+              <div className="chip">
+                <span className="ico" style={{ background: '#007acc', color: '#fff' }} dangerouslySetInnerHTML={{ __html: svgIco('vscode') }}></span>
+                <span className="name">VSCode</span>
+              </div>
+            </div>
+          </div>
+
+          {/* RED NEURONAL */}
+          <canvas id="neural-canvas" ref={canvasRef}></canvas>
+          <div className="neural-nodes" id="neuralNodes" ref={nodesDivRef}></div>
+        </div>
+      </div>
     </section>
   );
 };
