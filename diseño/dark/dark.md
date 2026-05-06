@@ -1,92 +1,86 @@
 ---
-name: Midnight Clarity
+name: Midnight Tech
 colors:
-  surface: '#0b1326'
-  surface-dim: '#0b1326'
-  surface-bright: '#31394d'
-  surface-container-lowest: '#060e20'
-  surface-container-low: '#131b2e'
-  surface-container: '#171f33'
-  surface-container-high: '#222a3d'
-  surface-container-highest: '#2d3449'
-  on-surface: '#dae2fd'
-  on-surface-variant: '#dac0c9'
-  inverse-surface: '#dae2fd'
-  inverse-on-surface: '#283044'
-  outline: '#a28a93'
-  outline-variant: '#544249'
-  surface-tint: '#ffafd3'
-  primary: '#ffafd3'
-  on-primary: '#620040'
-  primary-container: '#f472b6'
-  on-primary-container: '#6d0047'
-  inverse-primary: '#a43073'
-  secondary: '#7bd0ff'
-  on-secondary: '#00354a'
-  secondary-container: '#00a6e0'
-  on-secondary-container: '#00374d'
-  tertiary: '#b9c8de'
-  on-tertiary: '#233143'
-  tertiary-container: '#91a0b5'
-  on-tertiary-container: '#283748'
+  surface: '#0e1416'
+  surface-dim: '#0e1416'
+  surface-bright: '#343a3c'
+  surface-container-lowest: '#090f11'
+  surface-container-low: '#161d1e'
+  surface-container: '#1a2122'
+  surface-container-high: '#242b2d'
+  surface-container-highest: '#2f3638'
+  on-surface: '#dde4e5'
+  on-surface-variant: '#bbc9cd'
+  inverse-surface: '#dde4e5'
+  inverse-on-surface: '#2b3233'
+  outline: '#859397'
+  outline-variant: '#3c494c'
+  surface-tint: '#2fd9f4'
+  primary: '#8aebff'
+  on-primary: '#00363e'
+  primary-container: '#22d3ee'
+  on-primary-container: '#005763'
+  inverse-primary: '#006877'
+  secondary: '#b9c8de'
+  on-secondary: '#233143'
+  secondary-container: '#39485a'
+  on-secondary-container: '#a7b6cc'
+  tertiary: '#cfdef7'
+  on-tertiary: '#233144'
+  tertiary-container: '#b3c2da'
+  on-tertiary-container: '#425064'
   error: '#ffb4ab'
   on-error: '#690005'
   error-container: '#93000a'
   on-error-container: '#ffdad6'
-  primary-fixed: '#ffd8e7'
-  primary-fixed-dim: '#ffafd3'
-  on-primary-fixed: '#3d0026'
-  on-primary-fixed-variant: '#85145a'
-  secondary-fixed: '#c4e7ff'
-  secondary-fixed-dim: '#7bd0ff'
-  on-secondary-fixed: '#001e2c'
-  on-secondary-fixed-variant: '#004c69'
-  tertiary-fixed: '#d4e4fa'
-  tertiary-fixed-dim: '#b9c8de'
-  on-tertiary-fixed: '#0d1c2d'
-  on-tertiary-fixed-variant: '#39485a'
-  background: '#0b1326'
-  on-background: '#dae2fd'
-  surface-variant: '#2d3449'
+  primary-fixed: '#a2eeff'
+  primary-fixed-dim: '#2fd9f4'
+  on-primary-fixed: '#001f25'
+  on-primary-fixed-variant: '#004e5a'
+  secondary-fixed: '#d4e4fa'
+  secondary-fixed-dim: '#b9c8de'
+  on-secondary-fixed: '#0d1c2d'
+  on-secondary-fixed-variant: '#39485a'
+  tertiary-fixed: '#d5e3fd'
+  tertiary-fixed-dim: '#b9c7e0'
+  on-tertiary-fixed: '#0d1c2f'
+  on-tertiary-fixed-variant: '#3a485c'
+  background: '#0e1416'
+  on-background: '#dde4e5'
+  surface-variant: '#2f3638'
 typography:
   headline-xl:
     fontFamily: Noto Serif
     fontSize: 48px
     fontWeight: '700'
-    lineHeight: '1.1'
+    lineHeight: '1.2'
     letterSpacing: -0.02em
   headline-lg:
     fontFamily: Noto Serif
     fontSize: 32px
     fontWeight: '600'
-    lineHeight: '1.2'
-    letterSpacing: -0.01em
+    lineHeight: '1.3'
   headline-md:
     fontFamily: Noto Serif
     fontSize: 24px
-    fontWeight: '600'
-    lineHeight: '1.3'
+    fontWeight: '500'
+    lineHeight: '1.4'
   body-lg:
-    fontFamily: Noto Serif
+    fontFamily: Inter
     fontSize: 18px
     fontWeight: '400'
     lineHeight: '1.6'
   body-md:
-    fontFamily: Noto Serif
+    fontFamily: Inter
     fontSize: 16px
     fontWeight: '400'
     lineHeight: '1.6'
-  label-caps:
-    fontFamily: Inter
-    fontSize: 12px
-    fontWeight: '600'
-    lineHeight: '1.0'
-    letterSpacing: 0.1em
   label-sm:
     fontFamily: Inter
-    fontSize: 13px
-    fontWeight: '500'
-    lineHeight: '1.4'
+    fontSize: 14px
+    fontWeight: '600'
+    lineHeight: '1'
+    letterSpacing: 0.05em
 rounded:
   sm: 0.125rem
   DEFAULT: 0.25rem
@@ -95,56 +89,52 @@ rounded:
   xl: 0.75rem
   full: 9999px
 spacing:
-  base: 8px
-  container-max: 1280px
+  container-max: 1200px
   gutter: 24px
   margin-mobile: 16px
-  margin-desktop: 64px
-  stack-sm: 12px
-  stack-md: 24px
-  stack-lg: 48px
+  section-gap: 80px
+  stack-sm: 8px
+  stack-md: 16px
+  stack-lg: 32px
 ---
 
 ## Brand & Style
-This design system embodies an aesthetic of "Midnight Clarity"—a sophisticated, high-contrast approach to dark mode that prioritizes legibility and serenity. It is designed for premium editorial platforms, luxury portfolios, or high-end news applications where the content requires a focused, quiet atmosphere.
+The design system is engineered for high-end technical portfolios, emphasizing precision, intellectual depth, and digital craftsmanship. The aesthetic is rooted in **Modern Minimalism**, utilizing expansive negative space and a strict typographic hierarchy to convey authority. By pairing a traditional serif with a high-energy neon accent, the system strikes a balance between timeless professional credibility and cutting-edge innovation. 
 
-The style is a fusion of **Modern Minimalism** and **Tonal Layering**. It avoids the harshness of pure black backgrounds, opting instead for deep, atmospheric indigos that provide a softer canvas for high-contrast typography. The visual language is poised and intellectual, evoking the feeling of a high-end print magazine read under soft moonlight. Every element is intentional, utilizing generous whitespace (or "darkspace") to ensure the interface never feels crowded or noisy.
+The emotional objective is to evoke a sense of "quiet power"—a professional environment that is calm and focused, yet punctuated by bursts of technical vibrancy.
 
 ## Colors
-The palette is anchored by deep, nocturnal tones that establish a sense of depth and permanence. The primary background uses a rich indigo-slate (#0F172A), while secondary surfaces utilize a lighter slate (#1E293B) to create natural hierarchy through tonal elevation rather than heavy shadows.
+The palette is anchored by a deep navy foundation that provides a more sophisticated depth than pure black. The primary accent, **Electric Cyan (#22D3EE)**, is used sparingly but strategically for interactive elements and key highlights to ensure maximum visual impact against the dark backdrop. 
 
-The coral accent (#F472B6) serves as the "spark" within the darkness. It is used sparingly for primary actions, critical highlights, and active states to maintain its potency. Text is rendered in high-contrast off-whites and cool grays to ensure AAA accessibility while reducing eye strain. This color strategy relies on the contrast between the warmth of the coral and the icy coolness of the indigo base.
+- **Primary:** Electric Cyan for calls to action, focus states, and data visualization.
+- **Base:** Deep Navy (#0B1326) for the primary canvas.
+- **Surface:** Slightly lighter slate-navy tones for cards and section differentiation.
+- **Typography:** High-contrast off-white (#F8FAFC) for readability, with slate-gray for secondary information.
 
 ## Typography
-The typography is the soul of this design system. **Noto Serif** is used for both headlines and body copy to achieve an elegant, editorial rhythm. Its classic letterforms provide a humanistic touch that balances the coldness of the dark UI. 
+This design system utilizes a sophisticated typographic pairing to differentiate between narrative content and functional UI. 
 
-Headlines are set with tight tracking and aggressive line heights to feel like architectural elements on the page. Body text utilizes generous line spacing to ensure long-form reading is effortless against the dark background. For functional clarity, **Inter** is introduced as a secondary typeface for utility labels, buttons, and navigation elements. Using a clean sans-serif for metadata and labels creates a "structural" frame around the more expressive serif content.
+**Noto Serif** is reserved for headlines and editorial moments, providing a classic, authoritative feel that suggests expertise. **Inter** is used for all functional UI elements, body text, and labels, ensuring maximum legibility and a clean, technical appearance. Use tight letter-spacing for large headlines to maintain a modern edge, and generous line-height for body text to facilitate long-form reading on dark backgrounds.
 
 ## Layout & Spacing
-The layout follows a **Fixed-Fluid Hybrid** model. Content is contained within a maximum width of 1280px to prevent line lengths from becoming unreadable on ultra-wide displays. A 12-column grid is employed with wide gutters (24px) to emphasize the editorial feel.
+The layout follows a **Fixed Grid** model for desktop to ensure a controlled, gallery-like presentation of portfolio work. A 12-column system is used with generous gutters to maintain a clean, minimalist feel. 
 
-Spacing is governed by a strict 8px linear scale. Large vertical margins (stack-lg) are encouraged between sections to maintain the "serene" brand promise. Elements should feel as though they have room to breathe, avoiding dense clusters of information. Use centered layouts for landing experiences and asymmetrical grids for content-heavy pages to mimic high-end magazine layouts.
+Spacing follows a strict 8px baseline grid. Section vertical spacing is intentionally large (80px+) to allow the typography and work samples room to breathe, preventing the dark interface from feeling cramped or overwhelming.
 
 ## Elevation & Depth
-In this design system, depth is communicated through **Tonal Layers** rather than traditional drop shadows. The background is divided into three primary tiers:
-1.  **Base (Level 0):** #0F172A – The foundation for the entire viewport.
-2.  **Surface (Level 1):** #1E293B – Used for cards, modals, and navigation bars.
-3.  **Overlay (Level 2):** #334155 – Reserved for hover states or elements that require immediate attention.
+Depth is achieved through **Tonal Layers** and **Low-Contrast Outlines** rather than traditional shadows. 
 
-To enhance the "Midnight" aesthetic, a subtle **Backdrop Blur** (12px to 20px) is applied to floating elements like navigation bars and dropdowns, allowing the deep indigo background colors to bleed through elegantly. Borders are kept minimal, using a low-opacity slate (#94A3B8 at 15% opacity) to define edges without creating visual clutter.
+In this design system, surfaces "lift" by becoming slightly lighter in color (moving from #0B1326 to #111A2E). Interactive cards and containers should use a 1px border in a muted slate (#1E293B) to define edges. For the primary accent, a subtle outer glow (0px 0px 15px rgba(34, 211, 238, 0.3)) can be applied to buttons or active indicators to simulate a tech-forward, emissive display.
 
 ## Shapes
-The shape language is disciplined and professional. A **Soft (Level 1)** roundedness is applied to all UI components. This subtle 4px (0.25rem) radius takes the "edge" off the high-contrast interface without making it feel overly playful or "bubbly."
+The shape language is "Soft" (Level 1), utilizing subtle 4px corner radii. This approach maintains the professional rigor of sharp-edged minimalism while making the interface feel modern and engineered. 
 
--   **Buttons & Inputs:** 4px radius for a crisp, architectural look.
--   **Cards & Large Containers:** 8px (rounded-lg) to provide a gentle distinction from the background.
--   **Image Containers:** Should remain sharp (0px) or use the 4px radius to maintain the editorial, photographic feel. 
-The goal is to maintain structural integrity while ensuring the interface feels approachable and modern.
+Avoid fully circular "pill" shapes for buttons; instead, use the standard 4px radius to keep the silhouette architectural. Icons should follow a "linear" style with consistent 2px stroke weights to match the precision of the typography.
 
 ## Components
--   **Buttons:** Primary buttons are filled with the Coral accent (#F472B6) with dark indigo text for maximum contrast. Secondary buttons use a "Ghost" style—transparent backgrounds with a subtle slate border and white text.
--   **Chips:** Small, pill-shaped tags using the Surface color (#1E293B) with Coral text for active states or Slate text for neutral states.
--   **Input Fields:** Minimalist design with a bottom-border only or a very subtle dark-fill. Focus states are indicated by the border transforming into the Coral accent.
--   **Cards:** Tonal cards (#1E293B) with no shadows. Use a 1px border (#94A3B8 at 10% opacity) to define the perimeter against the base background.
--   **Lists:** Divided by thin, elegant lines with generous padding. Hover states should trigger a subtle background shift to Level 2 elevation.
--   **Additional Components:** This system benefits from **Pull Quotes** (large Noto Serif italic text) and **Full-Bleed Image Spacers** to break up text-heavy layouts and lean into the editorial narrative.
+- **Buttons:** Primary buttons use a solid Electric Cyan background with black text for maximum contrast. Secondary buttons are "ghost" style with a 1px slate border and white text.
+- **Cards:** Use a slightly elevated surface color (#111A2E) with a 1px border. On hover, the border color transitions to Electric Cyan.
+- **Chips/Tags:** Small, low-contrast slate backgrounds with uppercase Inter labels. Active tags use a subtle cyan underline.
+- **Inputs:** Darker background than the surface, with a 1px border that glows Electric Cyan upon focus.
+- **Project Grid:** Large-scale imagery paired with Noto Serif titles. Metadata (date, role) should use the Inter label-sm style.
+- **Navigation:** Fixed top-bar with a backdrop blur (Glassmorphism) effect to maintain context while scrolling through deep content.

@@ -25,8 +25,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(251, 248, 253, 0.92);
-  box-shadow: 0 0 0 1px var(--primary);
+  background-color: var(--surface-variant);
+  box-shadow: 0 0 0 1px var(--outline-variant);
   transition: .4s;
   border-radius: 30px;
 }
@@ -40,7 +40,7 @@
   left: 2px;
   bottom: 2px;
   z-index: 2;
-  background-color: #e8e8e8;
+  background-color: var(--on-surface);
   transition: .4s;
 }
 
@@ -56,18 +56,13 @@
 
 /* Luna: visible en dark mode (checked), posicionada a la izquierda */
 .moon svg {
-  fill: #73C0FC;
+  fill: var(--primary);
   position: absolute;
   top: 5px;
   left: 5px;
   z-index: 1;
   width: 24px;
   height: 24px;
-}
-
-/* En light mode la luna se mimetiza con el fondo del track */
-[data-theme="light"] .moon svg {
-  fill: rgba(251, 248, 253, 0.92);
 }
 
 .sun svg {
@@ -90,9 +85,9 @@
   100% { transform: rotate(0deg); }
 }
 
-/* Dark mode activo (checked): cielo nocturno + borde rosa del tema */
+/* Dark mode activo (checked): cielo nocturno + borde con color primario del tema (Cian) */
 .theme-toggle-input:checked + .slider {
-  background-color: #183153;
+  background-color: var(--surface-container-highest);
   box-shadow: 0 0 0 1px var(--primary);
 }
 

@@ -118,32 +118,20 @@
 
 /* --- ESTILOS DE LA CARD INTEGRADA --- */
 .nicolas-card {
-  /* Variables de color de la card original scoped para no ensuciar tu tema global */
-  --ink:        #1b1d3a;
-  --ink-soft:   #2a2f5c;
-  --plum:       #4a3a6b;
-  --rose:       #f3a9b6;
-  --peach:      #f6c7a8;
-  --gold:       #f5d28a;
-  --gold-deep:  #d99a55;
-  --torii:      #c8472f;
-  --foam:       #f6efe4;
-  --foam-dim:   rgba(246,239,228,0.78);
-
   /* Ajuste de tamaño para el Hero Parallax */
   width: min(520px, 90vw); 
   position: relative;
   text-align: left;
   padding: 38px 44px 36px;
-  border-radius: 22px;
-  background: linear-gradient(155deg, rgba(27,29,58,0.85) 0%, rgba(74,58,107,0.78) 55%, rgba(200,71,47,0.65) 100%);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  border: 1px solid rgba(246,239,228,0.22);
-  box-shadow: 0 30px 80px -30px rgba(13, 10, 35, .85), 0 1px 0 0 rgba(255,255,255,.08) inset, 0 -1px 0 0 rgba(0,0,0,.18) inset;
-  color: var(--foam);
+  border-radius: 0.75rem; /* Alineado a las formas suaves nivel 1 del sistema */
+  background: color-mix(in srgb, var(--surface-container) 55%, transparent);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--outline-variant);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3), 0 1px 0 0 color-mix(in srgb, var(--on-surface) 10%, transparent) inset;
+  color: var(--on-surface);
   overflow: hidden;
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
 }
 
 /* Efecto de sol detrás del texto en la tarjeta */
@@ -152,7 +140,7 @@
   position: absolute;
   width: 360px; height: 360px;
   right: -120px; top: -160px;
-  background: radial-gradient(closest-side, rgba(245,210,138,.55), rgba(245,210,138,0) 70%);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--primary-container) 40%, transparent), transparent 70%);
   pointer-events: none;
 }
 
@@ -160,57 +148,58 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 3px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--secondary);
   margin-bottom: 20px;
 }
 
 .nicolas-card .eyebrow .dot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 12px 2px rgba(245,210,138,.7);
+  background: var(--secondary);
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--secondary) 60%, transparent);
 }
 
 .nicolas-card .eyebrow .torii-mark {
-  color: var(--rose);
+  color: var(--primary);
   font-size: 14px;
   margin-left: 4px;
   letter-spacing: 0;
 }
 
 .nicolas-card h1.name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
+  font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 48px;
   line-height: 1.04;
   letter-spacing: -0.5px;
-  color: var(--foam);
+  color: var(--on-surface);
   margin-bottom: 0;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .nicolas-card h1.name .accent {
   font-style: italic;
   font-weight: 500;
-  color: var(--rose);
+  color: var(--primary);
 }
 
 .nicolas-card .horizon {
   height: 1px;
   margin: 14px 0 18px;
-  background: linear-gradient(90deg, transparent, rgba(246,239,228,.45), transparent);
+  background: linear-gradient(90deg, transparent, var(--outline-variant), transparent);
 }
 
 .nicolas-card .role {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 2.4px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(246,239,228,.7);
+  color: var(--on-surface-variant);
   margin-bottom: 28px;
   display: flex;
   align-items: center;
@@ -220,25 +209,26 @@
 .nicolas-card .role .bar {
   flex: 0 0 36px;
   height: 1px;
-  background: var(--gold-deep);
+  background: var(--outline-variant);
 }
 
 .nicolas-card .bio {
+  font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.55;
-  font-weight: 300;
-  color: rgba(246,239,228,.92);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--on-surface-variant);
   max-width: 56ch;
   text-wrap: pretty;
   margin-bottom: 32px;
 }
 
 .nicolas-card .bio em {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--gold);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--on-surface);
 }
 
 .nicolas-card .skills {
@@ -249,33 +239,35 @@
 }
 
 .nicolas-card .chip {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .6px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   padding: 6px 12px;
   border-radius: 9999px;
-  background: rgba(246,239,228,0.08);
-  border: 1px solid rgba(246,239,228,0.22);
-  color: var(--foam);
+  background: var(--surface-variant);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
   backdrop-filter: blur(4px);
-  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+  transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
 .nicolas-card .chip:hover {
   transform: translateY(-2px);
-  background: rgba(246,239,228,0.16);
-  border-color: rgba(245,210,138,.6);
+  background: var(--surface-container-high);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .nicolas-card .chip .glyph {
-  color: var(--gold);
+  color: var(--primary);
   margin-right: 6px;
 }
 
 .nicolas-card .sep {
   width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(246,239,228,.4);
+  background: var(--outline-variant);
   margin: 0 2px;
 }
 
@@ -293,48 +285,48 @@
 .nicolas-card .seal .kanji {
   width: 38px; height: 38px;
   display: grid; place-items: center;
-  border: 1px solid #ffffff;
-  color: #ffffff;
-  font-family: 'Cormorant Garamond', serif;
+  border: 1px solid var(--outline);
+  color: var(--on-surface);
+  font-family: var(--font-serif);
   font-weight: 600;
   font-size: 22px;
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--surface-variant) 50%, transparent);
 }
 
 .nicolas-card .seal .yr {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 2px;
-  color: rgba(246,239,228,.65);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--on-surface-variant);
 }
 
 .nicolas-card .meta {
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px dashed rgba(246,239,228,.18);
+  border-top: 1px dashed var(--outline-variant);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(246,239,228,.55);
+  color: var(--on-surface-variant);
 }
 
 .nicolas-card .meta .now {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--rose);
+  color: var(--primary);
 }
 
 .nicolas-card .meta .now::before {
   content: '';
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--rose);
-  box-shadow: 0 0 10px 1px rgba(243,169,182,.7);
+  background: var(--primary);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--primary) 60%, transparent);
   animation: pulse 2.4s ease-in-out infinite;
 }
 

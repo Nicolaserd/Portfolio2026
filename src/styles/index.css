@@ -1,41 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
 
 /* =============================================
-   DARK MODE — "Midnight Clarity" (predeterminado)
+   DARK MODE — "Midnight Tech" (predeterminado)
    ============================================= */
 :root {
-  --background:              #0b1326;
-  --surface:                 #171f33;
-  --surface-low:             #131b2e;
-  --surface-high:            #222a3d;
-  --surface-highest:         #2d3449;
+  --background:              #0e1416;
+  --on-background:           #dde4e5;
+  
+  --surface:                 #0e1416;
+  --surface-dim:             #0e1416;
+  --surface-bright:          #343a3c;
+  --surface-container-lowest:#090f11;
+  --surface-container-low:   #161d1e;
+  --surface-container:       #1a2122;
+  --surface-container-high:  #242b2d;
+  --surface-container-highest:#2f3638;
+  --surface-variant:         #2f3638;
 
-  --on-surface:              #dae2fd;
-  --on-surface-variant:      #dac0c9;
+  --on-surface:              #dde4e5;
+  --on-surface-variant:      #bbc9cd;
+  --inverse-surface:         #dde4e5;
+  --inverse-on-surface:      #2b3233;
 
-  --primary:                 #ffafd3;
-  --primary-container:       #f472b6;
-  --on-primary:              #620040;
+  --outline:                 #859397;
+  --outline-variant:         #3c494c;
 
-  --secondary:               #7bd0ff;
-  --on-secondary:            #00354a;
+  /* Cian Eléctrico (Sustituye al rosa obsoleto) */
+  --primary:                 #8aebff; 
+  --on-primary:              #00363e;
+  --primary-container:       #22d3ee;
+  --on-primary-container:    #005763;
+  --inverse-primary:         #006877;
 
-  --outline:                 #a28a93;
-  --outline-variant:         #544249;
+  --secondary:               #b9c8de;
+  --on-secondary:            #233143;
+  --secondary-container:     #39485a;
+  --on-secondary-container:  #a7b6cc;
 
-  --border:                  rgba(162, 138, 147, 0.15);
+  --tertiary:                #cfdef7;
+  --on-tertiary:             #233144;
+  --tertiary-container:      #b3c2da;
+  --on-tertiary-container:   #425064;
+  
+  --border:                  var(--outline-variant);
 
   /* Typography tokens */
-  --font-serif: 'Noto Serif', Georgia, serif;
-  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-serif, 'Noto Serif', Georgia, serif);
+  --font-sans:  var(--font-sans, 'Inter', system-ui, sans-serif);
 
   /* Radius */
-  --radius-sm:  0.125rem;
-  --radius:     0.25rem;
-  --radius-md:  0.375rem;
-  --radius-lg:  0.5rem;
-  --radius-xl:  0.75rem;
-  --radius-full:9999px;
+  --rounded-sm: 0.125rem;
+  --rounded-md: 0.375rem;
+  --rounded-lg: 0.5rem;
+  --rounded-xl: 0.75rem;
 
   /* Spacing */
   --space-xs:   4px;
@@ -53,25 +70,44 @@
    ============================================= */
 [data-theme="light"] {
   --background:              #fbf8fd;
-  --surface:                 #efedf2;
-  --surface-low:             #f5f3f8;
-  --surface-high:            #e9e7ec;
-  --surface-highest:         #e3e2e6;
+  --on-background:           #1b1b1f;
+  
+  --surface:                 #fbf8fd;
+  --surface-dim:             #dbd9de;
+  --surface-bright:          #fbf8fd;
+  --surface-container-lowest:#ffffff;
+  --surface-container-low:   #f5f3f8;
+  --surface-container:       #efedf2;
+  --surface-container-high:  #e9e7ec;
+  --surface-container-highest:#e3e2e6;
+  --surface-variant:         #e3e2e6;
 
   --on-surface:              #1b1b1f;
   --on-surface-variant:      #44464f;
-
-  --primary:                 #334678;
-  --primary-container:       #4b5e91;
-  --on-primary:              #ffffff;
-
-  --secondary:               #98453b;
-  --on-secondary:            #ffffff;
+  --inverse-surface:         #303034;
+  --inverse-on-surface:      #f2f0f5;
 
   --outline:                 #757780;
   --outline-variant:         #c5c6d0;
 
-  --border:                  rgba(117, 119, 128, 0.2);
+  /* Deep Indigo */
+  --primary:                 #334678; 
+  --on-primary:              #ffffff;
+  --primary-container:       #4b5e91;
+  --on-primary-container:    #cfd9ff;
+  --inverse-primary:         #b2c5ff;
+
+  --secondary:               #98453b;
+  --on-secondary:            #ffffff;
+  --secondary-container:     #ff9789;
+  --on-secondary-container:  #782d25;
+
+  --tertiary:                #58397a;
+  --on-tertiary:             #ffffff;
+  --tertiary-container:      #705193;
+  --on-tertiary-container:   #e9d1ff;
+  
+  --border:                  var(--outline-variant);
 }
 
 /* =============================================
