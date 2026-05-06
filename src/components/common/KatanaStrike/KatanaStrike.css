@@ -1,0 +1,339 @@
+/* =================================================
+   KATANA STRIKE — 100% Fiel a Catana (4).html
+   ================================================= */
+
+.katana-section {
+  --bg-0: var(--surface, #0b1326);
+  --bg-1: var(--surface-container, #171f33);
+  --ink: var(--on-surface, #dae2fd);
+  --ink-dim: var(--outline, #a28a93);
+  --accent: var(--primary, #ffafd3);
+
+  --blade-len: 460px;
+  --blade-thick: 7px;
+  --guard-w: 10px;
+  --guard-h: 26px;
+  --grip-len: 120px;
+  --grip-thick: 14px;
+  --steel-1: #f4f1ea;
+  --steel-2: #cfcabd;
+
+  /* Theme-adaptive chips */
+  --chip-bg: rgba(20, 22, 27, 0.88);
+  --chip-border: rgba(232, 228, 220, 0.12);
+  --chip-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 24px rgba(0,0,0,0.45);
+  
+  /* Neural lines */
+  --cat-frontend: rgba(97,218,251,0.55);
+  --cat-backend: rgba(95,160,78,0.55);
+  --cat-data: rgba(242,200,17,0.55);
+  --cat-tools: rgba(240,80,51,0.55);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body, "Inter", sans-serif);
+  display: grid;
+  place-items: center;
+}
+
+[data-theme="light"] .katana-section {
+  --bg-0: var(--surface, #fbf8fd);
+  --bg-1: var(--surface-container, #efedf2);
+  --ink: var(--on-surface, #1b1b1f);
+  --ink-dim: var(--outline, #757780);
+  --accent: var(--primary, #334678);
+  --steel-1: #94a3b8;
+  --steel-2: #64748b;
+
+  --chip-bg: rgba(255, 255, 255, 0.88);
+  --chip-border: rgba(117, 119, 128, 0.15); /* outline at 15% */
+  --chip-shadow: 0 1px 0 rgba(255,255,255,0.8) inset, 0 4px 12px rgba(0,0,0,0.05);
+
+  --cat-frontend: rgba(15, 118, 168, 0.75);
+  --cat-backend: rgba(38, 100, 25, 0.75);
+  --cat-data: rgba(180, 130, 0, 0.75);
+  --cat-tools: rgba(180, 40, 15, 0.75);
+}
+
+/* ── STAGE ── */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── HALO ── */
+.halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 700px; height: 700px;
+  margin: -350px 0 0 -350px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(232,228,220,0.12), transparent 70%);
+  filter: blur(6px);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+[data-theme="light"] .halo {
+  background: radial-gradient(closest-side, rgba(15, 23, 42, 0.12), transparent 70%);
+}
+
+/* ── KATANA ── */
+.katana-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate(-40px, 8px) scale(0.98);
+  will-change: transform, opacity, filter;
+}
+.katana { position: relative; transform: rotate(-30deg); width: 0; height: 0; }
+.blade {
+  position: absolute; left: 0;
+  top: calc(var(--blade-thick) / -2);
+  width: var(--blade-len); height: var(--blade-thick);
+  border-radius: 1px 2px 2px 1px;
+  background: linear-gradient(180deg, var(--steel-2) 0%, var(--steel-1) 38%, #fff 50%, var(--steel-1) 62%, var(--steel-2) 100%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.35) inset;
+}
+.blade::after {
+  content: "";
+  position: absolute; right: -10px; top: 0;
+  width: 14px; height: 100%;
+  background: linear-gradient(180deg, var(--steel-2), var(--steel-1) 50%, var(--steel-2));
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.blade::before {
+  content: "";
+  position: absolute; left: 4px; right: 12px; top: 55%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55) 8%, rgba(255,255,255,0.55) 92%, transparent);
+  filter: blur(0.4px); opacity: 0.7;
+}
+.habaki {
+  position: absolute; left: -4px; top: -8px;
+  width: 14px; height: 16px;
+  background: linear-gradient(180deg, #d8d3c5, #f1ede2 50%, #b9b4a6);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.4);
+}
+.tsuba {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px);
+  top: calc(var(--guard-h) / -2);
+  width: var(--guard-w); height: var(--guard-h);
+  background: linear-gradient(180deg, #1c1d20, #2a2b30 50%, #0f1013);
+  border: 1px solid #000; border-radius: 2px;
+}
+.grip {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px - var(--grip-len));
+  top: calc(var(--grip-thick) / -2);
+  width: var(--grip-len); height: var(--grip-thick);
+  background:
+    repeating-linear-gradient(45deg, transparent 0 8px, rgba(0,0,0,0.55) 8px 9px, transparent 9px 17px),
+    repeating-linear-gradient(-45deg, transparent 0 8px, rgba(0,0,0,0.55) 8px 9px, transparent 9px 17px),
+    linear-gradient(180deg, #2a2c31, #15171a 50%, #0a0b0d);
+  border: 1px solid #000; border-radius: 3px;
+}
+.grip::after {
+  content: "";
+  position: absolute; left: 38%; top: 50%;
+  width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #c7a96a, #6e5320 70%, #2a1f08);
+}
+.kashira {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px - var(--grip-len) - 8px);
+  top: calc((var(--grip-thick) + 6px) / -2);
+  width: 8px; height: calc(var(--grip-thick) + 6px);
+  background: linear-gradient(180deg, #2a2b30, #0f1013);
+  border: 1px solid #000; border-radius: 2px 1px 1px 2px;
+}
+
+/* ── CINTA ── */
+.ribbon {
+  position: absolute; top: 50%; left: -5%;
+  width: 110%; height: 3px; margin-top: -1.5px;
+  transform-origin: left center; transform: scaleX(0);
+  background: linear-gradient(90deg, transparent, rgba(255,240,210,0.9) 30%, #fff 50%, rgba(255,240,210,0.9) 70%, transparent);
+  box-shadow: 0 0 14px rgba(255,235,190,0.65), 0 0 32px rgba(255,210,150,0.4);
+  opacity: 0; pointer-events: none;
+}
+.ribbon.core {
+  height: 1px; margin-top: -0.5px;
+  background: linear-gradient(90deg, transparent, #fff 50%, transparent);
+  box-shadow: 0 0 6px #fff, 0 0 18px rgba(255,255,255,0.6);
+}
+
+[data-theme="light"] .ribbon {
+  background: linear-gradient(90deg, transparent, rgba(255,200,100,0.9) 30%, #ffd700 50%, rgba(255,200,100,0.9) 70%, transparent);
+  box-shadow: 0 0 14px rgba(255,150,50,0.65), 0 0 32px rgba(255,100,0,0.4);
+}
+[data-theme="light"] .ribbon.core {
+  background: linear-gradient(90deg, transparent, #ffd700 50%, transparent);
+  box-shadow: 0 0 6px #ffcc00, 0 0 18px rgba(255,204,0,0.6);
+}
+
+/* ── TÍTULO ── */
+.stack-title {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -70px);
+  white-space: nowrap;
+  font-family: var(--font-heading, "Noto Serif", serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(232,228,220,0.15);
+  padding-bottom: 10px;
+  transition: opacity 0.6s ease, filter 0.6s ease;
+  filter: blur(4px);
+}
+.stack-title .pre { font-family: var(--font-body, "Inter", sans-serif); font-size: 0.4em; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); vertical-align: middle; }
+.stack-title.visible { opacity: 1; filter: blur(0); }
+
+[data-theme="light"] .stack-title {
+  border-bottom-color: rgba(30,41,59,0.15);
+}
+
+/* ── GRUPO (secuencial) ── */
+.group-panel {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
+  filter: blur(4px);
+  will-change: opacity, filter, transform;
+}
+.group-panel.visible {
+  opacity: 1; filter: blur(0);
+}
+.group-panel .glabel {
+  font-size: 11px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--ink-dim);
+}
+.group-panel .row {
+  display: flex; gap: 12px;
+  align-items: center; flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90vw;
+}
+
+/* ── CHIPS ── */
+.chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 9px 14px 9px 10px;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px; color: var(--ink);
+  font-size: 14px; line-height: 1;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--chip-shadow);
+  cursor: default;
+}
+[data-theme="light"] .chip {
+  /* Handled by CSS variables in root */
+}
+.chip .ico {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  border-radius: 5px; flex: 0 0 22px;
+  color: #0a0b0d; font-weight: 700; font-size: 11px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+.chip .ico.ol { background: transparent; color: var(--ink); border: 1px solid currentColor; font-size: 10px; }
+.chip .ico svg { width: 13px; height: 13px; }
+.chip .name { letter-spacing: 0.02em; font-weight: 500; }
+
+/* ── RED NEURONAL ── */
+#neural-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.neural-nodes {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  z-index: 2;
+}
+.node {
+  position: absolute;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 13px 8px 9px;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px; color: var(--ink);
+  font-size: 13px; line-height: 1;
+  box-shadow: var(--chip-shadow);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  transition: box-shadow 0.4s ease, opacity 0.6s ease;
+}
+[data-theme="light"] .node {
+  /* Handled by CSS variables */
+}
+.node:hover { box-shadow: 0 0 0 1px rgba(232,228,220,0.25), 0 4px 24px rgba(0,0,0,0.6); }
+[data-theme="light"] .node:hover { box-shadow: 0 0 0 1px rgba(30,41,59,0.25), 0 4px 12px rgba(0,0,0,0.1); }
+.node .ico {
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 4px; flex: 0 0 20px;
+  color: #0a0b0d; font-weight: 700; font-size: 10px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+.node .ico.ol { background: transparent; color: var(--ink); border: 1px solid currentColor; font-size: 9px; }
+.node .ico svg { width: 12px; height: 12px; }
+.node .name { letter-spacing: 0.02em; font-weight: 500; font-size: 12px; }
+
+/* Contenedor de cluster: caja con título arriba y nodos contenidos */
+.cluster-box {
+  position: absolute;
+  border: 1px solid var(--chip-border);
+  border-radius: 14px;
+  background: rgba(128,128,128,0.015); /* Neutral faint tint */
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+[data-theme="light"] .cluster-box {
+  background: rgba(0,0,0,0.025);
+}
+.cluster-box .ctitle {
+  position: absolute;
+  top: 12px; left: 0; right: 0;
+  text-align: center;
+  font-size: 11px; letter-spacing: 0.32em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 3;
+}
+.cluster-box .cinner {
+  position: absolute;
+  inset: 38px 8px 8px 8px;
+}
+
+/* Caption */
+.caption {
+  position: absolute; left: 0; right: 0; bottom: 22px;
+  text-align: center; font-size: 11px;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--ink-dim); pointer-events: none;
+}
+.caption b { color: var(--accent); font-weight: 500; }

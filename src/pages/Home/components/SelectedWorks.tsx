@@ -1,14 +1,12 @@
 import React from 'react';
 import './SelectedWorks.css';
 
-/* Tipado para los enlaces dinámicos con iconos */
 interface ProjectLink {
   url: string;
   iconUrl: string;
   alt: string;
 }
 
-/* Representa la estructura de datos de los proyectos destacados */
 interface Project {
   id: string;
   title: string;
@@ -26,7 +24,7 @@ const MOCK_PROJECTS: Project[] = [
     id: '1',
     title: 'UdecData',
     category: 'Data & AI Platform',
-    description: 'Portal de inteligencia académica para la Universidad diseñado para la Cundinamarca que centraliza reportes, analítica institucional, pronóstico de población estudiantil y agentes de IA para soporte. Incluye automatización de boletines, normalización de datos, dashboards filtrables y consultas read-only al analista de IA.',
+    description: 'Portal de inteligencia académica para la Universidad diseñada para la Cundinamarca que centraliza reportes, analítica institucional, pronóstico de población estudiantil y agentes de IA para soporte. Incluye automatización de boletines, normalización de datos, dashboards filtrables y consultas read-only al analista de IA.',
     imageUrl: '/proyectos_input/udec_proyecto.png',
     spanClass: 'col-span-8',
     aspectClass: 'aspect-video',
@@ -56,11 +54,10 @@ const MOCK_PROJECTS: Project[] = [
     category: 'Mobile App',
     description: 'Aplicación móvil para gestionar préstamos, beneficiarios, pagos y estadísticas locales, organizada con una arquitectura modular pensada para mantener orden y escalabilidad.',
     imageUrl: '/proyectos_input/Prestamo.png',
-    chips: ['React Native', 'Expo ', 'AHP', 'SQLite','Arquitectura modular'],
+    chips: ['React Native', 'Expo', 'AHP', 'SQLite', 'Arquitectura modular'],
     spanClass: 'col-span-4',
     aspectClass: 'aspect-square',
-     links: [
-      
+    links: [
       { url: 'https://github.com/Nicolaserd/Prestamo-App-Expo-Arquitectura-Modular-', iconUrl: 'https://api.iconify.design/mdi:github.svg?color=%23ffffff', alt: 'Repositorio GitHub' }
     ]
   },
@@ -68,64 +65,41 @@ const MOCK_PROJECTS: Project[] = [
     id: '4',
     title: 'Bot IA Telegram',
     category: 'AI Backend',
-    description:
-      'Backend en NestJS para un bot de Telegram con autenticación, roles, base de datos cifrada y respuestas en tiempo real asistidas por Inteligencia Artificial.',
+    description: 'Backend en NestJS para un bot de Telegram con autenticación, roles, base de datos cifrada y respuestas en tiempo real asistidas por Inteligencia Artificial.',
     imageUrl: '/proyectos_input/BotTelegram.png',
     spanClass: 'col-span-8',
     aspectClass: 'aspect-auto',
     chips: ['NestJS', 'PostgreSQL', 'TypeORM', 'JWT', 'IA'],
     links: [
-      {
-        url: 'https://t.me/Mario1379_bot',
-        iconUrl: 'https://api.iconify.design/mdi:telegram.svg?color=%23ffffff',
-        alt: 'Demo Telegram'
-      },
-      {
-        url: 'https://whatsappchatbot-sigma.vercel.app/',
-        iconUrl: 'https://api.iconify.design/mdi:web.svg?color=%23ffffff',
-        alt: 'Deploy'
-      },
-      {
-        url: 'https://github.com/Nicolaserd/BotIATelegram',
-        iconUrl: 'https://api.iconify.design/mdi:github.svg?color=%23ffffff',
-        alt: 'Repositorio GitHub'
-      }
+      { url: 'https://t.me/Mario1379_bot', iconUrl: 'https://api.iconify.design/mdi:telegram.svg?color=%23ffffff', alt: 'Demo Telegram' },
+      { url: 'https://whatsappchatbot-sigma.vercel.app/', iconUrl: 'https://api.iconify.design/mdi:web.svg?color=%23ffffff', alt: 'Deploy' },
+      { url: 'https://github.com/Nicolaserd/BotIATelegram', iconUrl: 'https://api.iconify.design/mdi:github.svg?color=%23ffffff', alt: 'Repositorio GitHub' }
     ]
   },
   {
     id: '5',
     title: 'Encuentros Dialógicos',
     category: 'Power BI Dashboard',
-    description:
-      'Dashboard de seguimiento orientado a consolidar planes de mejoramiento, asistencia y percepción de estudiantes y docentes a partir de múltiples fuentes institucionales. El resultado es una vista clara para hacer seguimiento a compromisos, participación y satisfacción dentro del proceso institucional.',
+    description: 'Dashboard de seguimiento orientado a consolidar planes de mejoramiento, asistencia y percepción de estudiantes y docentes a partir de múltiples fuentes institucionales.',
     imageUrl: '/proyectos_input/EncuentrosDialogicos.png',
     spanClass: 'col-span-8',
     aspectClass: 'aspect-video',
     chips: ['Power BI', 'ETL', 'Limpieza de datos', 'Cruce de bases', 'DAX'],
     links: [
-      {
-        url: 'https://app.powerbi.com/view?r=eyJrIjoiMmY2ZWYwYTctMWVlZS00M2M2LWFiNGEtN2MzNGM1ODJhOWIyIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9',
-        iconUrl: 'https://api.iconify.design/simple-icons:powerbi.svg?color=%23ffffff',
-        alt: 'Dashboard Interactivo'
-      }
+      { url: 'https://app.powerbi.com/view?r=eyJrIjoiMmY2ZWYwYTctMWVlZS00M2M2LWFiNGEtN2MzNGM1ODJhOWIyIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9', iconUrl: 'https://api.iconify.design/simple-icons:powerbi.svg?color=%23ffffff', alt: 'Dashboard Interactivo' }
     ]
   },
   {
     id: '6',
     title: 'Boletín Estadístico Institucional',
     category: 'Power BI Analytics',
-    description:
-      'Tablero integral construido en Power BI para consolidar oferta académica, población estudiantil, talento humano, deserción, planta física e investigación. Incorpora un ejercicio predictivo sobre deserción académica.',
+    description: 'Tablero integral construido en Power BI para consolidar oferta académica, población estudiantil, talento humano, deserción, planta física e investigación.',
     imageUrl: '/proyectos_input/BoletinEstadistico.png',
     spanClass: 'col-span-4',
     aspectClass: 'aspect-square',
     chips: ['Power BI', 'ETL', 'Limpieza de datos', 'DAX', 'Análisis predictivo'],
     links: [
-      {
-        url: 'https://app.powerbi.com/view?r=eyJrIjoiYzE4NzhiNzgtMmViMS00YTNkLTg5YTMtOWEwNjg1N2FiYTYzIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9',
-        iconUrl: 'https://api.iconify.design/simple-icons:powerbi.svg?color=%23ffffff',
-        alt: 'Dashboard Interactivo'
-      }
+      { url: 'https://app.powerbi.com/view?r=eyJrIjoiYzE4NzhiNzgtMmViMS00YTNkLTg5YTMtOWEwNjg1N2FiYTYzIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9', iconUrl: 'https://api.iconify.design/simple-icons:powerbi.svg?color=%23ffffff', alt: 'Dashboard Interactivo' }
     ]
   }
 ];
@@ -145,7 +119,6 @@ const SelectedWorks: React.FC = () => {
             <div className="card-content">
               <span className="card-category">{project.category}</span>
               <h3 className="card-title">{project.title}</h3>
-              
               <div className="card-details">
                 <p className="card-description">{project.description}</p>
                 {project.chips && (
