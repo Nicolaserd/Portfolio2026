@@ -191,4 +191,42 @@
   width: 26px;
   height: 26px;
   transition: transform 0.2s ease, filter 0.3s ease;
-  cursor: pointer
+  cursor: pointer;
+  /* íconos blancos — funcionan bien en dark mode */
+  filter: none;
+}
+
+.card-link img:hover {
+  transform: scale(1.15);
+}
+
+/* En light mode: invertir íconos blancos → negros para que sean visibles */
+[data-theme="light"] .card-link img {
+  filter: invert(1);
+}
+
+/* En light mode: clarear las imágenes de fondo oscuras (ej. dashboards Power BI) */
+[data-theme="light"] .card-bg-image {
+  filter: brightness(1.15) contrast(0.92) saturate(0.9);
+}
+
+/* En light mode: el overlay cubre más para disimular la diferencia de tono */
+[data-theme="light"] .card-overlay {
+  background: linear-gradient(
+    to top,
+    var(--surface-container) 0%,
+    color-mix(in srgb, var(--surface-container) 75%, transparent) 55%,
+    color-mix(in srgb, var(--surface-container) 30%, transparent) 80%,
+    transparent 100%
+  );
+}
+
+[data-theme="light"] .bento-card:hover .card-overlay {
+  background: linear-gradient(
+    to top,
+    var(--surface-container) 0%,
+    color-mix(in srgb, var(--surface-container) 92%, transparent) 70%,
+    color-mix(in srgb, var(--surface-container) 50%, transparent) 90%,
+    transparent 100%
+  );
+}

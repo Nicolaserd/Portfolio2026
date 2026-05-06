@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Katana Toggle</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --night-1:#0b1024;
+    --night-2:#161E33;
+    --night-3:#222b4a;
+    --day-1:#f7c873;
+    --day-2:#ef8b54;
+    --day-3:#e35d6a;
+    --blade:#e8ecef;
+    --blade-edge:#ffffff;
+    --tsuka:#1a1a1a;
+    --tsuka-2:#2a2a2a;
+    --gold:#d4a64a;
+    --tsuba:#f1f1f1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;font-family:"Inter",ui-sans-serif,system-ui,sans-serif;background:#08091a;color:#e8ecf5;overflow:hidden}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(1200px 800px at 50% 60%, #11142b 0%, #07081a 70%);
+  }
+  .stage{
+    width:min(720px,92vw);
+    display:flex;flex-direction:column;align-items:center;gap:48px;
+    user-select:none;
+  }
+  .label{
+    font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#7a82a8;font-weight:500;
+  }
+
+  /* ============ TOGGLE ============ */
+  .toggle{
+    --w: 540px;
+    --h: 220px;
+    width:var(--w); height:var(--h);
+    position:relative;
+    border-radius:calc(var(--h)/2);
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,.06),
+      inset 0 -10px 30px rgba(0,0,0,.55),
+      0 30px 60px -20px rgba(0,0,0,.6),
+      0 0 0 1px rgba(255,255,255,.04);
+    transition: box-shadow .6s ease;
+  }
+
+  /* sky layers */
+  .sky{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
+  .sky .layer{position:absolute;inset:0;transition:opacity 1.1s ease}
+  .sky .night{
+    background:
+      radial-gradient(120% 140% at 80% 30%, #2a3160 0%, #161E33 40%, #0a0f24 100%);
+    opacity:1;
+  }
+  .sky .day{
+    background:
+      radial-gradient(120% 140% at 20% 30%, #ffd089 0%, #ef8b54 45%, #c84a6b 100%);
+    opacity:0;
+  }
+  .toggle.is-day .sky .night{opacity:0}
+  .toggle.is-day .sky .day{opacity:1}
+
+  /* stars */
+  .stars{position:absolute;inset:0;pointer-events:none;transition:opacity 1.1s ease}
+  .stars i{position:absolute;background:#fff;border-radius:50%;opacity:.85;
+    box-shadow:0 0 6px rgba(255,255,255,.7);
+    animation: twinkle 2.6s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+  .toggle.is-day .stars{opacity:0}
+
+  /* clouds (day) */
+  .clouds{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.1s ease}
+  .toggle.is-day .clouds{opacity:.85}
+  .clouds .c{position:absolute;background:rgba(255,255,255,.55);border-radius:999px;filter:blur(.3px)}
+
+  /* ground silhouette - subtle mountains */
+  .ground{position:absolute;left:0;right:0;bottom:0;height:38%;pointer-events:none}
+  .ground svg{display:block;width:100%;height:100%}
+
+  /* ============ ORB (sun/moon) ============ */
+  .orb-wrap{
+    position:absolute;
+    top:50%; left:0;
+    width:100%; height:0;
+    transform:translateY(-50%);
+    pointer-events:none;
+  }
+  .orb{
+    --size: 130px;
+    position:absolute; top:0; left:0;
+    width:var(--size); height:var(--size);
+    transform:translate(calc(var(--ox,140px) - 50%), -50%);
+    transition: transform 1.1s cubic-bezier(.5,.0,.2,1);
+  }
+  .toggle.is-day .orb{ --ox: calc(var(--w) - 140px); }
+  .toggle:not(.is-day) .orb{ --ox: 140px; }
+
+  /* the orb is two halves that can split */
+  .orb .half{
+    position:absolute; top:0; height:100%; width:50%;
+    overflow:hidden;
+    transition: transform .55s cubic-bezier(.55,0,.3,1), opacity .4s ease;
+  }
+  .orb .half.l{ left:0;  transform-origin:right center; }
+  .orb .half.r{ right:0; transform-origin:left center;  }
+  .orb .face{
+    position:absolute; top:0; width:200%; height:100%;
+    border-radius:50%;
+    background-size:100% 100%;
+  }
+  .orb .half.l .face{ left:0; }
+  .orb .half.r .face{ right:0; }
+
+  /* moon */
+  .orb .face.moon{
+    background:
+      radial-gradient(circle at 35% 35%, #fdfaf0 0%, #e8e3c8 55%, #b6ad84 100%);
+    box-shadow: inset -18px -22px 40px rgba(0,0,0,.35);
+  }
+  .orb .face.moon::before, .orb .face.moon::after{
+    content:""; position:absolute; border-radius:50%;
+    background: rgba(0,0,0,.12);
+  }
+  .orb .face.moon::before{ width:18%; height:18%; left:22%; top:55%; }
+  .orb .face.moon::after { width:11%; height:11%; left:60%; top:30%; box-shadow: 14px 26px 0 rgba(0,0,0,.1), -6px 22px 0 -2px rgba(0,0,0,.08);}
+
+  /* sun */
+  .orb .face.sun{
+    background:
+      radial-gradient(circle at 40% 40%, #fff7d1 0%, #ffd56a 45%, #ff944a 100%);
+    box-shadow: inset -10px -14px 30px rgba(220,90,60,.35);
+  }
+
+  /* unclipped glow layer (sibling to halves) */
+  .orb .glow{
+    position:absolute; inset:-30%;
+    border-radius:50%;
+    pointer-events:none;
+    transition: opacity .5s ease, background .5s ease;
+  }
+  .orb .glow.moon-glow{
+    background: radial-gradient(circle, rgba(255,244,200,.45) 0%, rgba(255,244,200,.18) 30%, transparent 60%);
+    opacity:1;
+  }
+  .orb .glow.sun-glow{
+    background: radial-gradient(circle, rgba(255,210,120,.7) 0%, rgba(255,150,80,.35) 32%, transparent 65%);
+    opacity:0;
+  }
+  .toggle.is-day .orb .glow.moon-glow{opacity:0}
+  .toggle.is-day .orb .glow.sun-glow{opacity:1}
+  /* sun rays */
+  .orb .rays{
+    position:absolute; inset:-30%;
+    pointer-events:none;
+    background:
+      conic-gradient(from 0deg,
+        rgba(255,220,140,0) 0deg, rgba(255,220,140,.6) 6deg, rgba(255,220,140,0) 12deg,
+        rgba(255,220,140,0) 30deg, rgba(255,220,140,.45) 36deg, rgba(255,220,140,0) 42deg,
+        rgba(255,220,140,0) 60deg, rgba(255,220,140,.55) 66deg, rgba(255,220,140,0) 72deg,
+        rgba(255,220,140,0) 90deg, rgba(255,220,140,.4)  96deg, rgba(255,220,140,0) 102deg,
+        rgba(255,220,140,0) 120deg, rgba(255,220,140,.55) 126deg, rgba(255,220,140,0) 132deg,
+        rgba(255,220,140,0) 150deg, rgba(255,220,140,.45) 156deg, rgba(255,220,140,0) 162deg,
+        rgba(255,220,140,0) 180deg, rgba(255,220,140,.6)  186deg, rgba(255,220,140,0) 192deg,
+        rgba(255,220,140,0) 210deg, rgba(255,220,140,.45) 216deg, rgba(255,220,140,0) 222deg,
+        rgba(255,220,140,0) 240deg, rgba(255,220,140,.55) 246deg, rgba(255,220,140,0) 252deg,
+        rgba(255,220,140,0) 270deg, rgba(255,220,140,.4)  276deg, rgba(255,220,140,0) 282deg,
+        rgba(255,220,140,0) 300deg, rgba(255,220,140,.55) 306deg, rgba(255,220,140,0) 312deg,
+        rgba(255,220,140,0) 330deg, rgba(255,220,140,.45) 336deg, rgba(255,220,140,0) 342deg,
+        rgba(255,220,140,0) 360deg);
+    -webkit-mask: radial-gradient(circle, transparent 38%, #000 50%, transparent 70%);
+            mask: radial-gradient(circle, transparent 38%, #000 50%, transparent 70%);
+    animation: spin 24s linear infinite;
+    opacity:.9;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .orb-rays-wrap{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s ease}
+  .toggle.is-day .orb-rays-wrap{opacity:1}
+
+  /* hide whichever face isn't active */
+  .toggle.is-day .face.moon{opacity:0}
+  .toggle:not(.is-day) .face.sun{opacity:0}
+  .face{transition: opacity .4s ease;}
+
+  /* slash state: split the halves apart */
+  .toggle.slashing .orb .half.l{ transform: translate(-22%, -10%) rotate(-14deg); opacity:.6; }
+  .toggle.slashing .orb .half.r{ transform: translate( 22%,  12%) rotate( 14deg); opacity:.6; }
+
+  /* ============ KATANA ============ */
+  .katana{
+    position:absolute; top:50%; left:50%;
+    width:520px; height:36px;
+    transform-origin: 30px 50%; /* rotate around handle butt */
+    transform: translate(-50%,-50%) rotate(8deg);
+    pointer-events:none;
+    transition: transform .9s cubic-bezier(.55,.05,.2,1);
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,.45));
+  }
+  /* rest poses */
+  .toggle:not(.is-day) .katana{
+    /* katana on left side, blade pointing right toward moon */
+    transform: translate(calc(-50% - 80px), -50%) rotate(6deg);
+  }
+  .toggle.is-day .katana{
+    /* katana on right side, blade pointing left toward sun */
+    transform: translate(calc(-50% + 80px), -50%) rotate(186deg);
+  }
+  /* slash keyframe */
+  @keyframes slashL2R{
+    0%   { transform: translate(calc(-50% - 80px), -50%) rotate(6deg);   }
+    20%  { transform: translate(calc(-50% - 80px), -50%) rotate(-22deg); } /* wind up */
+    55%  { transform: translate(-50%, -50%)              rotate(40deg);  } /* impact */
+    100% { transform: translate(calc(-50% + 80px), -50%) rotate(186deg); } /* end */
+  }
+  @keyframes slashR2L{
+    0%   { transform: translate(calc(-50% + 80px), -50%) rotate(186deg); }
+    20%  { transform: translate(calc(-50% + 80px), -50%) rotate(214deg); }
+    55%  { transform: translate(-50%, -50%)              rotate(150deg); }
+    100% { transform: translate(calc(-50% - 80px), -50%) rotate(6deg);   }
+  }
+  .toggle.slashing.to-day  .katana{ animation: slashL2R .9s cubic-bezier(.5,.05,.2,1) forwards; transition:none;}
+  .toggle.slashing.to-night .katana{ animation: slashR2L .9s cubic-bezier(.5,.05,.2,1) forwards; transition:none;}
+
+  /* slash flash line */
+  .slash-line{
+    position:absolute; left:0; top:50%;
+    width:100%; height:6px;
+    transform-origin:50% 50%;
+    transform: translateY(-50%) rotate(-18deg) scaleX(0);
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    filter: blur(.4px);
+    pointer-events:none;
+    opacity:0;
+    box-shadow:0 0 18px #fff, 0 0 40px rgba(255,255,255,.6);
+  }
+  .toggle.slashing .slash-line{
+    animation: flash .55s ease-out forwards;
+  }
+  @keyframes flash{
+    0%   { transform: translateY(-50%) rotate(-22deg) scaleX(0); opacity:0; }
+    25%  { opacity:1; }
+    60%  { transform: translateY(-50%) rotate(-12deg) scaleX(1.05); opacity:1;}
+    100% { transform: translateY(-50%) rotate(-8deg)  scaleX(1.1);  opacity:0;}
+  }
+
+  /* status label inside */
+  .word{
+    position:absolute; bottom:14px; left:50%;
+    transform:translateX(-50%);
+    font-size:11px; letter-spacing:.4em; text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+    transition: color .8s ease;
+    font-weight:600;
+  }
+  .toggle.is-day .word{color:rgba(40,10,0,.55)}
+
+  .hint{font-size:12px;color:#5a6486;letter-spacing:.18em;text-transform:uppercase}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="label">Day · Night</div>
+
+    <div class="toggle" id="toggle" role="switch" aria-checked="false" tabindex="0">
+      <div class="sky">
+        <div class="layer night"></div>
+        <div class="layer day"></div>
+      </div>
+
+      <div class="stars" id="stars"></div>
+      <div class="clouds" id="clouds"></div>
+
+      <div class="ground">
+        <svg viewBox="0 0 540 84" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,84 L0,55 L60,32 L120,52 L180,28 L240,48 L300,26 L360,46 L420,30 L480,52 L540,38 L540,84 Z"
+                fill="rgba(0,0,0,.45)"/>
+          <path d="M0,84 L0,68 L80,54 L160,66 L240,52 L320,68 L400,56 L480,70 L540,60 L540,84 Z"
+                fill="rgba(0,0,0,.55)"/>
+        </svg>
+      </div>
+
+      <!-- orb -->
+      <div class="orb-wrap">
+        <div class="orb" id="orb">
+          <!-- unclipped glow halos -->
+          <div class="glow moon-glow"></div>
+          <div class="glow sun-glow"></div>
+          <!-- rays only on sun -->
+          <div class="orb-rays-wrap"><div class="rays"></div></div>
+          <div class="half l">
+            <div class="face moon"></div>
+            <div class="face sun"></div>
+          </div>
+          <div class="half r">
+            <div class="face moon"></div>
+            <div class="face sun"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slash-line"></div>
+
+      <!-- katana SVG -->
+      <svg class="katana" viewBox="0 0 520 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="bladeGrad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0"   stop-color="#cfd6dc"/>
+            <stop offset=".25" stop-color="#ffffff"/>
+            <stop offset=".55" stop-color="#e5eaef"/>
+            <stop offset="1"   stop-color="#9aa3ae"/>
+          </linearGradient>
+          <linearGradient id="edgeGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0"   stop-color="#ffffff" stop-opacity=".0"/>
+            <stop offset=".15" stop-color="#ffffff" stop-opacity=".9"/>
+            <stop offset=".95" stop-color="#ffffff" stop-opacity=".9"/>
+            <stop offset="1"   stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="tsukaGrad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#2b2b2e"/>
+            <stop offset=".5" stop-color="#0e0e10"/>
+            <stop offset="1" stop-color="#2b2b2e"/>
+          </linearGradient>
+        </defs>
+
+        <!-- BLADE (handle on left at x=0..95, tsuba ~95-110, blade 110->515 tip) -->
+        <!-- blade body -->
+        <polygon points="110,12 510,16 515,18 510,20 110,24" fill="url(#bladeGrad)"/>
+        <!-- bright edge highlight -->
+        <rect x="115" y="17" width="395" height="1.2" fill="url(#edgeGrad)" opacity=".95"/>
+        <!-- subtle hamon (temper line) -->
+        <path d="M115,21 Q200,22 280,21 T500,21" stroke="rgba(255,255,255,.35)" stroke-width=".6" fill="none"/>
+
+        <!-- TSUBA (guard) -->
+        <rect x="95" y="6" width="14" height="24" rx="2" fill="#eef0f2" stroke="#9aa0a8" stroke-width=".8"/>
+        <rect x="98" y="9" width="8" height="18" fill="#cfd3d8"/>
+
+        <!-- TSUKA (handle) -->
+        <rect x="8" y="9" width="86" height="18" rx="3" fill="url(#tsukaGrad)"/>
+        <!-- ito (cord) diamond pattern -->
+        <g stroke="#3a3a3e" stroke-width=".7" fill="none" opacity=".9">
+          <path d="M10,9 L24,27 M22,9 L36,27 M34,9 L48,27 M46,9 L60,27 M58,9 L72,27 M70,9 L84,27 M82,9 L94,25"/>
+          <path d="M10,27 L24,9 M22,27 L36,9 M34,27 L48,9 M46,27 L60,9 M58,27 L72,9 M70,27 L84,9 M82,27 L94,11"/>
+        </g>
+        <!-- menuki (gold ornament) -->
+        <circle cx="50" cy="18" r="2.6" fill="#d4a64a" stroke="#7a5a1f" stroke-width=".5"/>
+        <!-- kashira (butt cap) -->
+        <rect x="2" y="8" width="8" height="20" rx="2" fill="#0a0a0c"/>
+        <!-- fuchi (collar near tsuba) -->
+        <rect x="88" y="8" width="8" height="20" rx="1.5" fill="#1a1a1c"/>
+      </svg>
+
+      <div class="word" id="word">night</div>
+    </div>
+
+    <div class="hint">click or press space</div>
+  </div>
+
+<script>
+  const tog = document.getElementById('toggle');
+  const word = document.getElementById('word');
+  const starsEl = document.getElementById('stars');
+  const cloudsEl = document.getElementById('clouds');
+
+  // build stars
+  const SW = 540, SH = 220;
+  for (let i=0;i<28;i++){
+    const s = document.createElement('i');
+    const sz = Math.random()*2+1;
+    s.style.width = s.style.height = sz+'px';
+    s.style.left = Math.random()*SW+'px';
+    s.style.top  = (Math.random()*SH*0.7)+'px';
+    s.style.animationDelay = (Math.random()*2.6)+'s';
+    starsEl.appendChild(s);
+  }
+  // clouds
+  const cloudDefs = [
+    {x:60,  y:55, w:90, h:18, o:.55},
+    {x:180, y:35, w:70, h:14, o:.45},
+    {x:380, y:60, w:110,h:20, o:.6},
+    {x:460, y:30, w:60, h:12, o:.5},
+  ];
+  cloudDefs.forEach(c=>{
+    const el = document.createElement('div');
+    el.className='c';
+    Object.assign(el.style,{left:c.x+'px',top:c.y+'px',width:c.w+'px',height:c.h+'px',opacity:c.o});
+    cloudsEl.appendChild(el);
+  });
+
+  let busy = false;
+  function flip(){
+    if (busy) return;
+    busy = true;
+    const goingDay = !tog.classList.contains('is-day');
+    tog.classList.add('slashing');
+    tog.classList.add(goingDay ? 'to-day' : 'to-night');
+
+    // at impact (~55% of .9s = 495ms), split halves and swap state
+    setTimeout(()=>{
+      tog.classList.toggle('is-day', goingDay);
+      word.textContent = goingDay ? 'day' : 'night';
+      tog.setAttribute('aria-checked', goingDay ? 'true':'false');
+    }, 480);
+
+    // end of slash anim
+    setTimeout(()=>{
+      tog.classList.remove('slashing','to-day','to-night');
+      busy = false;
+    }, 920);
+  }
+  tog.addEventListener('click', flip);
+  tog.addEventListener('keydown', e=>{
+    if (e.key===' '||e.key==='Enter'){ e.preventDefault(); flip(); }
+  });
+</script>
+</body>
+</html>
