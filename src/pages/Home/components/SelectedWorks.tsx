@@ -104,6 +104,34 @@ const MOCK_PROJECTS: Project[] = [
   }
 ];
 
+function chipKey(name: string): string {
+  const n = name.toLowerCase();
+  if (n.includes('typescript'))           return 'ts';
+  if (n.includes('react'))                return 'react';
+  if (n.includes('next'))                 return 'next';
+  if (n.includes('astro'))                return 'astro';
+  if (n.includes('nestjs') || n === 'nest') return 'nest';
+  if (n.includes('supabase'))             return 'supabase';
+  if (n.includes('postgre'))              return 'postgres';
+  if (n.includes('prisma'))               return 'prisma';
+  if (n.includes('power bi'))             return 'powerbi';
+  if (n === 'dax')                        return 'dax';
+  if (n === 'ia' || n.endsWith(', ia') || n.includes(', ia')) return 'ai';
+  if (n === 'ia aplicada')                return 'ai';
+  if (n.includes('expo'))                 return 'expo';
+  if (n.includes('sqlite'))              return 'sqlite';
+  if (n.includes('jwt'))                  return 'jwt';
+  if (n.includes('typeorm'))              return 'typeorm';
+  if (n.includes('ahp'))                  return 'ahp';
+  if (n.includes('equilibrio'))           return 'nash';
+  if (n.includes('arquitectura'))         return 'arch';
+  if (n.includes('etl'))                  return 'etl';
+  if (n.includes('limpieza'))             return 'clean';
+  if (n.includes('cruce'))               return 'merge';
+  if (n.includes('predictivo') || n.includes('análisis')) return 'analytics';
+  return 'default';
+}
+
 const SelectedWorks: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -136,33 +164,47 @@ const SelectedWorks: React.FC = () => {
       </div>
       <div className="bento-grid">
         {MOCK_PROJECTS.map((project, index) => (
-          <div 
-            key={project.id} 
+          <div
+            key={project.id}
             ref={el => { cardsRef.current[index] = el; }}
             className={`bento-card ${project.spanClass} ${project.aspectClass}`}
             style={{ transitionDelay: `${(index % 2) * 200}ms` }}
           >
-            <img src={project.imageUrl} alt={project.title} className="card-bg-image" />
-            <div className="card-overlay"></div>
-            <div className="card-content">
-              <span className="card-category">{project.category}</span>
-              <h3 className="card-title">{project.title}</h3>
-              <div className="card-details">
-                <p className="card-description">{project.description}</p>
-                {project.chips && (
-                  <div className="card-chips">
-                    {project.chips.map(chip => <span key={chip} className="chip">{chip}</span>)}
-                  </div>
-                )}
-                {project.links && (
-                  <div className="card-links">
-                    {project.links.map((link, i) => (
-                      <a key={i} href={link.url} target="_blank" rel="noreferrer" className="card-link" title={link.alt}>
-                        <img src={link.iconUrl} alt={link.alt} />
-                      </a>
-                    ))}
-                  </div>
-                )}
+            <div className="card-inner">
+              {/* Capa frontal: imagen + título + etiqueta */}
+              <div className="card-face card-front">
+                <img src={project.imageUrl} alt={project.title} className="card-bg-image" />
+                <div className="card-overlay"></div>
+                <div className="card-front-content">
+                  <span className="card-category">{project.category}</span>
+                  <h3 className="card-title">{project.title}</h3>
+                </div>
+              </div>
+
+              {/* Capa central: solo color de fondo (espesor 3D) */}
+              <div className="card-face card-middle"></div>
+
+              {/* Capa de reverso: descripción + chips + enlaces */}
+              <div className="card-face card-back">
+                <div className="card-back-content">
+                  <span className="card-category">{project.category}</span>
+                  <h3 className="card-title">{project.title}</h3>
+                  <p className="card-description">{project.description}</p>
+                  {project.chips && (
+                    <div className="card-chips">
+                      {project.chips.map(chip => <span key={chip} className="chip" data-tech={chipKey(chip)}>{chip}</span>)}
+                    </div>
+                  )}
+                  {project.links && (
+                    <div className="card-links">
+                      {project.links.map((link, i) => (
+                        <a key={i} href={link.url} target="_blank" rel="noreferrer" className="card-link" title={link.alt}>
+                          <img src={link.iconUrl} alt={link.alt} />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

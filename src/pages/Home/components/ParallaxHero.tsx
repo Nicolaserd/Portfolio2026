@@ -48,7 +48,7 @@ const ParallaxHero: React.FC = () => {
       {/* Contenedor para texto futuro */}
       <div className="parallax-content">
         <SimpleParallax scale={1.1} delay={0} orientation="up">
-          <div style={{ padding: '2rem 10%', display: 'flex', justifyContent: 'flex-start' }}>
+          <div style={{ padding: '2rem 10%', display: 'flex', justifyContent: 'flex-end' }}>
             
             {/* Card extraída de Card Nicolas.html */}
             <article className="nicolas-card" role="region" aria-label="Tarjeta de presentación">
