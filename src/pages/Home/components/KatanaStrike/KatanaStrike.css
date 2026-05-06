@@ -1,0 +1,254 @@
+/* =============================================
+   KATANA STRIKE — Solo la katana
+   ============================================= */
+
+.katana-section {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  border: 2px solid red; /* debug — quitar al terminar */
+
+  /* Activa las container query units (cqw / cqh) */
+  container-type: size;
+}
+
+/* Stage — ocupa todo el ancho */
+.katana-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/*
+  Scaler — la katana es dependiente del bloque.
+  length / length = número sin unidad, válido para scale.
+  Katana sin escalar: ~580px ancho × 340px alto (rotada -30°).
+  96% para margen de seguridad en cada lado.
+*/
+.katana-scaler {
+  position: absolute;
+  inset: 0;
+  scale: min(calc(96cqw / 580px), calc(96cqh / 340px));
+  transform-origin: center center;
+}
+
+/* ─── KATANA ─────────────────────────────────── */
+
+/* Variables de proporciones y colores — DARK (predeterminado) */
+.katana-stage {
+  --blade-len: 520px;
+  --blade-thick: 7px;
+  --guard-w: 10px;
+  --guard-h: 28px;
+  --grip-len: 130px;
+  --grip-thick: 14px;
+
+  /* Hoja — acero claro */
+  --steel-1: #f4f1ea;
+  --steel-2: #cfcabd;
+  --steel-edge: #ffffff;
+
+  /* Tsuba / Kashira — casi negro */
+  --guard-top:    #1c1d20;
+  --guard-mid:    #2a2b30;
+  --guard-bot:    #0f1013;
+  --guard-border: #000000;
+
+  /* Mango */
+  --grip-top:   #2a2c31;
+  --grip-mid:   #15171a;
+  --grip-bot:   #0a0b0d;
+
+  /* Kashira */
+  --kashira-top: #2a2b30;
+  --kashira-bot: #0f1013;
+}
+
+/* Variables — LIGHT MODE */
+[data-theme="light"] .katana-stage {
+  --steel-1: #7a7870;
+  --steel-2: #5a5850;
+  --steel-edge: #a8a49c;
+
+  --guard-top:    #334678;
+  --guard-mid:    #4b5e91;
+  --guard-bot:    #1e2e56;
+  --guard-border: #1a2444;
+
+  --grip-top:   #2c3a5c;
+  --grip-mid:   #1e2a48;
+  --grip-bot:   #111c35;
+
+  --kashira-top: #334678;
+  --kashira-bot: #1e2e56;
+}
+
+.katana-wrap {
+  position: absolute;
+  /*
+    La katana NO es simétrica en vertical al rotarse -30°:
+    - Punta (kissaki): 260px ARRIBA del origen
+    - Mango (kashira): 80px ABAJO del origen
+    Desplazamos el origen 90px abajo para centrarla en el box.
+    90px = (260 - 80) / 2
+  */
+  top: calc(50% + 90px);
+  left: 50%;
+  width: 0;
+  height: 0;
+  will-change: transform, opacity, filter;
+  animation: katana 6s cubic-bezier(.2,.7,.2,1) infinite;
+}
+
+.katana {
+  position: relative;
+  transform: rotate(-30deg);
+  width: 0;
+  height: 0;
+}
+
+/* Hoja */
+.blade {
+  position: absolute;
+  left: 0;
+  top: calc(var(--blade-thick) / -2);
+  width: var(--blade-len);
+  height: var(--blade-thick);
+  border-radius: 1px 2px 2px 1px;
+  background: linear-gradient(180deg,
+    var(--steel-2) 0%,
+    var(--steel-1) 38%,
+    var(--steel-edge) 50%,
+    var(--steel-1) 62%,
+    var(--steel-2) 100%);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.35) inset,
+    0 0 8px rgba(255,250,220,0.10);
+}
+/* Kissaki (punta) */
+.blade::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: 14px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--steel-2), var(--steel-1) 50%, var(--steel-2));
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+/* Hamon (línea del temple) */
+.blade::before {
+  content: "";
+  position: absolute;
+  left: 4px; right: 12px;
+  top: 55%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55) 8%, rgba(255,255,255,0.55) 92%, transparent);
+  filter: blur(0.4px);
+  opacity: 0.7;
+}
+
+/* En light mode: borde oscuro para visibilidad */
+[data-theme="light"] .blade {
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.5) inset,
+    0 1px 3px rgba(0,0,0,0.25);
+}
+[data-theme="light"] .blade::before {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2) 8%, rgba(0,0,0,0.2) 92%, transparent);
+}
+
+/* Habaki (collar) */
+.habaki {
+  position: absolute;
+  left: -4px;
+  top: -8px;
+  width: 14px;
+  height: 16px;
+  background: linear-gradient(180deg, #d8d3c5, #f1ede2 50%, #b9b4a6);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.4);
+}
+
+/* Tsuba (guarda) */
+.tsuba {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px);
+  top: calc(var(--guard-h) / -2);
+  width: var(--guard-w);
+  height: var(--guard-h);
+  background: linear-gradient(180deg, var(--guard-top), var(--guard-mid) 50%, var(--guard-bot));
+  border: 1px solid var(--guard-border);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.05),
+    0 0 0 1px rgba(0,0,0,0.4);
+}
+
+/* Tsuka (mango) con ito diamante */
+.grip {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px - var(--grip-len));
+  top: calc(var(--grip-thick) / -2);
+  width: var(--grip-len);
+  height: var(--grip-thick);
+  background:
+    repeating-linear-gradient(45deg,
+      transparent 0 8px,
+      rgba(0,0,0,0.55) 8px 9px,
+      transparent 9px 17px),
+    repeating-linear-gradient(-45deg,
+      transparent 0 8px,
+      rgba(0,0,0,0.55) 8px 9px,
+      transparent 9px 17px),
+    linear-gradient(180deg, var(--grip-top), var(--grip-mid) 50%, var(--grip-bot));
+  border: 1px solid var(--guard-border);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+/* Menuki (ornamento dorado) */
+.grip::after {
+  content: "";
+  position: absolute;
+  left: 38%;
+  top: 50%;
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #c7a96a, #6e5320 70%, #2a1f08);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+}
+
+/* Kashira (pomo) */
+.kashira {
+  position: absolute;
+  left: calc(-1 * var(--guard-w) - 4px - var(--grip-len) - 8px);
+  top: calc((var(--grip-thick) + 6px) / -2);
+  width: 8px;
+  height: calc(var(--grip-thick) + 6px);
+  background: linear-gradient(180deg, var(--kashira-top), var(--kashira-bot));
+  border: 1px solid var(--guard-border);
+  border-radius: 2px 1px 1px 2px;
+}
+
+/* Animación: aparece → wind-up → estocada */
+@keyframes katana {
+  0%   { opacity: 0; transform: translate(-40px, 8px) scale(0.98); filter: blur(6px); }
+  8%   { opacity: 0.45; filter: blur(3px); }
+  18%  { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0); }
+  35%  { transform: translate(0, -4px) scale(1); }
+  50%  { transform: translate(0, 0) scale(1); opacity: 1; filter: blur(0); }
+  56%  { transform: translate(-90px, 0) scale(1); opacity: 1; filter: blur(0); }
+  62%  { transform: translate(800px, 0) rotate(30deg) scale(1.02); opacity: 1; filter: blur(1px); }
+  68%  { transform: translate(1500px, 0) rotate(30deg) scale(1.02); opacity: 0; filter: blur(2px); }
+  100% { transform: translate(1500px, 0) rotate(30deg) scale(1.02); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .katana-wrap { animation-duration: 0s; opacity: 1; }
+}
