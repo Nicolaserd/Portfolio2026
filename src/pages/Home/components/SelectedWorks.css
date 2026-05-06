@@ -56,6 +56,18 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  
+  /* Scroll Animation Initial State */
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+/* Scroll Animation End State */
+.bento-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .aspect-video { aspect-ratio: 16 / 9; }

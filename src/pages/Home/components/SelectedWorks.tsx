@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './SelectedWorks.css';
 
 interface ProjectLink {
@@ -105,6 +105,29 @@ const MOCK_PROJECTS: Project[] = [
 ];
 
 const SelectedWorks: React.FC = () => {
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.1
+    });
+
+    cardsRef.current.forEach(card => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="selected-works-section">
       <div className="section-header">
@@ -112,8 +135,13 @@ const SelectedWorks: React.FC = () => {
         <p className="section-subtitle">A curated selection of our most impactful collaborations.</p>
       </div>
       <div className="bento-grid">
-        {MOCK_PROJECTS.map((project) => (
-          <div key={project.id} className={`bento-card ${project.spanClass} ${project.aspectClass}`}>
+        {MOCK_PROJECTS.map((project, index) => (
+          <div 
+            key={project.id} 
+            ref={el => { cardsRef.current[index] = el; }}
+            className={`bento-card ${project.spanClass} ${project.aspectClass}`}
+            style={{ transitionDelay: `${(index % 2) * 200}ms` }}
+          >
             <img src={project.imageUrl} alt={project.title} className="card-bg-image" />
             <div className="card-overlay"></div>
             <div className="card-content">
