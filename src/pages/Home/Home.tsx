@@ -2,7 +2,11 @@ import './Home.css';
 
 const ALPACA_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDux6gdR03JLXdxuRN7n8LsXsB1vNNa5t3MT7qrRmNUM48jXax30CBAMeLQODarehN1SMs_Tybpnq6YRC5gvpm1bv9k0ggTvoTj-K92V9Ldh2uFZ1WzTDtLsa_jHF6BSvMwxbiikX3JAuBKjGR6mpXHORlHDgD3LXahZNweRya20vcMmqQjRCUBTJvoIK_95VwEcOWnDR8tzZ4Xo2VnOQvV01Q0lBY3C3Xcb7wU_vRKRxHmWPVzhxEwtlXNsVJ1lO_FasZ7yre8G5E';
 
-export default function Home() {
+interface HomeProps {
+  onNavigate: (page: string) => void;
+}
+
+export default function Home({ onNavigate }: HomeProps) {
   return (
     <div className="home-page">
 
@@ -10,16 +14,27 @@ export default function Home() {
       <section className="home-mobile">
         <div className="home-mobile-pattern chakana-pattern" />
         <div className="home-mobile-inner">
-          <div className="status-badge">
-            <span className="status-dot status-dot--red" />
-            <span className="status-text">SYSTEM_READY</span>
+          <div className="home-mobile-hero-text">
+            <div className="home-mobile-label-row">
+              <span className="hero-label">SISTEMA_PORTAFOLIO v3.0</span>
+              <div className="status-badge">
+                <span className="status-dot status-dot--green" />
+                <span className="status-text">SYSTEM_READY</span>
+              </div>
+            </div>
+            <h1 className="hero-title">
+              NICOLÁS_<br />
+              <span className="hero-title-accent">INCHAUSTEGUI</span>
+            </h1>
+            <p className="hero-subtitle">DESDE_COLOMBIA</p>
           </div>
+
           <div className="hero-asset">
             <div className="hero-backdrop hero-backdrop--gray" />
             <div className="hero-backdrop hero-backdrop--red" />
             <img className="hero-image-mobile" src={ALPACA_IMG} alt="3D Neo-Andean Alpaca" />
           </div>
-          <button className="cta-btn">
+          <button className="cta-btn" onClick={() => onNavigate('projects')}>
             <span className="cta-btn-text">INICIALIZAR</span>
             <span className="material-symbols-outlined cta-btn-icon" style={{ fontVariationSettings: "'FILL' 1" }}>
               bolt
@@ -46,11 +61,11 @@ export default function Home() {
             <span className="hero-label">SISTEMA_PORTAFOLIO v3.0</span>
 
             <h1 className="hero-title">
-              CREANDO_<br />
-              <span className="hero-title-accent">FUTURO</span>
+              NICOLÁS_<br />
+              <span className="hero-title-accent">INCHAUSTEGUI</span>
             </h1>
 
-            <p className="hero-subtitle">DESDE_LOS_ANDES</p>
+            <p className="hero-subtitle">DESDE_COLOMBIA</p>
 
             <div className="hero-actions">
               {/* Primary button */}

@@ -13,7 +13,7 @@ const NAV_LINKS = [
 export default function TopNav({ activePage, onNavigate }: TopNavProps) {
   return (
     <nav className="topnav">
-      <span className="topnav-brand">INCA_PORTFOLIO</span>
+      <span className="topnav-brand">NICOLÁS_PORTFOLIO</span>
       <ul className="topnav-links">
         {NAV_LINKS.map(({ label, page }) => (
           <li key={page}>

@@ -8,9 +8,10 @@ interface ProjectCardProps {
   image: string;
   icon?: string;
   primary: boolean;
+  url?: string;
 }
 
-export default function ProjectCard({ title, description, tags, badge, image, icon, primary }: ProjectCardProps) {
+export default function ProjectCard({ title, description, tags, badge, image, icon, primary, url }: ProjectCardProps) {
   return (
     <article className="project-card">
       <div className="project-card-image-wrap">
@@ -37,12 +38,21 @@ export default function ProjectCard({ title, description, tags, badge, image, ic
         </div>
         <div className="project-card-btn-wrap">
           <div className="project-card-btn-shadow" />
-          <button className={`project-card-btn ${primary ? 'project-card-btn--primary' : 'project-card-btn--secondary'}`}>
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
-              {primary ? 'play_arrow' : 'view_in_ar'}
-            </span>
-            {primary ? 'EJECUTAR' : 'INSPECCIONAR'}
-          </button>
+          {url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer" className={`project-card-btn ${primary ? 'project-card-btn--primary' : 'project-card-btn--secondary'}`}>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                {primary ? 'play_arrow' : 'view_in_ar'}
+              </span>
+              {primary ? 'EJECUTAR' : 'INSPECCIONAR'}
+            </a>
+          ) : (
+            <button className={`project-card-btn ${primary ? 'project-card-btn--primary' : 'project-card-btn--secondary'}`}>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
+                {primary ? 'play_arrow' : 'view_in_ar'}
+              </span>
+              {primary ? 'EJECUTAR' : 'INSPECCIONAR'}
+            </button>
+          )}
         </div>
       </div>
     </article>

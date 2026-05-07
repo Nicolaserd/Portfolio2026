@@ -3,24 +3,26 @@ import './Projects.css';
 
 const PROJECTS = [
   {
-    id: 'alpacha-os',
-    title: 'ALPACHA_OS',
-    description: 'A robust, tactile operating system interface merging neobrutalist grid structures with soft claymorphic interactions. Designed for high-performance creative workflows.',
-    tags: ['SYSTEM_DESIGN', 'UI/UX'],
+    id: 'Academic_Intelligence_Portal',
+    title: 'Academic_Intelligence_Portal',
+    description: 'Portal web institucional para automatizar reportes académicos, analizar datos, proyectar población estudiantil y consultar información mediante agentes de IA.',
+    tags: ['Next.js 16', 'React 19', 'TypeScript', 'Supabase/PostgreSQL', 'Prisma', 'IA'],
     badge: 'v2.0',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5fAZykW3TUnpNlHyykQUebhvpQiKPRTb4MsdZg1VcYA3S-9ChmQ9qfx9_mx-bG-WgUHbz2lL8g7mwWU0nwpp5vWJnnLrQEJQMVN2a6w2FjBxr7-O4sQMz6W1THxRJ9t-NreevM2zgto3cDdpClCb_NIoqAmEbC6nozdz-ac0qha0_qz8WAYLglU3Ol2827z_dDMsCOzDIKlFy1Xd-G9oSCyPZu629TL4YNZon72rYfNgVl3KHJqbwD9q4sC8s40pmP82ue0HhTb4',
     icon: 'data_object',
     primary: true,
+    url: 'https://udec-data.vercel.app/',
   },
   {
-    id: 'data-knot',
-    title: 'Data_Knot',
-    description: 'Parametric 3D fabrication translating ancestral knotted string data into physical polymer arrays. Used as structural load-bearing encryption keys.',
-    tags: [],
+    id: ' Bot_IA_Telegram',
+    title: ' Bot_IA_Telegram',
+    description: 'Backend en NestJS para un bot de Telegram con autenticación, roles, base de datos cifrada y respuestas en tiempo real asistidas por Inteligencia Artificial.',
+    tags: ["NestJS", "PostgreSQL", "TypeORM", "JWT", "IA"],
     badge: null,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDmarOyuCx9R4mumqz1KbUvEmZ-aKWPZR__fJE3hBPSKxN-WQabk9emd9atDx8bPVOfQg2fZXJGdWwJxBs5xjDUuGYSHaCzrj2St6YzrsVSM__wyxBtJ-GKJY8qn6zdgyzBDOUe-hEJOXuGvcf9urLv3S9mdC8G2vEbTD1eFCzq37SG0Utyu6pHrty-HYxriHhDwTfRS90vhwj0qdwsgQh3HyMcvBW9RSq-0tdRjjFw54H6cFQWKE-2UUgVNlTOmKylep6YPJaHHJk',
     icon: 'polyline',
     primary: false,
+    url: 'https://t.me/Mario1379_bot',
   },
   {
     id: 'geo-huaco',
@@ -56,8 +58,8 @@ export default function Projects() {
               </h1>
             </div>
             <div className="projects-status-badge">
-              <span className="status-dot" style={{ width: '12px', height: '12px', backgroundColor: 'var(--primary)', borderRadius: '50%', display: 'inline-block' }} />
-              <span style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>System Online</span>
+              <span className="status-dot" style={{ width: '12px', height: '12px', backgroundColor: '#00C853', borderRadius: '50%', display: 'inline-block' }} />
+              <span style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginLeft: '8px' }}>System Online</span>
             </div>
           </div>
 
