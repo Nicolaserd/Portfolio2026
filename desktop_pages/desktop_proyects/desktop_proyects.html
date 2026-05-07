@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PROYECTOS_DIR - Inca Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Subtle Andean Geometric Background Pattern */
+        .bg-andean-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%231a1c1c' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-fixed": "#1b1b1c",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline-variant": "#e7bdb9",
+                        "on-background": "#1a1c1c",
+                        "primary-fixed": "#ffdad6",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "secondary": "#5d5f5f",
+                        "surface-tint": "#c0001a",
+                        "on-tertiary-fixed-variant": "#474647",
+                        "background": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#5d3f3c",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary-container": "#6e6d6e",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "tertiary-fixed-dim": "#c8c6c7",
+                        "surface-dim": "#dadada",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#410003",
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary": "#565556",
+                        "on-tertiary-container": "#f3f0f1",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#ffecea",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-container": "#616363",
+                        "surface-bright": "#f9f9f9",
+                        "primary": "#ad0017",
+                        "inverse-primary": "#ffb3ad",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "surface-container": "#eeeeee",
+                        "tertiary-fixed": "#e5e2e3",
+                        "secondary-container": "#dfe0e0",
+                        "primary-container": "#d91023",
+                        "outline": "#926e6b",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#930011",
+                        "on-secondary-fixed-variant": "#454747"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "margin": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "xl": "48px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Space Grotesk", "sans-serif"],
+                        "label-bold": ["Space Grotesk", "sans-serif"],
+                        "headline-lg": ["Space Grotesk", "sans-serif"],
+                        "body-lg": ["Space Grotesk", "sans-serif"],
+                        "headline-md": ["Space Grotesk", "sans-serif"],
+                        "display-xl": ["Space Grotesk", "sans-serif"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-bold": ["14px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md bg-andean-pattern overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center px-margin py-md w-full sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-4 border-on-surface dark:border-white shadow-[4px_4px_0px_0px_rgba(26,28,28,1)] dark:shadow-[4px_4px_0px_0px_rgba(241,241,241,1)]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[32px] filled">grid_4x4</span>
+<div class="font-display-xl text-headline-md text-primary dark:text-inverse-primary tracking-tighter uppercase">INCA_PORTFOLIO</div>
+</div>
+<ul class="flex items-center gap-lg">
+<li>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all block py-xs" href="#">Home</a>
+</li>
+<li>
+<a class="font-headline-md text-headline-md text-primary font-bold border-b-4 border-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all block py-xs" href="#">Projects</a>
+</li>
+<li>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all block py-xs" href="#">About</a>
+</li>
+<li>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all block py-xs" href="#">Contact</a>
+</li>
+</ul>
+<button class="relative group active:translate-y-1 active:shadow-none transition-transform">
+<div class="absolute inset-0 bg-on-surface translate-y-[4px] translate-x-[4px]"></div>
+<div class="relative bg-primary text-on-primary font-label-bold text-label-bold py-md px-lg border-2 border-on-surface shadow-[inset_2px_2px_4px_rgba(255,255,255,0.4),inset_-2px_-2px_4px_rgba(0,0,0,0.2)] hover:bg-primary-container transition-colors uppercase tracking-widest">Hire Me</div>
+</button>
+</nav>
+<!-- Main Content -->
+<main class="w-full max-w-[1440px] mx-auto px-md md:px-margin py-xl pb-[120px] md:pb-xl flex flex-col gap-xl">
+<!-- Header Section -->
+<header class="flex flex-col gap-md relative">
+<!-- Stepped accent line -->
+<div class="w-32 h-4 bg-on-surface mb-sm flex">
+<div class="h-full w-1/3 bg-primary"></div>
+</div>
+<div class="flex items-baseline justify-between flex-wrap gap-md">
+<h1 class="font-display-xl text-display-xl text-on-surface tracking-tighter uppercase drop-shadow-[4px_4px_0px_rgba(26,28,28,1)] flex items-center gap-md">
+                    PROYECTOS_DIR
+                    <span class="material-symbols-outlined text-[48px] text-primary filled animate-pulse">terminal</span>
+</h1>
+<div class="bg-surface border-2 border-on-surface px-md py-sm shadow-[2px_2px_0px_0px_rgba(26,28,28,1)] flex items-center gap-sm">
+<span class="w-3 h-3 bg-primary rounded-full inline-block"></span>
+<span class="font-label-bold text-label-bold text-on-surface tracking-widest uppercase">System Online</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl border-l-4 border-primary pl-md mt-sm bg-surface/80 p-sm">
+                A highly curated archive of 3D digital fabrications, neo-andean user interfaces, and retro-futuristic computational artifacts.
+            </p>
+</header>
+<!-- Filter Tags (Chips) -->
+<section class="flex flex-wrap gap-sm">
+<button class="bg-primary text-on-primary font-label-bold text-label-bold px-md py-sm border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(26,28,28,1)] rounded-full hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-wider">ALL_DATA</button>
+<button class="bg-surface text-on-surface font-label-bold text-label-bold px-md py-sm border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(26,28,28,1)] rounded-full hover:bg-surface-variant hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-wider">3D_FAB</button>
+<button class="bg-surface text-on-surface font-label-bold text-label-bold px-md py-sm border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(26,28,28,1)] rounded-full hover:bg-surface-variant hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-wider">ALPACHA_CORE</button>
+<button class="bg-surface text-on-surface font-label-bold text-label-bold px-md py-sm border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(26,28,28,1)] rounded-full hover:bg-surface-variant hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-wider">CYBER_CERAMICS</button>
+</section>
+<!-- Projects Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter lg:gap-[32px]">
+<!-- Card 1: ALPACHA_OS -->
+<article class="bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(26,28,28,1)] flex flex-col group relative overflow-hidden transition-transform hover:-translate-y-1">
+<!-- Image Container -->
+<div class="aspect-[4/3] w-full border-b-4 border-on-surface relative overflow-hidden bg-surface-variant">
+<img alt="Alpacha OS Interface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-125 saturate-150" data-alt="A vibrant, retro-futuristic digital interface displayed on a heavy, chunky CRT monitor sitting on a concrete desk. The UI features a stylized, highly saturated 3D render of a fluffy alpaca wearing futuristic digital sunglasses. The color palette is stark and neobrutalist, relying on bright primary reds against deep charcoal and pristine white backgrounds. The aesthetic fuses early 90s computing graphics with ancient Andean iconography, characterized by rigid grid structures, pixelated stepped patterns, and squishy, claymorphic 3D buttons scattered across the screen layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5fAZykW3TUnpNlHyykQUebhvpQiKPRTb4MsdZg1VcYA3S-9ChmQ9qfx9_mx-bG-WgUHbz2lL8g7mwWU0nwpp5vWJnnLrQEJQMVN2a6w2FjBxr7-O4sQMz6W1THxRJ9t-NreevM2zgto3cDdpClCb_NIoqAmEbC6nozdz-ac0qha0_qz8WAYLglU3Ol2827z_dDMsCOzDIKlFy1Xd-G9oSCyPZu629TL4YNZon72rYfNgVl3KHJqbwD9q4sC8s40pmP82ue0HhTb4"/>
+<!-- Tech overlay detail -->
+<div class="absolute top-sm right-sm bg-primary text-on-primary font-label-bold text-[10px] px-sm py-[2px] border border-on-surface uppercase tracking-widest">v.2.0.4</div>
+</div>
+<!-- Content -->
+<div class="p-lg flex flex-col flex-grow justify-between gap-md relative bg-surface">
+<!-- Subtle background watermark -->
+<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none text-[120px] leading-none overflow-hidden select-none">
+<span class="material-symbols-outlined filled">pets</span>
+</div>
+<div class="flex flex-col gap-sm relative z-10">
+<div class="flex items-center justify-between border-b-2 border-on-surface pb-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-black tracking-tight">ALPACHA_OS</h2>
+<span class="material-symbols-outlined text-primary">data_object</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+                            A completely custom operating system shell designed with a neobrutalist, culturally-resonant aesthetic. Features heavy mechanical UI interactions and predictive alpaca-logic routing.
+                        </p>
+</div>
+<!-- Claymorphic Button -->
+<button class="relative mt-md w-full active:translate-y-[4px] transition-transform z-10 group/btn">
+<div class="absolute inset-0 bg-on-surface translate-y-[4px] rounded-sm"></div>
+<div class="relative w-full bg-primary text-on-primary font-label-bold text-label-bold py-md px-lg border-2 border-on-surface shadow-[inset_2px_2px_8px_rgba(255,255,255,0.4),inset_-2px_-2px_8px_rgba(0,0,0,0.3)] flex items-center justify-center gap-sm uppercase tracking-widest rounded-sm">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                            EJECUTAR
+                        </div>
+</button>
+</div>
+</article>
+<!-- Card 2: DIGITAL QUIPU -->
+<article class="bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(26,28,28,1)] flex flex-col group relative overflow-hidden transition-transform hover:-translate-y-1">
+<div class="aspect-[4/3] w-full border-b-4 border-on-surface relative overflow-hidden bg-surface-variant">
+<img alt="Digital Quipu Structure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-125" data-alt="A macro shot of a modern, 3D-printed digital fabrication interpreting an ancient Inca quipu data storage system. The object is composed of articulated, chunky geometric polymer knots in stark bright white and intense primary red, hanging against a dark charcoal neobrutalist concrete wall. The lighting is harsh and high-key studio lighting, creating deep, solid black offset shadows that emphasize the physical volume and grid-like structure of the modern artifact. The mood is high-tech, tactile, and culturally resonant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmarOyuCx9R4mumqz1KbUvEmZ-aKWPZR__fJE3hBPSKxN-WQabk9emd9atDx8bPVOfQg2fZXJGdWwJxBs5xjDUuGYSHaCzrj2St6YzrsVSM__wyxBtJ-GKJY8qn6zdgyzBDOUe-hEJOXuGvcf9urLv3S9mdC8G2vEbTD1eFCzq37SG0Utyu6pHrty-HYxriHhDwTfRS90vhwj0qdwsgQh3HyMcvBW9RSq-0tdRjjFw54H6cFQWKE-2UUgVNlTOmKylep6YPJaHHJk"/>
+</div>
+<div class="p-lg flex flex-col flex-grow justify-between gap-md relative bg-surface">
+<div class="flex flex-col gap-sm relative z-10">
+<div class="flex items-center justify-between border-b-2 border-on-surface pb-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-black tracking-tight uppercase">Data_Knot</h2>
+<span class="material-symbols-outlined text-primary">polyline</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+                            Parametric 3D fabrication translating ancestral knotted string data into physical polymer arrays. Used as structural load-bearing encryption keys.
+                        </p>
+</div>
+<button class="relative mt-md w-full active:translate-y-[4px] transition-transform z-10 group/btn">
+<div class="absolute inset-0 bg-on-surface translate-y-[4px] rounded-sm"></div>
+<div class="relative w-full bg-surface text-on-surface font-label-bold text-label-bold py-md px-lg border-2 border-on-surface shadow-[inset_2px_2px_8px_rgba(255,255,255,0.8),inset_-2px_-2px_8px_rgba(0,0,0,0.1)] flex items-center justify-center gap-sm uppercase tracking-widest rounded-sm hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[20px]">view_in_ar</span>
+                            INSPECCIONAR
+                        </div>
+</button>
+</div>
+</article>
+<!-- Card 3: CHAKANA GENERATOR -->
+<article class="bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(26,28,28,1)] flex flex-col group relative overflow-hidden transition-transform hover:-translate-y-1 md:col-span-2 lg:col-span-1">
+<div class="aspect-[4/3] w-full border-b-4 border-on-surface relative overflow-hidden bg-surface-variant">
+<img alt="Cyber Ceramic Vessel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter contrast-125" data-alt="A hyper-realistic 3D render of a futuristic ceramic vessel inspired by pre-Columbian Moche pottery. The object features heavy, brutalist geometric stepped forms resembling an Andean cross (Chakana), integrated with glowing neon red scanlines and soft, claymorphic bulges on its surface. It sits on a pristine white architectural plinth under stark studio lighting that casts hard, pitch-black geometric offset shadows onto the white floor. The aesthetic is a seamless blend of neobrutalist industrial design and ancient Peruvian heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANjDrB5Ntv1_4Z6WDbClIuHibjp9ExK_wMGXVpcje4yabVTgXFQcjpRPJCb29EPu7QnKD0UwjnbWnczpomtYQL8ixE3lO_h2FHcCSe912d_PUKOdXRMC5s4GPO6iLLSxAa_me7GmFp5z0cFQC1ynXs8EgWgVFwXl5Nnl2Ns0_soW1gzUDGplr42t8zJDu1A6hNu331x3Z1UPaSgQszD2plIVxMJ2LbLxfMiXfpu97Qrx5iIVxoCzjhf-DZIB47T9pRhwer1bHXoGA"/>
+</div>
+<div class="p-lg flex flex-col flex-grow justify-between gap-md relative bg-surface">
+<div class="flex flex-col gap-sm relative z-10">
+<div class="flex items-center justify-between border-b-2 border-on-surface pb-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-black tracking-tight uppercase">Geo_Huaco</h2>
+<span class="material-symbols-outlined text-primary">deployed_code</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+                            Procedurally generated 3D meshes that combine Moche portrait vessel topology with rigid, stepped Chakana geometry and claymorphic volume processing.
+                        </p>
+</div>
+<button class="relative mt-md w-full active:translate-y-[4px] transition-transform z-10 group/btn">
+<div class="absolute inset-0 bg-on-surface translate-y-[4px] rounded-sm"></div>
+<div class="relative w-full bg-surface text-on-surface font-label-bold text-label-bold py-md px-lg border-2 border-on-surface shadow-[inset_2px_2px_8px_rgba(255,255,255,0.8),inset_-2px_-2px_8px_rgba(0,0,0,0.1)] flex items-center justify-center gap-sm uppercase tracking-widest rounded-sm hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[20px]">view_in_ar</span>
+                            INSPECCIONAR
+                        </div>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex md:hidden justify-around items-center px-sm pb-[calc(env(safe-area-inset-bottom)+8px)] pt-xs bg-surface dark:bg-inverse-surface border-t-4 border-on-surface shadow-[0_-4px_0px_0px_rgba(26,28,28,1)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-primary-fixed rounded-xl transition-colors min-w-[64px]">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-bold text-label-bold text-[10px]">Home</span>
+</button>
+<!-- Active Tab -->
+<button class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl p-xs translate-y-[-8px] shadow-[4px_4px_0px_0px_rgba(26,28,28,1)] active:scale-95 transition-transform min-w-[72px] border-2 border-on-surface">
+<span class="material-symbols-outlined mb-1 filled">grid_view</span>
+<span class="font-label-bold text-label-bold text-[10px] tracking-wider uppercase">Projects</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-primary-fixed rounded-xl transition-colors min-w-[64px]">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-bold text-label-bold text-[10px]">About</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-primary-fixed rounded-xl transition-colors min-w-[64px]">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-label-bold text-label-bold text-[10px]">Contact</span>
+</button>
+</nav>
+</body></html>

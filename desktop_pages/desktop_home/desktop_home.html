@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INCA_PORTFOLIO - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1a1c1c",
+                      "surface": "#f9f9f9",
+                      "on-tertiary-fixed": "#1b1b1c",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f1f1f1",
+                      "outline-variant": "#e7bdb9",
+                      "on-background": "#1a1c1c",
+                      "primary-fixed": "#ffdad6",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "secondary": "#5d5f5f",
+                      "surface-tint": "#c0001a",
+                      "on-tertiary-fixed-variant": "#474647",
+                      "background": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#ffb3ad",
+                      "error-container": "#ffdad6",
+                      "on-surface-variant": "#5d3f3c",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e2e2e2",
+                      "tertiary-container": "#6e6d6e",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "tertiary-fixed-dim": "#c8c6c7",
+                      "surface-dim": "#dadada",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#e2e2e2",
+                      "on-primary-fixed": "#410003",
+                      "surface-container-low": "#f3f3f3",
+                      "tertiary": "#565556",
+                      "on-tertiary-container": "#f3f0f1",
+                      "on-error": "#ffffff",
+                      "on-primary-container": "#ffecea",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container-high": "#e8e8e8",
+                      "on-secondary-container": "#616363",
+                      "surface-bright": "#f9f9f9",
+                      "primary": "#ad0017",
+                      "inverse-primary": "#ffb3ad",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2f3131",
+                      "surface-container": "#eeeeee",
+                      "tertiary-fixed": "#e5e2e3",
+                      "secondary-container": "#dfe0e0",
+                      "primary-container": "#d91023",
+                      "outline": "#926e6b",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#930011",
+                      "on-secondary-fixed-variant": "#454747"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "md": "16px",
+                      "margin": "32px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "xl": "48px"
+              },
+              "fontFamily": {
+                      "body-md": ["Space Grotesk"],
+                      "label-bold": ["Space Grotesk"],
+                      "headline-lg": ["Space Grotesk"],
+                      "body-lg": ["Space Grotesk"],
+                      "headline-md": ["Space Grotesk"],
+                      "display-xl": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-bold": ["14px", {"lineHeight": "1.0", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Neobrutalist Outer Shadow */
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(26,28,28,1);
+        }
+        .neo-shadow-lg {
+            box-shadow: 8px 8px 0px 0px rgba(26,28,28,1);
+        }
+        /* Claymorphic Inner Shadows */
+        .clay-surface {
+            box-shadow: inset 4px 4px 10px rgba(255, 255, 255, 0.4), inset -4px -4px 10px rgba(26, 28, 28, 0.2);
+        }
+        .clay-recessed {
+            box-shadow: inset 4px 4px 10px rgba(26, 28, 28, 0.2), inset -4px -4px 10px rgba(255, 255, 255, 0.4);
+        }
+        /* Andean Grid Pattern Overlay */
+        .andean-grid {
+            background-image: linear-gradient(rgba(173, 0, 23, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(173, 0, 23, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        /* Interactive State Utility */
+        .neo-interactive:active {
+            transform: translate(4px, 4px);
+            box-shadow: none !important;
+        }
+        .neo-interactive-lg:active {
+            transform: translate(8px, 8px);
+            box-shadow: none !important;
+        }
+        /* Grid specific to neobrutalism offset */
+        .offset-border {
+            border: 4px solid #1a1c1c;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md andean-grid min-h-screen relative overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center px-margin py-md w-full sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-4 border-on-surface dark:border-white shadow-[4px_4px_0px_0px_rgba(26,28,28,1)] dark:shadow-[4px_4px_0px_0px_rgba(241,241,241,1)]">
+<div class="font-display-xl text-headline-md text-primary dark:text-inverse-primary tracking-tighter uppercase font-bold">
+            INCA_PORTFOLIO
+        </div>
+<div class="flex gap-lg items-center">
+<a class="font-headline-md text-headline-md text-primary font-bold border-b-2 border-primary hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-1 active:shadow-none transition-transform" href="#">Home</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-1 active:shadow-none transition-transform" href="#">Projects</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-1 active:shadow-none transition-transform" href="#">About</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant dark:text-surface-variant hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-y-1 active:shadow-none transition-transform" href="#">Contact</a>
+<button class="bg-primary text-on-primary font-headline-md text-headline-md px-lg py-sm offset-border neo-shadow neo-interactive rounded-DEFAULT transition-all">
+                Hire Me
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="container mx-auto px-gutter py-xl flex flex-col gap-xl max-w-7xl pb-32 md:pb-xl">
+<!-- Status Indicator -->
+<div class="flex items-center gap-sm bg-surface-container-high px-md py-sm rounded-full w-max border-2 border-on-surface neo-shadow self-start md:self-end">
+<div class="w-3 h-3 bg-[#00C853] rounded-full animate-pulse border border-on-surface"></div>
+<span class="font-label-bold text-label-bold text-on-surface tracking-widest uppercase">System Online</span>
+</div>
+<!-- Hero Section: Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Left Text Column -->
+<div class="md:col-span-7 flex flex-col justify-center gap-lg">
+<div class="flex flex-col gap-sm">
+<h2 class="font-label-bold text-label-bold text-primary tracking-widest bg-surface-container w-max px-md py-xs offset-border neo-shadow uppercase">
+                        SISTEMA_PORTAFOLIO v3.0
+                    </h2>
+<h1 class="font-display-xl text-display-xl text-on-surface leading-tight offset-border p-md bg-surface clay-surface">
+                        CREANDO_<br/><span class="text-primary">FUTURO</span>
+</h1>
+<div class="font-headline-lg text-headline-lg text-secondary border-l-8 border-primary pl-md py-xs mt-sm">
+                        DESDE_LOS_ANDES
+                    </div>
+</div>
+<div class="flex flex-wrap gap-md mt-md">
+<button class="bg-primary text-on-primary font-headline-md text-headline-md px-xl py-md offset-border neo-shadow-lg neo-interactive-lg rounded-DEFAULT transition-all flex items-center gap-sm">
+                        EXPLORAR MÓDULOS
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+<button class="bg-surface text-on-surface font-headline-md text-headline-md px-xl py-md offset-border neo-shadow-lg neo-interactive-lg rounded-DEFAULT transition-all clay-surface flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                        INICIALIZAR
+                    </button>
+</div>
+</div>
+<!-- Right 3D Visual Column -->
+<div class="md:col-span-5 h-[500px] md:h-auto bg-surface-container-high offset-border neo-shadow-lg rounded-xl relative overflow-hidden clay-surface flex items-center justify-center p-md">
+<!-- Andean Pattern Decorative Elements -->
+<div class="absolute top-0 right-0 w-32 h-32 opacity-10" style="background-image: repeating-linear-gradient(45deg, #1a1c1c 0, #1a1c1c 2px, transparent 2px, transparent 8px);"></div>
+<div class="absolute bottom-0 left-0 w-full h-16 border-t-4 border-on-surface flex" style="background: repeating-linear-gradient(90deg, #1a1c1c 0, #1a1c1c 4px, transparent 4px, transparent 16px);"></div>
+<img alt="3D Claymorphic Alpaca" class="w-full h-full object-cover rounded-lg border-4 border-on-surface neo-shadow z-10" data-alt="A highly detailed 3D claymorphic rendering of a stylized alpaca wearing a vibrant, traditional Peruvian 'chullo' hat with earflaps and tassels. The alpaca has soft, rounded, voluminous shapes characteristic of claymorphism, colored in pristine white. It is set against a stark neobrutalist background featuring a harsh dark charcoal outer shadow that gives it a pop-out effect. The scene is illuminated by bright, high-key studio lighting with stark shadows, emphasizing the squishy 3D texture and the vibrant red accents of the neobrutalist UI surrounding it." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDux6gdR03JLXdxuRN7n8LsXsB1vNNa5t3MT7qrRmNUM48jXax30CBAMeLQODarehN1SMs_Tybpnq6YRC5gvpm1bv9k0ggTvoTj-K92V9Ldh2uFZ1WzTDtLsa_jHF6BSvMwxbiikX3JAuBKjGR6mpXHORlHDgD3LXahZNweRya20vcMmqQjRCUBTJvoIK_95VwEcOWnDR8tzZ4Xo2VnOQvV01Q0lBY3C3Xcb7wU_vRKRxHmWPVzhxEwtlXNsVJ1lO_FasZ7yre8G5E"/>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex md:hidden justify-around items-center px-sm pb-safe pt-xs bg-surface dark:bg-inverse-surface border-t-4 border-on-surface shadow-[0_-4px_0px_0px_rgba(26,28,28,1)]">
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl p-xs translate-y-[-4px] shadow-[4px_4px_0px_0px_rgba(26,28,28,1)] w-16 h-16 font-label-bold text-label-bold transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined mb-xs" style="font-variation-settings: 'FILL' 1;">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-xs w-16 h-16 font-label-bold text-label-bold hover:bg-primary-fixed transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined mb-xs">grid_view</span>
+            Projects
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-xs w-16 h-16 font-label-bold text-label-bold hover:bg-primary-fixed transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined mb-xs">person</span>
+            About
+        </a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-xs w-16 h-16 font-label-bold text-label-bold hover:bg-primary-fixed transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined mb-xs">mail</span>
+            Contact
+        </a>
+</nav>
+</body></html>
