@@ -1,0 +1,176 @@
+.project-card {
+  background-color: var(--surface);
+  border: 4px solid var(--on-surface);
+  box-shadow: 6px 6px 0px 0px rgba(26,28,28,1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    box-shadow: 8px 8px 0px 0px rgba(26,28,28,1);
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.project-card-image-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-bottom: 4px solid var(--on-surface);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--surface-variant);
+}
+
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: contrast(1.25) saturate(1.5);
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.05);
+}
+
+.project-card-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid var(--on-surface);
+}
+
+.project-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  justify-content: space-between;
+  background-color: var(--surface);
+  position: relative;
+}
+
+.project-card-watermark {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 120px;
+  line-height: 1;
+  overflow: hidden;
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--on-surface);
+  padding-bottom: 4px;
+}
+
+.project-card-title {
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+}
+
+.project-card-icon {
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.project-card-desc {
+  font-size: 16px;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.project-card-tag {
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border: 1px solid var(--on-surface);
+  text-transform: uppercase;
+}
+
+/* Claymorphic button with offset shadow */
+.project-card-btn-wrap {
+  position: relative;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.project-card-btn-shadow {
+  position: absolute;
+  inset: 0;
+  background-color: var(--on-surface);
+  transform: translateY(4px);
+  border-radius: 2px;
+}
+
+.project-card-btn {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 16px;
+  border: 2px solid var(--on-surface);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  border-radius: 2px;
+}
+
+.project-card-btn-wrap:active .project-card-btn {
+  transform: translateY(4px);
+}
+
+.project-card-btn-wrap:active .project-card-btn-shadow {
+  opacity: 0;
+}
+
+.project-card-btn--primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: inset 2px 2px 8px rgba(255,255,255,0.4), inset -2px -2px 8px rgba(0,0,0,0.3);
+}
+
+.project-card-btn--secondary {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  box-shadow: inset 2px 2px 8px rgba(255,255,255,0.8), inset -2px -2px 8px rgba(0,0,0,0.1);
+}

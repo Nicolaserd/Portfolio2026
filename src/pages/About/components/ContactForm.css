@@ -1,0 +1,119 @@
+.contact-section {
+  width: 100%;
+}
+
+.contact-card {
+  background-color: var(--surface-container-low);
+  border: 4px solid var(--on-surface);
+  box-shadow: var(--neo-shadow-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    #1a1c1c 2px,
+    #1a1c1c 4px
+  );
+  opacity: 0.05;
+}
+
+.contact-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.contact-input {
+  width: 100%;
+  background-color: var(--surface);
+  border: 2px solid var(--on-surface);
+  border-radius: 4px;
+  padding: 16px;
+  font-family: var(--font);
+  font-size: 16px;
+  color: var(--on-surface);
+  box-shadow: var(--clay-inner);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-input::placeholder {
+  color: var(--on-surface-variant);
+}
+
+.contact-input:focus {
+  border-color: var(--primary);
+  box-shadow: var(--clay-inner), 0 0 0 2px var(--primary);
+}
+
+.contact-textarea {
+  resize: none;
+}
+
+.contact-submit {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 16px 24px;
+  border: 4px solid var(--on-surface);
+  box-shadow: var(--neo-shadow);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.contact-submit:hover {
+  background-color: var(--primary-container);
+}
+
+.contact-submit:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}

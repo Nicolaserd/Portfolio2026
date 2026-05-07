@@ -1,0 +1,111 @@
+/* Hidden on mobile, visible on desktop */
+.topnav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--surface);
+    border-bottom: 4px solid var(--on-surface);
+    box-shadow: 4px 4px 0px 0px rgba(26,28,28,1);
+  }
+}
+
+.topnav-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.topnav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.topnav-link {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  padding: 4px 0;
+  transition: transform 0.1s ease;
+  position: relative;
+}
+
+.topnav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.2s ease;
+}
+
+.topnav-link--active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.topnav-link--active::after {
+  width: 100%;
+}
+
+.topnav-link:hover {
+  transform: translate(2px, 2px);
+}
+
+/* Neobrutalist Hire Me button with offset shadow */
+.topnav-hire {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s ease;
+}
+
+.topnav-hire:active {
+  transform: translate(4px, 4px);
+}
+
+.topnav-hire:active .topnav-hire-shadow {
+  opacity: 0;
+}
+
+.topnav-hire-shadow {
+  position: absolute;
+  inset: 0;
+  background-color: var(--on-surface);
+  transform: translate(4px, 4px);
+}
+
+.topnav-hire-face {
+  position: relative;
+  display: block;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: 2px solid var(--on-surface);
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2);
+}

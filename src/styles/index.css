@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  --surface: #f9f9f9;
+  --surface-dim: #dadada;
+  --surface-bright: #f9f9f9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f3f3;
+  --surface-container: #eeeeee;
+  --surface-container-high: #e8e8e8;
+  --surface-container-highest: #e2e2e2;
+  --on-surface: #1a1c1c;
+  --on-surface-variant: #5d3f3c;
+  --inverse-surface: #2f3131;
+  --inverse-on-surface: #f1f1f1;
+  --outline: #926e6b;
+  --outline-variant: #e7bdb9;
+  --primary: #ad0017;
+  --on-primary: #ffffff;
+  --primary-container: #d91023;
+  --on-primary-container: #ffecea;
+  --primary-fixed: #ffdad6;
+  --primary-fixed-dim: #ffb3ad;
+  --secondary: #5d5f5f;
+  --on-secondary: #ffffff;
+  --secondary-container: #dfe0e0;
+  --on-secondary-container: #616363;
+  --surface-variant: #e2e2e2;
+  --background: #f9f9f9;
+  --on-background: #1a1c1c;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+
+  --neo-shadow: 4px 4px 0px 0px rgba(26,28,28,1);
+  --neo-shadow-lg: 8px 8px 0px 0px rgba(26,28,28,1);
+  --neo-shadow-up: 0 -4px 0px 0px rgba(26,28,28,1);
+  --clay-inner: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.8);
+
+  --font: 'Space Grotesk', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Andean dot pattern */
+.chakana-pattern {
+  background-image: radial-gradient(var(--on-surface) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.04;
+}
+
+/* BottomNav visible only mobile */
+.mobile-nav-wrapper {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .mobile-nav-wrapper {
+    display: none;
+  }
+}
+
+/* Scanlines */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    #1a1c1c 2px,
+    #1a1c1c 4px
+  );
+  opacity: 0.05;
+}
