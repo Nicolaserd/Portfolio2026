@@ -149,4 +149,35 @@ The shape language is "Soft" (0.25rem - 0.75rem radius). While the layout is str
 - **Chips/Tags:** Small, pill-shaped labels using the tertiary lavender background and indigo text, used for project categories.
 - **Inputs:** Minimalist bottom-border only or very light ghost-outlined boxes. Focus states should transition the border color to coral.
 - **Navigation:** A centered or split-header layout with significant height (80px+). Use the Glassmorphism blur effect on scroll.
+
+## Excepción: Navbar (Light Mode)
+
+El navbar es la única excepción al sistema de color base del tema light. Su fondo replica la atmósfera del **toggle de día (sol/amanecer)** para crear un vínculo visual directo con el indicador de tema activo. Este tratamiento solo aplica al header global; el resto de la interfaz mantiene el sistema neutro de Ethereal Dusk.
+
+### Background
+Gradiente radial cálido tipo "sunset sky", con la misma opacidad 0.7 del glassmorphism estándar:
+
+```css
+background: radial-gradient(
+  120% 140% at 20% 30%,
+  rgba(255, 208, 137, 0.7) 0%,   /* #ffd089 — amarillo cálido */
+  rgba(239, 139, 84, 0.7) 45%,   /* #ef8b54 — naranja */
+  rgba(200, 74, 107, 0.7) 100%   /* #c84a6b — coral/rosa */
+);
+```
+
+### Bordes
+- Bordes superior y laterales: `transparent` (evita líneas grises sobre el gradiente cálido)
+- Borde inferior: `rgba(180, 100, 40, 0.25)` — separación sutil con el contenido
+
+### Tipografía (override del sistema)
+Para garantizar legibilidad sobre el gradiente cálido, los textos del navbar se desvían de los tokens neutros del tema:
+
+- **Logo principal:** `#2b0e08` (deep coffee / dusk profundo) — alto contraste sobre tonos amarillos/naranjas
+- **Logo accent:** `#fff7d1` (cream del sol) — vínculo cromático con el centro del sun-face
+- **Nav links:** `#3d1a14` (coffee ligeramente más claro) — coherente con el logo
+- **Nav links hover:** `#fff7d1` (cream) — feedback luminoso, refuerza la metáfora del amanecer
+
+### Justificación
+El navbar es un componente persistente que el usuario ve siempre. Anclarlo visualmente al toggle de día refuerza la identidad del tema activo y aporta un foco emocional cálido sin contaminar el resto de la interfaz, que mantiene su carácter editorial y minimalista.
 - **Project Grid:** A mix of large-scale hero images and smaller supporting shots, emphasizing "negative space" between items.
