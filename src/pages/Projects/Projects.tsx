@@ -25,14 +25,15 @@ const PROJECTS = [
     url: 'https://t.me/Mario1379_bot',
   },
   {
-    id: 'geo-huaco',
-    title: 'Geo_Huaco',
-    description: 'Procedurally generated 3D meshes that combine Moche portrait vessel topology with rigid, stepped Chakana geometry and claymorphic volume processing.',
-    tags: [],
+    id: 'Boletín_Estadístico_Institucional',
+    title: 'Boletín_Estadístico_Institucional',
+    description: 'Tablero integral construido en Power BI para consolidar oferta académica, población estudiantil, talento humano, deserción, planta física e investigación. Incorpora un ejercicio predictivo sobre deserción académica con análisis histórico y tratamiento de datos atípicos, facilitando la planeación.',
+    tags: ["ETL", "Limpieza de datos", "DAX", "Análisis predictivo", "Power BI"],
     badge: null,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANjDrB5Ntv1_4Z6WDbClIuHibjp9ExK_wMGXVpcje4yabVTgXFQcjpRPJCb29EPu7QnKD0UwjnbWnczpomtYQL8ixE3lO_h2FHcCSe912d_PUKOdXRMC5s4GPO6iLLSxAa_me7GmFp5z0cFQC1ynXs8EgWgVFwXl5Nnl2Ns0_soW1gzUDGplr42t8zJDu1A6hNu331x3Z1UPaSgQszD2plIVxMJ2LbLxfMiXfpu97Qrx5iIVxoCzjhf-DZIB47T9pRhwer1bHXoGA',
     icon: 'deployed_code',
     primary: false,
+    url: 'https://app.powerbi.com/view?r=eyJrIjoiYzE4NzhiNzgtMmViMS00YTNkLTg5YTMtOWEwNjg1N2FiYTYzIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9',
   },
 ];
 
