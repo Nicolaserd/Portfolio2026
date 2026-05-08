@@ -34,6 +34,7 @@ export default function CommentEntry({
     .join('')
     .slice(0, 2);
   const isLocked = isLiking || isLikeBlocked;
+  const isHeartActive = isLiking || isLikeBlocked;
   const likeAriaLabel = isLikeBlocked && blockedLabel
     ? `Corazon bloqueado para ${entry.author}. ${blockedLabel}`
     : `Dar corazon a ${entry.author}`;
@@ -51,9 +52,13 @@ export default function CommentEntry({
             onClick={() => onLike?.(entry.id)}
             aria-disabled={isLocked}
             aria-label={likeAriaLabel}
-            title={isLikeBlocked ? blockedLabel : undefined}
           >
-            <span className="material-symbols-outlined">{isLikeBlocked ? 'schedule' : 'favorite'}</span>
+            <span
+              className="material-symbols-outlined"
+              style={{ fontVariationSettings: isHeartActive ? "'FILL' 1" : "'FILL' 0" }}
+            >
+              favorite
+            </span>
             <span className="comment-entry-likes-count">{likesCount}</span>
           </button>
         )}
@@ -77,9 +82,13 @@ export default function CommentEntry({
               onClick={() => onLike?.(entry.id)}
               aria-disabled={isLocked}
               aria-label={likeAriaLabel}
-              title={isLikeBlocked ? blockedLabel : undefined}
             >
-              <span className="material-symbols-outlined">{isLikeBlocked ? 'schedule' : 'favorite'}</span>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontVariationSettings: isHeartActive ? "'FILL' 1" : "'FILL' 0" }}
+              >
+                favorite
+              </span>
               <span className="comment-entry-likes-count">{likesCount}</span>
             </button>
           </div>
