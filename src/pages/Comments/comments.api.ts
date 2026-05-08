@@ -39,13 +39,20 @@ export interface CreateCommentResponse {
   };
 }
 
+const API_BASE_URL = (import.meta.env.VITE_BACKEND_URL ?? '').replace(/\/+$/, '');
+
+function buildApiUrl(path: string): string {
+  if (!API_BASE_URL) return path;
+  return `${API_BASE_URL}${path}`;
+}
+
 export async function fetchComentariosPage(page = 1, itemsPerPage = 10): Promise<PaginatedCommentsResponse> {
   const params = new URLSearchParams({
     page: String(page),
     itemsPorPagina: String(itemsPerPage),
   });
 
-  const response = await fetch(`/comentarios?${params.toString()}`);
+  const response = await fetch(buildApiUrl(`/comentarios?${params.toString()}`));
 
   if (!response.ok) {
     throw new Error(`No se pudo cargar la pagina ${page} de comentarios: ${response.status}`);
@@ -55,7 +62,7 @@ export async function fetchComentariosPage(page = 1, itemsPerPage = 10): Promise
 }
 
 export async function addCorazonToComentario(comentarioId: string): Promise<LikeCommentResponse> {
-  const response = await fetch('/comentarios/corazones', {
+  const response = await fetch(buildApiUrl('/comentarios/corazones'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -73,7 +80,7 @@ export async function addCorazonToComentario(comentarioId: string): Promise<Like
 }
 
 export async function createComentario(payload: CreateCommentPayload): Promise<CreateCommentResponse> {
-  const response = await fetch('/comentarios', {
+  const response = await fetch(buildApiUrl('/comentarios'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
