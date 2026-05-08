@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import ContactForm from './components/ContactForm';
 import './About.css';
 
@@ -21,6 +22,18 @@ const SKILLS = [
 ];
 
 export default function About() {
+  const formRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('openAboutForm') !== 'true') {
+      return;
+    }
+
+    sessionStorage.removeItem('openAboutForm');
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    formRef.current?.querySelector<HTMLInputElement>('#name')?.focus();
+  }, []);
+
   return (
     <main className="about-canvas">
       <div className="about-content">
@@ -63,7 +76,7 @@ export default function About() {
         </section>
 
         {/* Contact form — spans col 2 row 2 on desktop */}
-        <div className="about-form-col">
+        <div className="about-form-col" ref={formRef}>
           <ContactForm />
         </div>
       </div>

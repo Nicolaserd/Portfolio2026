@@ -1,0 +1,265 @@
+.comments-page {
+  min-height: 100dvh;
+  background-color: var(--background);
+  color: var(--on-background);
+  background-image:
+    radial-gradient(circle at center, rgba(26, 28, 28, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(26, 28, 28, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 28, 28, 0.025) 1px, transparent 1px);
+  background-size: 18px 18px, 36px 36px, 36px 36px;
+  padding-bottom: 112px;
+}
+
+.comments-mobile-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+  min-height: 80px;
+  padding: 20px 28px;
+  background-color: rgba(249, 249, 249, 0.96);
+  border-bottom: 4px solid var(--on-surface);
+  box-shadow: 4px 4px 0px 0px rgba(26,28,28,1);
+}
+
+.comments-mobile-title {
+  font-size: clamp(22px, 8vw, 28px);
+  font-weight: 700;
+  line-height: 1;
+  color: #7f1122;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.comments-mobile-topbar-icon {
+  color: #7f1122;
+  font-size: 28px !important;
+  flex-shrink: 0;
+}
+
+.comments-mobile-shell,
+.comments-desktop-shell {
+  width: 100%;
+}
+
+.comments-mobile-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 128px 28px 0;
+}
+
+.comments-mobile-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.comments-section-title {
+  font-size: clamp(24px, 7.5vw, 48px);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  color: var(--on-surface);
+}
+
+.comments-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 14px;
+  background-color: var(--surface-container-lowest);
+  border: 2px solid var(--on-surface);
+  box-shadow: 2px 2px 0px 0px rgba(26,28,28,1);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.comments-badge--primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 4px 4px 0px 0px rgba(26,28,28,0.35);
+}
+
+.comments-mobile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.comments-load-btn {
+  align-self: center;
+  position: relative;
+  margin-top: 18px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.comments-load-btn:disabled {
+  cursor: not-allowed;
+}
+
+.comments-load-btn--mobile {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.comments-load-btn-shadow {
+  position: absolute;
+  inset: 0;
+  background-color: var(--on-surface);
+  transform: translate(6px, 6px);
+}
+
+.comments-load-btn-face {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 26px;
+  background-color: var(--surface);
+  border: 4px solid var(--on-surface);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.comments-load-btn:disabled .comments-load-btn-face {
+  opacity: 0.82;
+}
+
+.comments-load-btn-face .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.comments-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(26, 28, 28, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 9999px;
+  animation: comments-spin 0.8s linear infinite;
+}
+
+.comments-fab {
+  position: sticky;
+  bottom: 112px;
+  align-self: flex-end;
+  margin-top: 24px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.comments-fab-shadow {
+  position: absolute;
+  inset: 0;
+  background-color: #b51726;
+  transform: translate(8px, 8px);
+}
+
+.comments-fab-face {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
+  height: 92px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: 4px solid var(--on-surface);
+  box-shadow: inset 2px 2px 8px rgba(255,255,255,0.3), inset -2px -2px 8px rgba(0,0,0,0.25);
+}
+
+.comments-fab-face .material-symbols-outlined {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.comments-desktop-shell {
+  display: none;
+}
+
+@keyframes comments-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .comments-page {
+    padding-bottom: 48px;
+  }
+
+  .comments-mobile-topbar,
+  .comments-mobile-shell {
+    display: none;
+  }
+
+  .comments-desktop-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 92px 32px 64px;
+  }
+
+  .comments-desktop-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .comments-section-title {
+    font-size: 50px;
+  }
+
+  .comments-section-underline {
+    width: 108px;
+    height: 8px;
+    margin-top: 8px;
+    background:
+      linear-gradient(to right, var(--primary) 0 72%, transparent 72% 100%);
+    box-shadow: 0 4px 0 rgba(173, 0, 23, 0.18);
+  }
+
+  .comments-desktop-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .comments-load-btn {
+    width: auto;
+  }
+
+  .comments-load-btn-face {
+    min-width: 388px;
+    width: auto;
+  }
+
+  .comments-fab--desktop {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    margin-top: 0;
+    z-index: 35;
+  }
+}

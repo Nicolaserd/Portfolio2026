@@ -1,0 +1,56 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]: NICOLÁS_PORTFOLIO
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - button "Home" [ref=e8] [cursor=pointer]
+      - listitem [ref=e9]:
+        - button "Projects" [ref=e10] [cursor=pointer]
+      - listitem [ref=e11]:
+        - button "About" [ref=e12] [cursor=pointer]
+      - listitem [ref=e13]:
+        - button "Comments" [ref=e14] [cursor=pointer]
+    - button "Hire Me" [ref=e15] [cursor=pointer]:
+      - generic [ref=e17]: Hire Me
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "PAST_ENTRIES" [level=2] [ref=e22]
+        - generic [ref=e24]: 32_UNITS
+      - generic [ref=e25]:
+        - article [ref=e26]:
+          - generic [ref=e29]: IT
+          - generic [ref=e30]:
+            - generic [ref=e31]:
+              - heading "INTI_TECH_99" [level=3] [ref=e32]
+              - generic [ref=e33]: 24/10/2023
+            - paragraph [ref=e34]: “La integracion de los patrones de tejido en el sistema de cuadricula es simplemente sublime. Una interfaz digna del Tawantinsuyu digital.”
+            - generic [ref=e36]:
+              - generic [ref=e37]: favorite
+              - text: "128"
+        - article [ref=e38]:
+          - generic [ref=e41]: KM
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - heading "KIPU_MASTER" [level=3] [ref=e44]
+              - generic [ref=e45]: 23/10/2023
+            - paragraph [ref=e46]: “Las sombras neobrutalistas le dan un peso estructural que recuerda a los muros de Sacsayhuaman. Excelente ejecucion.”
+            - generic [ref=e48]:
+              - generic [ref=e49]: favorite
+              - text: "85"
+        - article [ref=e50]:
+          - generic [ref=e53]: RD
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - heading "REZO_DIGITAL" [level=3] [ref=e56]
+              - generic [ref=e57]: 22/10/2023
+            - paragraph [ref=e58]: “Habra soporte para visualizacion de kipus dinamicos en la proxima actualizacion?”
+            - generic [ref=e60]:
+              - generic [ref=e61]: favorite
+              - text: "42"
+      - button "CARGAR MAS COMENTARIOS add_circle" [ref=e62] [cursor=pointer]:
+        - generic [ref=e64]:
+          - text: CARGAR MAS COMENTARIOS
+          - generic [ref=e65]: add_circle
+      - button "Add comment" [ref=e66] [cursor=pointer]:
+        - generic [ref=e69]: add

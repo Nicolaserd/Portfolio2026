@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: 'Home', page: 'home' },
   { label: 'Projects', page: 'projects' },
   { label: 'About', page: 'about' },
-  { label: 'Contact', page: 'contact' },
+  { label: 'Comments', page: 'comments' },
 ];
 
 export default function TopNav({ activePage, onNavigate }: TopNavProps) {

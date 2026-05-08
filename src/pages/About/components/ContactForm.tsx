@@ -1,4 +1,6 @@
 import { useFormik } from 'formik';
+import { useState } from 'react';
+import { createComentario } from '../../Comments/comments.api';
 import './ContactForm.css';
 
 interface ContactFormValues {
@@ -8,6 +10,11 @@ interface ContactFormValues {
 }
 
 export default function ContactForm() {
+  const [submissionState, setSubmissionState] = useState<{
+    tone: 'success' | 'error';
+    message: string;
+  } | null>(null);
+
   const formik = useFormik<ContactFormValues>({
     initialValues: {
       name: '',
@@ -31,9 +38,29 @@ export default function ContactForm() {
 
       return errors;
     },
-    onSubmit: (values, { resetForm }) => {
-      console.log('INIT_CONEXION', values);
-      resetForm();
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      setSubmissionState(null);
+
+      try {
+        const response = await createComentario({
+          nombre_usuario: values.name.trim(),
+          comentario: values.message.trim(),
+          ...(values.email.trim() ? { correo: values.email.trim() } : {}),
+        });
+
+        resetForm();
+        setSubmissionState({
+          tone: 'success',
+          message: `Transmision confirmada: comentario ${response.comentario.id.slice(0, 8).toUpperCase()} almacenado.`,
+        });
+      } catch (error) {
+        setSubmissionState({
+          tone: 'error',
+          message: error instanceof Error ? error.message : 'No se pudo enviar el comentario. Intenta de nuevo.',
+        });
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -46,6 +73,14 @@ export default function ContactForm() {
           INIT_CONEXION
         </h2>
         <form className="contact-form" onSubmit={formik.handleSubmit} noValidate>
+          {submissionState && (
+            <div className={`contact-feedback contact-feedback--${submissionState.tone}`} role="status" aria-live="polite">
+              <span className="material-symbols-outlined">
+                {submissionState.tone === 'success' ? 'task_alt' : 'warning'}
+              </span>
+              <span>{submissionState.message}</span>
+            </div>
+          )}
           <div className="contact-field">
             <label className="contact-label" htmlFor="name">User_Identity</label>
             <input
@@ -55,10 +90,17 @@ export default function ContactForm() {
               type="text"
               placeholder="Enter your designation"
               value={formik.values.name}
-              onChange={formik.handleChange}
+              onChange={(event) => {
+                if (submissionState) {
+                  setSubmissionState(null);
+                }
+
+                formik.handleChange(event);
+              }}
               onBlur={formik.handleBlur}
               aria-invalid={Boolean(formik.touched.name && formik.errors.name)}
               aria-describedby={formik.touched.name && formik.errors.name ? 'name-error' : undefined}
+              disabled={formik.isSubmitting}
             />
             {formik.touched.name && formik.errors.name && (
               <span className="contact-error" id="name-error">{formik.errors.name}</span>
@@ -73,10 +115,17 @@ export default function ContactForm() {
               type="email"
               placeholder="email@server.com"
               value={formik.values.email}
-              onChange={formik.handleChange}
+              onChange={(event) => {
+                if (submissionState) {
+                  setSubmissionState(null);
+                }
+
+                formik.handleChange(event);
+              }}
               onBlur={formik.handleBlur}
               aria-invalid={Boolean(formik.touched.email && formik.errors.email)}
               aria-describedby={formik.touched.email && formik.errors.email ? 'email-error' : undefined}
+              disabled={formik.isSubmitting}
             />
             {formik.touched.email && formik.errors.email && (
               <span className="contact-error" id="email-error">{formik.errors.email}</span>
@@ -91,18 +140,25 @@ export default function ContactForm() {
               rows={4}
               placeholder="Input parameters here..."
               value={formik.values.message}
-              onChange={formik.handleChange}
+              onChange={(event) => {
+                if (submissionState) {
+                  setSubmissionState(null);
+                }
+
+                formik.handleChange(event);
+              }}
               onBlur={formik.handleBlur}
               aria-invalid={Boolean(formik.touched.message && formik.errors.message)}
               aria-describedby={formik.touched.message && formik.errors.message ? 'message-error' : undefined}
+              disabled={formik.isSubmitting}
             />
             {formik.touched.message && formik.errors.message && (
               <span className="contact-error" id="message-error">{formik.errors.message}</span>
             )}
           </div>
-          <button className="contact-submit" type="submit">
-            <span>EXECUTE</span>
-            <span className="material-symbols-outlined">send</span>
+          <button className="contact-submit" type="submit" disabled={formik.isSubmitting}>
+            <span>{formik.isSubmitting ? 'TRANSMITIENDO' : 'EXECUTE'}</span>
+            <span className="material-symbols-outlined">{formik.isSubmitting ? 'progress_activity' : 'send'}</span>
           </button>
         </form>
       </div>

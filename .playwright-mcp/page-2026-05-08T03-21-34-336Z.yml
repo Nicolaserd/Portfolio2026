@@ -1,0 +1,60 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]: NICOLÁS_PORTFOLIO
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - button "Home" [ref=e8] [cursor=pointer]
+      - listitem [ref=e9]:
+        - button "Projects" [ref=e10] [cursor=pointer]
+      - listitem [ref=e11]:
+        - button "About" [ref=e12] [cursor=pointer]
+      - listitem [ref=e13]:
+        - button "Comments" [ref=e14] [cursor=pointer]
+    - button "Hire Me" [ref=e15] [cursor=pointer]:
+      - generic [ref=e17]: Hire Me
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "RECENT_TRANSMISSIONS" [level=2] [ref=e22]
+        - generic [ref=e24]: "ESTADO: ACTIVO"
+      - generic [ref=e25]:
+        - article [ref=e26]:
+          - generic [ref=e28]: IT
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - heading "INTI_TECH_99" [level=3] [ref=e31]
+              - generic [ref=e32]: HACE 2 MIN
+            - paragraph [ref=e33]: “La integracion de los patrones de tejido en el sistema de cuadricula es simplemente sublime. Una interfaz digna del Tawantinsuyu digital.”
+            - generic [ref=e34]:
+              - generic [ref=e35]: "PROTOCOLO: UI/UX"
+              - generic [ref=e36]:
+                - generic [ref=e37]: favorite
+                - text: "128"
+        - article [ref=e38]:
+          - generic [ref=e40]: KM
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - heading "KIPU_MASTER" [level=3] [ref=e43]
+              - generic [ref=e44]: HACE 15 MIN
+            - paragraph [ref=e45]: “Las sombras neobrutalistas le dan un peso estructural que recuerda a los muros de Sacsayhuaman. Excelente ejecucion.”
+            - generic [ref=e46]:
+              - generic [ref=e47]: "PROTOCOLO: ARQUITECTURA"
+              - generic [ref=e48]:
+                - generic [ref=e49]: favorite
+                - text: "85"
+        - article [ref=e50]:
+          - generic [ref=e52]: RD
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - heading "REZO_DIGITAL" [level=3] [ref=e55]
+              - generic [ref=e56]: HACE 1 HORA
+            - paragraph [ref=e57]: “Habra soporte para visualizacion de kipus dinamicos en la proxima actualizacion?”
+            - generic [ref=e58]:
+              - generic [ref=e59]: "PROTOCOLO: VISUALIZACION"
+              - generic [ref=e60]:
+                - generic [ref=e61]: favorite
+                - text: "42"
+      - button "CARGAR MAS TRANSMISIONES add_circle" [ref=e62] [cursor=pointer]:
+        - generic [ref=e64]:
+          - text: CARGAR MAS TRANSMISIONES
+          - generic [ref=e65]: add_circle

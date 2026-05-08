@@ -13,7 +13,7 @@ const NAV_ITEMS: NavItem[] = [
   { icon: 'home', label: 'Home', page: 'home' },
   { icon: 'grid_view', label: 'Projects', page: 'projects' },
   { icon: 'person', label: 'About', page: 'about' },
-  { icon: 'mail', label: 'Contact', page: 'contact' },
+  { icon: 'mail', label: 'Comments', page: 'comments' },
 ];
 
 export default function BottomNav({ activePage, onNavigate }: BottomNavProps) {

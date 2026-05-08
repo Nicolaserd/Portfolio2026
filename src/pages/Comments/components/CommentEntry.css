@@ -1,0 +1,209 @@
+.comment-entry {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  background-color: var(--surface-container-lowest);
+  border: 4px solid var(--on-surface);
+  overflow: hidden;
+}
+
+.comment-entry--mobile {
+  grid-template-columns: 76px 1fr;
+  align-items: start;
+  padding: 20px;
+  box-shadow: 8px 8px 0px 0px rgba(173, 0, 23, 0.85);
+}
+
+.comment-entry--desktop {
+  grid-template-columns: 72px 1fr;
+  align-items: start;
+  padding: 12px;
+  box-shadow: 6px 8px 0px 0px rgba(26,28,28,1);
+}
+
+.comment-entry-media {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.comment-entry-avatar {
+  width: 76px;
+  height: 76px;
+  border: 3px solid var(--on-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--surface-container-lowest);
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
+}
+
+.comment-entry--desktop .comment-entry-avatar {
+  width: 68px;
+  height: 68px;
+  font-size: 22px;
+}
+
+.comment-entry-avatar--ember {
+  background:
+    radial-gradient(circle at 35% 35%, #ffd8d1 0%, transparent 28%),
+    linear-gradient(135deg, #5a0008 0%, #d91023 58%, #ffb3ad 100%);
+}
+
+.comment-entry-avatar--copper {
+  background:
+    radial-gradient(circle at 35% 35%, #ffe9d9 0%, transparent 28%),
+    linear-gradient(135deg, #4a1e00 0%, #a93f11 58%, #f2c8ae 100%);
+}
+
+.comment-entry-avatar--graphite {
+  background:
+    radial-gradient(circle at 35% 35%, #ebebeb 0%, transparent 26%),
+    linear-gradient(135deg, #151617 0%, #3f4244 55%, #a4a7aa 100%);
+}
+
+.comment-entry-avatar--shadow {
+  background:
+    radial-gradient(circle at 35% 35%, #e8dff4 0%, transparent 24%),
+    linear-gradient(135deg, #15111c 0%, #41314d 60%, #9789a8 100%);
+}
+
+.comment-entry-avatar--stone {
+  background:
+    radial-gradient(circle at 35% 35%, #f0ebdf 0%, transparent 24%),
+    linear-gradient(135deg, #2c261f 0%, #665849 60%, #c3b199 100%);
+}
+
+.comment-entry-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.comment-entry-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.comment-entry-author {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #7f1122;
+  text-transform: uppercase;
+}
+
+.comment-entry--desktop .comment-entry-author {
+  font-size: 20px;
+}
+
+.comment-entry-time {
+  flex-shrink: 0;
+  color: rgba(26, 28, 28, 0.55);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.comment-entry--desktop .comment-entry-time {
+  color: var(--on-surface);
+}
+
+.comment-entry-message {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--on-surface);
+}
+
+.comment-entry-message--desktop {
+  font-size: 16px;
+  font-style: italic;
+  color: #2f3131;
+}
+
+.comment-entry-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.comment-entry-likes {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 6px 12px;
+  border: 2px solid var(--on-surface);
+  color: var(--on-surface);
+  font-size: 12px;
+  font-family: var(--font);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease;
+}
+
+.comment-entry-likes {
+  background-color: #ffd8d1;
+}
+
+.comment-entry-likes:hover:not([aria-disabled='true']) {
+  transform: translateY(-1px);
+}
+
+.comment-entry-likes[aria-disabled='true'] {
+  cursor: wait;
+}
+
+.comment-entry-likes--blocked[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.comment-entry-likes--mobile {
+  min-height: 24px;
+  padding: 4px 10px;
+  font-size: 11px;
+  box-shadow: 2px 2px 0px 0px rgba(173, 0, 23, 0.35);
+}
+
+.comment-entry-likes--pending {
+  opacity: 0.86;
+}
+
+.comment-entry-likes .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.comment-entry-likes-count {
+  min-width: 1ch;
+}
+
+.comment-entry-likes--pending .material-symbols-outlined {
+  color: var(--primary);
+  animation: comment-like-pulse 0.7s ease-in-out infinite;
+}
+
+.comment-entry-likes--blocked .material-symbols-outlined {
+  color: #7f1122;
+}
+
+@keyframes comment-like-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.18);
+  }
+}
