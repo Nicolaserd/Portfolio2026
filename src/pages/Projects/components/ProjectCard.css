@@ -78,8 +78,9 @@
 
 .project-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 12px;
   border-bottom: 2px solid var(--on-surface);
   padding-bottom: 4px;
 }
@@ -89,16 +90,24 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  line-height: 1.15;
   color: var(--on-surface);
-  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: calc(100% - 36px);
+  text-overflow: unset;
+  overflow-wrap: normal;
+  word-break: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .project-card-icon {
   color: var(--primary);
   font-size: 24px;
+  flex-shrink: 0;
 }
 
 .project-card-desc {
@@ -177,4 +186,18 @@
   background-color: var(--surface);
   color: var(--on-surface);
   box-shadow: inset 2px 2px 8px rgba(255,255,255,0.8), inset -2px -2px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+  .project-card-header {
+    align-items: center;
+  }
+
+  .project-card-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-wrap: normal;
+    word-break: normal;
+    display: block;
+  }
 }

@@ -12,6 +12,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, description, tags, badge, image, icon, primary, url }: ProjectCardProps) {
+  const titleSegments = title.trim().split('_');
+
   return (
     <article className="project-card">
       <div className="project-card-image-wrap">
@@ -24,7 +26,19 @@ export default function ProjectCard({ title, description, tags, badge, image, ic
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative', zIndex: 1 }}>
           <div className="project-card-header">
-            <h2 className="project-card-title">{title}</h2>
+            <h2 className="project-card-title">
+              {titleSegments.map((segment, index) => (
+                <span key={`${segment}-${index}`}>
+                  {segment}
+                  {index < titleSegments.length - 1 && (
+                    <>
+                      _
+                      <wbr />
+                    </>
+                  )}
+                </span>
+              ))}
+            </h2>
             {icon && <span className="material-symbols-outlined project-card-icon">{icon}</span>}
           </div>
           <p className="project-card-desc">{description}</p>

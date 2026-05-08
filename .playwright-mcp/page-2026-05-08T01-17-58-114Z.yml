@@ -1,0 +1,27 @@
+- generic [ref=e3]:
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]: SISTEMA_PORTAFOLIO v3.0
+        - generic [ref=e12]: SYSTEM_READY
+      - heading "NICOLÁS_ INCHAUSTEGUI" [level=1] [ref=e13]:
+        - text: NICOLÁS_
+        - text: INCHAUSTEGUI
+      - paragraph [ref=e14]: DESDE_COLOMBIA
+    - img "3D Neo-Andean Alpaca" [ref=e18]
+    - button "INICIALIZAR bolt" [ref=e19] [cursor=pointer]:
+      - generic [ref=e20]: INICIALIZAR
+      - generic [ref=e21]: bolt
+  - navigation [ref=e22]:
+    - button "home Home" [ref=e23] [cursor=pointer]:
+      - generic [ref=e24]: home
+      - generic [ref=e25]: Home
+    - button "grid_view Projects" [ref=e26] [cursor=pointer]:
+      - generic [ref=e27]: grid_view
+      - generic [ref=e28]: Projects
+    - button "person About" [ref=e29] [cursor=pointer]:
+      - generic [ref=e30]: person
+      - generic [ref=e31]: About
+    - button "mail Contact" [ref=e32] [cursor=pointer]:
+      - generic [ref=e33]: mail
+      - generic [ref=e34]: Contact

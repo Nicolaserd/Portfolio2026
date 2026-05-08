@@ -1,7 +1,24 @@
 import ContactForm from './components/ContactForm';
 import './About.css';
 
-const SKILLS = ['UX/UI', '3D Generalist', 'Creative Dev'];
+const SKILLS = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Next.js',
+  'Tailwind',
+  'Node.js',
+  'Express',
+  'MongoDB',
+  'PostgreSQL',
+  'Supabase',
+  'Prisma',
+  'Power BI',
+  'Power Query',
+  'DAX',
+  'ETL',
+  'Python',
+];
 
 export default function About() {
   return (
