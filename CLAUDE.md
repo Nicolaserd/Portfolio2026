@@ -20,12 +20,14 @@ Portafolio personal de Nicolás Inchaustegui. SPA en **React 19 + TypeScript + V
 
 | Acción | Comando |
 |---|---|
-| Desarrollo | `pnpm run dev` |
+| Desarrollo (solo UI, sin API) | `pnpm run dev` |
+| Desarrollo full-stack (UI + API + Neon) | `pnpm run dev:api` (`vercel dev`) |
 | Build producción | `pnpm run build` (`tsc -b && vite build`) |
 | Lint | `pnpm run lint` |
 | Preview del build | `pnpm run preview` |
+| Migrar datos a Neon | `pnpm run db:migrate` |
 
-El backend se consume vía `VITE_BACKEND_URL` (ver `.env`). En dev, `vite.config.ts` hace proxy de `/comentarios` hacia ese backend.
+La API es **same-origin** en `/api/*` (Vercel Functions). El frontend las llama con base vacía (`VITE_BACKEND_URL=` en `.env`). Para probar la API localmente usa `vercel dev`; `pnpm run dev` (vite puro) sirve la UI pero las llamadas a `/api` fallan de forma controlada.
 
 ## 3. Arquitectura y scaffolding
 
@@ -38,10 +40,19 @@ src/
 │   ├── <Pagina>.tsx       # Componente principal de la página
 │   ├── <Pagina>.css       # Estilos exclusivos de la página
 │   ├── components/        # Componentes exclusivos de esa página
-│   └── <pagina>.api.ts    # Capa de acceso al backend de esa página (si aplica)
+│   └── <pagina>.api.ts    # Capa cliente que llama a /api/* (si aplica)
 ├── styles/index.css       # Estilos globales: tokens (variables CSS), reset, tipografía
 ├── App.tsx                # Raíz + enrutamiento por hash (#home/#projects/#about/#comments)
 └── main.tsx               # Punto de entrada
+
+api/                       # Vercel Functions (backend serverless sobre Neon)
+├── _db.ts                 # Cliente SQL compartido (@neondatabase/serverless)
+├── _types.ts              # Tipos VercelRequest/VercelResponse mínimos
+└── comentarios/
+    ├── index.ts           # GET (listar paginado) + POST (crear comentario)
+    └── corazones.ts       # POST (sumar corazón/like)
+
+scripts/migrate-to-neon.mjs # Migración única de datos al esquema de Neon
 ```
 
 **Convenciones al crear/modificar código:**
@@ -57,6 +68,19 @@ src/
 2. Evalúa si puedes **reutilizar** algo existente, **extender** un componente, o si **justifica** crear uno nuevo.
 3. Respeta la separación de capas, la modularidad y las convenciones. Evita duplicar lógica.
 4. Si la solución rompe la arquitectura o mete deuda técnica, propón una alternativa mejor alineada antes de implementar.
+
+**Datos y backend (Neon):**
+- La base de datos es **Neon (PostgreSQL)**. El acceso vive **solo** en las Vercel Functions de `api/`; nunca desde el navegador.
+- Toda función usa el cliente compartido `api/_db.ts` (`sql` de `@neondatabase/serverless`). No crees clientes nuevos ni conexiones sueltas.
+- La conexión viene de `DATABASE_URL` (env var). **En Vercel debe configurarse en Project Settings → Environment Variables**; en local en `.env` (que está en `.gitignore` — nunca commitear credenciales).
+- **`@neondatabase/serverless` es dependencia de producción** (la usan las funciones en runtime), no devDependency.
+- Esquema:
+  - `usuarios (id uuid pk, nombre text, correo text null, fecha_creacion timestamptz)`
+  - `comentarios (id uuid pk, usuario_id uuid fk→usuarios, contenido text, cantidad_likes int, fecha_creacion timestamptz)`
+- Contrato de la API (no romperlo sin actualizar el cliente `comments.api.ts`):
+  - `GET /api/comentarios?page&itemsPorPagina` → `{ page, itemsPerPage, totalItems, totalPages, items[] }`
+  - `POST /api/comentarios` `{ nombre_usuario, comentario, correo? }` → `{ usuario, comentario }`
+  - `POST /api/comentarios/corazones` `{ comentario_id }` → `{ comentarioId, corazonesRecibidos }`
 
 ## 4. Sistema de diseño
 

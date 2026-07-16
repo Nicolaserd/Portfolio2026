@@ -1,7 +1,21 @@
+import { useState } from 'react';
 import ProjectCard from './components/ProjectCard';
 import './Projects.css';
 
-const PROJECTS = [
+type ProjectCategory = 'WEB_APPS' | 'IA_BOTS' | 'DATA_BI';
+
+const PROJECTS: Array<{
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  badge: string | null;
+  image: string;
+  icon: string;
+  primary: boolean;
+  url: string;
+  category: ProjectCategory;
+}> = [
   {
     id: 'Academic_Intelligence_Portal',
     title: 'Academic_Intelligence_Portal',
@@ -12,6 +26,7 @@ const PROJECTS = [
     icon: 'data_object',
     primary: true,
     url: 'https://udec-data.vercel.app/',
+    category: 'WEB_APPS',
   },
   {
     id: ' Bot_IA_Telegram',
@@ -23,6 +38,7 @@ const PROJECTS = [
     icon: 'polyline',
     primary: false,
     url: 'https://t.me/Mario1379_bot',
+    category: 'IA_BOTS',
   },
   {
     id: 'Boletín_Estadístico_Institucional',
@@ -34,12 +50,19 @@ const PROJECTS = [
     icon: 'deployed_code',
     primary: false,
     url: 'https://app.powerbi.com/view?r=eyJrIjoiYzE4NzhiNzgtMmViMS00YTNkLTg5YTMtOWEwNjg1N2FiYTYzIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9',
+    category: 'DATA_BI',
   },
 ];
 
-const FILTERS = ['ALL_DATA', '3D_FAB', 'ALPACHA_CORE', 'CYBER_CERAMICS'];
+const FILTERS: Array<'ALL_DATA' | ProjectCategory> = ['ALL_DATA', 'WEB_APPS', 'IA_BOTS', 'DATA_BI'];
 
 export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState<'ALL_DATA' | ProjectCategory>('ALL_DATA');
+
+  const visibleProjects = activeFilter === 'ALL_DATA'
+    ? PROJECTS
+    : PROJECTS.filter((p) => p.category === activeFilter);
+
   return (
     <div className="projects-page">
       <div className="projects-content">
@@ -73,8 +96,13 @@ export default function Projects() {
 
         {/* Filter chips — desktop only */}
         <div className="projects-filters">
-          {FILTERS.map((f, i) => (
-            <button key={f} className={`filter-chip ${i === 0 ? 'filter-chip--active' : 'filter-chip--inactive'}`}>
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              type="button"
+              className={`filter-chip ${f === activeFilter ? 'filter-chip--active' : 'filter-chip--inactive'}`}
+              onClick={() => setActiveFilter(f)}
+            >
               {f}
             </button>
           ))}
@@ -82,7 +110,7 @@ export default function Projects() {
 
         {/* Cards */}
         <div className="projects-list">
-          {PROJECTS.map((p) => (
+          {visibleProjects.map((p) => (
             <ProjectCard key={p.id} {...p} />
           ))}
         </div>
