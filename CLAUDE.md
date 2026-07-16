@@ -1,101 +1,82 @@
 # CLAUDE.md
 
-Guía para trabajar en este proyecto. Estas instrucciones son obligatorias y tienen prioridad sobre comportamientos por defecto.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Portafolio personal de Nicolás Inchaustegui. SPA en **React 19 + TypeScript + Vite**, con navegación por hash (sin router externo). Estética *neo-brutalista / claymórfica de inspiración andina*. El idioma del proyecto (UI, comentarios, mensajes) es **español**.
+Portafolio personal de Nicolás Inchaustegui. SPA en React 19 + TypeScript + Vite con navegación por hash (sin router externo), y una API serverless propia (Vercel Functions) sobre Neon Postgres. Estética neo-brutalista / claymórfica de inspiración andina. El idioma del proyecto (UI, comentarios, mensajes de commit, nombres de variables) es español.
 
----
+## Comandos
 
-## 1. Gestor de paquetes: pnpm (obligatorio)
+```
+pnpm install              # instalar dependencias (único gestor permitido, ver abajo)
+pnpm run dev              # solo UI (vite). Las llamadas a /api fallan con 404: no hay servidor de funciones detrás.
+pnpm run dev:api          # UI + API + Neon vía `vercel dev` (requiere Vercel CLI y sesión iniciada)
+pnpm run build            # tsc -b && vite build
+pnpm run lint             # eslint . (sin flag para un solo archivo; pasa el path: `pnpm exec eslint src/App.tsx`)
+pnpm run preview           # sirve el build de dist/
+pnpm run db:migrate       # node scripts/migrate-to-neon.mjs — migración única/idempotente de datos a Neon
+pnpm audit                # debe reportar 0 vulnerabilidades tras tocar dependencias
+```
 
-- **Instalar / actualizar / eliminar cualquier dependencia se hace SIEMPRE con `pnpm`.** Nunca `npm` ni `yarn`.
-  - Instalar: `pnpm add <paquete>` · dev: `pnpm add -D <paquete>` · quitar: `pnpm remove <paquete>`
-  - Instalar todo: `pnpm install` · Scripts: `pnpm run <script>` (`dev`, `build`, `lint`, `preview`)
-- El único lockfile válido es **`pnpm-lock.yaml`**. Si aparece `package-lock.json` o `yarn.lock`, es un error: elimínalo.
-- La versión de pnpm está fijada en `package.json` (`packageManager`). No la cambies sin motivo.
-- Tras cambios en dependencias: `pnpm audit` debe reportar **0 vulnerabilidades** y `pnpm run build` debe pasar.
-- Al agregar una dependencia, prefiere la última versión estable **compatible con el resto del stack**; si un `major` rompe peer dependencies (p. ej. TypeScript vs typescript-eslint), quédate en la última versión compatible en lugar de forzar el major.
+No hay test runner configurado en este repo (no existe script `test`).
 
-## 2. Comandos
+**Gestor de paquetes: pnpm, siempre.** Nunca `npm` ni `yarn`. El único lockfile válido es `pnpm-lock.yaml`; si aparece `package-lock.json` o `yarn.lock`, es un error y hay que borrarlo. La versión está fijada en `package.json` (`packageManager`). Al agregar una dependencia, usa la última estable **compatible con el resto del stack**: si un major rompe peer dependencies (p. ej. pasó con TypeScript 7 vs `typescript-eslint`, que aún exige `<6.1.0`), quédate en la última versión compatible en vez de forzarlo.
 
-| Acción | Comando |
-|---|---|
-| Desarrollo (solo UI, sin API) | `pnpm run dev` |
-| Desarrollo full-stack (UI + API + Neon) | `pnpm run dev:api` (`vercel dev`) |
-| Build producción | `pnpm run build` (`tsc -b && vite build`) |
-| Lint | `pnpm run lint` |
-| Preview del build | `pnpm run preview` |
-| Migrar datos a Neon | `pnpm run db:migrate` |
+## Arquitectura
 
-La API es **same-origin** en `/api/*` (Vercel Functions). El frontend las llama con base vacía (`VITE_BACKEND_URL=` en `.env`). Para probar la API localmente usa `vercel dev`; `pnpm run dev` (vite puro) sirve la UI pero las llamadas a `/api` fallan de forma controlada.
+### Frontend (`src/`)
 
-## 3. Arquitectura y scaffolding
+Enrutamiento sin librería: `App.tsx` lee/escribe `window.location.hash` (`home`/`projects`/`about`/`comments`), mantiene el tipo `Page` y el array `VALID_PAGES` como fuente de verdad, y renderiza desde un mapa `Record<Page, ReactElement>`. Al agregar una página hay que tocar los tres puntos.
 
-Estructura real (fuente de verdad también en [.agents/rules/arquitectura.md](.agents/rules/arquitectura.md)):
-
+Co-localización estricta por página — no hay carpeta `components/` global salvo para lo verdaderamente compartido:
 ```
 src/
-├── components/common/     # Componentes compartidos entre páginas (TopNav, BottomNav)
-├── pages/<Pagina>/        # Una carpeta por página
-│   ├── <Pagina>.tsx       # Componente principal de la página
-│   ├── <Pagina>.css       # Estilos exclusivos de la página
-│   ├── components/        # Componentes exclusivos de esa página
-│   └── <pagina>.api.ts    # Capa cliente que llama a /api/* (si aplica)
-├── styles/index.css       # Estilos globales: tokens (variables CSS), reset, tipografía
-├── App.tsx                # Raíz + enrutamiento por hash (#home/#projects/#about/#comments)
-└── main.tsx               # Punto de entrada
-
-api/                       # Vercel Functions (backend serverless sobre Neon)
-├── _db.ts                 # Cliente SQL compartido (@neondatabase/serverless)
-├── _types.ts              # Tipos VercelRequest/VercelResponse mínimos
-└── comentarios/
-    ├── index.ts           # GET (listar paginado) + POST (crear comentario)
-    └── corazones.ts       # POST (sumar corazón/like)
-
-scripts/migrate-to-neon.mjs # Migración única de datos al esquema de Neon
+├── components/common/     # Solo lo usado por ≥2 páginas (TopNav, BottomNav)
+├── pages/<Pagina>/
+│   ├── <Pagina>.tsx        # componente principal
+│   ├── <Pagina>.css        # estilos exclusivos de la página
+│   ├── components/         # subcomponentes exclusivos de esa página
+│   └── <pagina>.api.ts     # funciones fetch + tipos hacia /api/* (si la página habla con el backend)
+├── styles/index.css        # único lugar para tokens de diseño, reset, tipografía
+├── App.tsx
+└── main.tsx
 ```
+Las llamadas de red viven siempre en el `*.api.ts` de la página, con sus `interface` exportadas — nunca `fetch` inline en el componente (ver `src/pages/Comments/comments.api.ts` como referencia).
 
-**Convenciones al crear/modificar código:**
-- **Co-localización estricta:** cada página vive en su carpeta con su `.tsx`, su `.css` y sus `components/` propios. Lo que usan ≥2 páginas va a `components/common/`.
-- **Nombres:** carpetas y componentes en `PascalCase`; archivos de API en `<nombre>.api.ts`.
-- **Separación de capas:** las llamadas `fetch`/backend viven en el `*.api.ts` de la página con sus tipos (`interface`) exportados, no dentro del componente. Los componentes consumen esas funciones.
-- **Enrutamiento:** se hace por `window.location.hash` en `App.tsx`. Al agregar una página nueva, extiende el tipo `Page`, `VALID_PAGES` y el mapa `pages`.
-- **CSS:** un `.css` por componente/página, importado desde su `.tsx`. Los estilos globales y variables van solo en `src/styles/index.css`.
-- **Comentarios:** solo los importantes sobre el funcionamiento de funciones/componentes. Nada de comentarios obvios o decorativos.
+### Backend (`api/`) — Vercel Functions sobre Neon
 
-**DRY — antes de escribir código:**
-1. Analiza la arquitectura actual (patrones, carpetas, dependencias, flujo de datos).
-2. Evalúa si puedes **reutilizar** algo existente, **extender** un componente, o si **justifica** crear uno nuevo.
-3. Respeta la separación de capas, la modularidad y las convenciones. Evita duplicar lógica.
-4. Si la solución rompe la arquitectura o mete deuda técnica, propón una alternativa mejor alineada antes de implementar.
+No hay servidor Node propio; el CRUD vive en funciones serverless desplegadas junto al frontend, y la lógica de negocio está factorizada para poder reutilizarse en dos runtimes distintos:
 
-**Datos y backend (Neon):**
-- La base de datos es **Neon (PostgreSQL)**. El acceso vive **solo** en las Vercel Functions de `api/`; nunca desde el navegador.
-- Toda función usa el cliente compartido `api/_db.ts` (`sql` de `@neondatabase/serverless`). No crees clientes nuevos ni conexiones sueltas.
-- La conexión viene de `DATABASE_URL` (env var). **En Vercel debe configurarse en Project Settings → Environment Variables**; en local en `.env` (que está en `.gitignore` — nunca commitear credenciales).
-- **`@neondatabase/serverless` es dependencia de producción** (la usan las funciones en runtime), no devDependency.
-- Esquema:
-  - `usuarios (id uuid pk, nombre text, correo text null, fecha_creacion timestamptz)`
-  - `comentarios (id uuid pk, usuario_id uuid fk→usuarios, contenido text, cantidad_likes int, fecha_creacion timestamptz)`
-- Contrato de la API (no romperlo sin actualizar el cliente `comments.api.ts`):
-  - `GET /api/comentarios?page&itemsPorPagina` → `{ page, itemsPerPage, totalItems, totalPages, items[] }`
-  - `POST /api/comentarios` `{ nombre_usuario, comentario, correo? }` → `{ usuario, comentario }`
-  - `POST /api/comentarios/corazones` `{ comentario_id }` → `{ comentarioId, corazonesRecibidos }`
+- `api/comentarios.logic.ts` — funciones puras (`listComentarios`, `createComentario`, `likeComentario`) con acceso a Neon. Aquí vive toda la lógica real; lanza `ApiError(status, message)` para errores de negocio.
+- `api/_db.ts` — cliente Neon compartido (lazy: `getSql()` crea la conexión en el primer uso, para poder importar el módulo sin `DATABASE_URL` presente).
+- `api/_types.ts` — tipos mínimos `VercelRequest`/`VercelResponse` (no se depende de `@vercel/node` a propósito: arrastraba un build script de `esbuild` que pnpm bloqueaba).
+- `api/comentarios/index.ts` (`GET`/`POST`) y `api/comentarios/corazones.ts` (`POST`) — son wrappers delgados: parsean `req`, llaman a `comentarios.logic.ts`, mapean `ApiError` a status HTTP.
+- **El mismo `comentarios.logic.ts` se reutiliza en dev**: `vite.config.ts` define un plugin (`devApiPlugin`) que registra un middleware de Vite sirviendo `/api/comentarios*` durante `pnpm run dev`, para no depender de `vercel dev` en el día a día. Si cambias el contrato de un endpoint, hazlo en `comentarios.logic.ts` una sola vez — nunca dupliques la query en el middleware de Vite y en la función de Vercel por separado.
 
-## 4. Sistema de diseño
+Contrato HTTP (no romper sin actualizar `comments.api.ts` en el frontend):
+- `GET /api/comentarios?page&itemsPorPagina` → `{ page, itemsPerPage, totalItems, totalPages, items[] }`
+- `POST /api/comentarios` `{ nombre_usuario, comentario, correo? }` → `{ usuario, comentario }`
+- `POST /api/comentarios/corazones` `{ comentario_id }` → `{ comentarioId, corazonesRecibidos }`
 
-Todos los valores de diseño se toman de las **variables CSS** definidas en `src/styles/index.css`. **No hardcodees colores ni sombras**; usa los tokens.
+Esquema Neon:
+- `usuarios (id uuid pk, nombre text, correo text null, fecha_creacion timestamptz)`
+- `comentarios (id uuid pk, usuario_id uuid fk→usuarios, contenido text, cantidad_likes int, fecha_creacion timestamptz)`
 
-- **Paleta (Material-style tokens):** superficies `--surface*`, texto `--on-surface*`, primario rojo `--primary: #ad0017` / `--primary-container`, `--secondary`, `--outline`, `--error`. Fondo claro por defecto.
-- **Tipografía:** `--font: 'Space Grotesk'`. Iconos con **Material Symbols Outlined** (`<span className="material-symbols-outlined">`).
-- **Estilo neo-brutalista / claymórfico:** sombras duras `--neo-shadow`, `--neo-shadow-lg`, `--neo-shadow-up` (offset sólido, sin blur) y relieve `--clay-inner`. Bordes marcados, botones con capa "shadow" + "face" (ver `Home.tsx`).
-- **Toque andino:** patrón de puntos `.chakana-pattern` y `.scanlines` como texturas sutiles.
-- **Responsive:** enfoque *mobile-first* con secciones separadas mobile/desktop cuando hace falta; breakpoint principal `@media (min-width: 768px)`. `BottomNav` solo en mobile (`.mobile-nav-wrapper`), `TopNav` en desktop. Usa unidades relativas y `100dvh`.
-- **Coherencia:** cualquier elemento nuevo debe verse parte del mismo sistema (mismos tokens, sombras, tipografía y lenguaje visual). Si necesitas un valor nuevo recurrente, agrégalo como variable en `index.css`, no inline.
+Reglas de esta capa:
+- El acceso a Postgres vive **solo** en `api/`, nunca desde el navegador.
+- `DATABASE_URL` viene de env vars: local en `.env` (gitignored, nunca commitear), en producción en Vercel → Project Settings → Environment Variables.
+- `@neondatabase/serverless` es dependencia de **producción** (runtime de las funciones), no dev.
+- El frontend llama a la API same-origin (`VITE_BACKEND_URL` vacío en `.env`); no reintroducir una URL absoluta de un backend externo.
 
-## 5. Verificación antes de terminar
+### Sistema de diseño
 
-- `pnpm run build` pasa.
-- `pnpm run lint` sin **nuevos** errores (los preexistentes en `src/pages/Comments/Comments.tsx` no son parte de tu cambio salvo que se pida arreglarlos).
-- `pnpm audit`: 0 vulnerabilidades.
-- Reporta con honestidad qué se verificó y qué quedó pendiente.
+Todos los valores visuales salen de las variables CSS en `src/styles/index.css` — no hardcodear colores/sombras en componentes; si falta un token, añadirlo ahí.
+
+- Paleta Material-style: `--surface*`, `--on-surface*`, `--primary: #ad0017` / `--primary-container`, `--secondary`, `--outline`, `--error`.
+- Tipografía `--font: 'Space Grotesk'`; iconos con Material Symbols Outlined (`<span className="material-symbols-outlined">`).
+- Estilo neo-brutalista/claymórfico: sombras duras sin blur (`--neo-shadow`, `--neo-shadow-lg`, `--neo-shadow-up`) y relieve `--clay-inner`; botones con capa "shadow" + "face" superpuestas (ver `Home.tsx`).
+- Motivo andino: `.chakana-pattern` (puntos) y `.scanlines` como texturas sutiles de fondo.
+- Mobile-first con breakpoint principal `@media (min-width: 768px)`; `BottomNav` solo mobile (`.mobile-nav-wrapper`), `TopNav` solo desktop. Varias páginas (Home, Comments) renderizan secciones `*-mobile` y `*-desktop` separadas en vez de una sola con CSS responsive — seguir ese patrón si aplica.
+
+## Notas conocidas
+
+- `src/pages/Comments/Comments.tsx` tiene 4 errores preexistentes de `eslint-plugin-react-hooks` (`react-hooks/purity`, `react-hooks/set-state-in-effect` por usos de `Date.now()` durante el render y `setState` síncrono en un efecto). No son parte de cambios nuevos salvo que se pida arreglarlos explícitamente.
