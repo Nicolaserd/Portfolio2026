@@ -69,7 +69,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
             <div className="hero-actions">
               {/* Primary button */}
-              <button className="hero-btn hero-btn--primary">
+              <button className="hero-btn hero-btn--primary" onClick={() => onNavigate('projects')}>
                 <span className="hero-btn-shadow" />
                 <span className="hero-btn-face">
                   EXPLORAR MÓDULOS
@@ -80,7 +80,7 @@ export default function Home({ onNavigate }: HomeProps) {
               </button>
 
               {/* Secondary button */}
-              <button className="hero-btn hero-btn--secondary">
+              <button className="hero-btn hero-btn--secondary" onClick={() => onNavigate('about')}>
                 <span className="hero-btn-shadow" />
                 <span className="hero-btn-face">
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>

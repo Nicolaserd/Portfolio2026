@@ -26,7 +26,7 @@ export default function TopNav({ activePage, onNavigate }: TopNavProps) {
           </li>
         ))}
       </ul>
-      <button className="topnav-hire">
+      <button className="topnav-hire" onClick={() => window.open('https://www.linkedin.com/in/nicolas-inchaustegui-gonzalez-b25246205', '_blank')}>
         <span className="topnav-hire-shadow" />
         <span className="topnav-hire-face">Hire Me</span>
       </button>

@@ -69,16 +69,7 @@ Todos los valores de diseño se toman de las **variables CSS** definidas en `src
 - **Responsive:** enfoque *mobile-first* con secciones separadas mobile/desktop cuando hace falta; breakpoint principal `@media (min-width: 768px)`. `BottomNav` solo en mobile (`.mobile-nav-wrapper`), `TopNav` en desktop. Usa unidades relativas y `100dvh`.
 - **Coherencia:** cualquier elemento nuevo debe verse parte del mismo sistema (mismos tokens, sombras, tipografía y lenguaje visual). Si necesitas un valor nuevo recurrente, agrégalo como variable en `index.css`, no inline.
 
-## 5. Mejora iterativa (bucle de refinamiento)
-
-Cuando una tarea permita mejorar arquitectura, scaffolding o diseño **sin romper el contenido existente**:
-
-1. Itera la solución **hasta 3 veces**, comparando cada versión contra la anterior para converger en la mejor.
-2. En cada iteración valida que **no se dañe el contenido ni el comportamiento actual** (build sigue pasando, UI y datos intactos).
-3. Detente antes de las 3 iteraciones si ya alcanzaste una solución claramente óptima, o si iterar más empezaría a introducir riesgo o deuda.
-4. Prioriza siempre **preservar lo que ya funciona** sobre un cambio ambicioso: ante la duda, la opción conservadora.
-
-## 6. Verificación antes de terminar
+## 5. Verificación antes de terminar
 
 - `pnpm run build` pasa.
 - `pnpm run lint` sin **nuevos** errores (los preexistentes en `src/pages/Comments/Comments.tsx` no son parte de tu cambio salvo que se pida arreglarlos).
